@@ -12,6 +12,7 @@
         android:paddingLeft="@dimen/dimenPaddingCommon"
         android:paddingRight="@dimen/dimenPaddingCommon">
         <TextView style="@style/AppTheme.Label"
+            android:id="@+id/item_time"
             android:textColor="@android:color/white"
             android:layout_marginTop="30dp"
             android:layout_height="45dp"
@@ -54,11 +55,13 @@
             app:rv_cornerRadius_TL="@dimen/dimenPaddingDiminutive"
             app:rv_cornerRadius_TR="@dimen/dimenPaddingDiminutive">
             <TextView style="@style/AppTheme.Label.Title"
+                android:id="@+id/item_title"
                 android:layout_gravity="center_vertical"
                 android:layout_marginTop="@dimen/dimenPaddingDiminutive"
                 android:textColor="@android:color/white"
-                android:text="winter farewell"/>
+                android:text="仓库一"/>
             <ImageView style="@style/AppTheme.Label.Title"
+                android:id="@+id/item_photo"
                 android:layout_width="match_parent"
                 android:layout_gravity="center_vertical"
                 android:textColor="@android:color/white"

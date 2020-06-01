@@ -110,7 +110,8 @@ public class CaptureActivity extends BaseActivity implements SurfaceHolder.Callb
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        setContentView(getLayoutID());
+        initView();
     }
 
     public int getLayoutID() {

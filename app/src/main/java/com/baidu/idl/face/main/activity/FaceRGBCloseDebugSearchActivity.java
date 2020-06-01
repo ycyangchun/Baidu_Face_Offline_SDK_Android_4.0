@@ -29,6 +29,7 @@ import com.baidu.idl.face.main.manager.FaceSDKManager;
 import com.baidu.idl.face.main.model.LivenessModel;
 import com.baidu.idl.face.main.model.SingleBaseConfig;
 import com.baidu.idl.face.main.model.User;
+import com.baidu.idl.face.main.patrol.PatrolMainActivity;
 import com.baidu.idl.face.main.patrol.PatrolSplashActivity;
 import com.baidu.idl.face.main.utils.DensityUtils;
 import com.baidu.idl.face.main.utils.FaceOnDrawTexturViewUtil;
@@ -249,6 +250,7 @@ public class FaceRGBCloseDebugSearchActivity extends BaseActivity implements Vie
                             if(!FaceRGBCloseDebugSearchActivity.this.isFinishing()){
                                 FaceRGBCloseDebugSearchActivity.this.finish();
                                 Toast.makeText(FaceRGBCloseDebugSearchActivity.this, user.getUserName()+"登录成功", Toast.LENGTH_SHORT).show();
+                                startActivity(new Intent(FaceRGBCloseDebugSearchActivity.this, PatrolMainActivity.class));
                             }
 
                         }
@@ -284,6 +286,7 @@ public class FaceRGBCloseDebugSearchActivity extends BaseActivity implements Vie
                                 if(!FaceRGBCloseDebugSearchActivity.this.isFinishing()){
                                     FaceRGBCloseDebugSearchActivity.this.finish();
                                     Toast.makeText(FaceRGBCloseDebugSearchActivity.this, user.getUserName()+"登录成功", Toast.LENGTH_SHORT).show();
+                                    startActivity(new Intent(FaceRGBCloseDebugSearchActivity.this, PatrolMainActivity.class));
                                 }
                             }
                         }

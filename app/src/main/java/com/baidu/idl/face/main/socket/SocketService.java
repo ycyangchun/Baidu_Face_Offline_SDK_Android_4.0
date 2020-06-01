@@ -54,7 +54,6 @@ import com.baidu.idl.face.main.utils.ImageUtils;
 import com.baidu.idl.main.facesdk.FaceInfo;
 import com.baidu.idl.main.facesdk.model.BDFaceImageInstance;
 import com.baidu.idl.main.facesdk.model.BDFaceSDKCommon;
-import com.baidu.vis.unified.license.AndroidLicenser;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.vilyever.socketclient.SocketClient;
@@ -113,7 +112,8 @@ public class SocketService extends Service {
         @Override
         public void onConnected(SocketClient client) {
             Log.e("shang", "socket连接");
-            deviceid = AndroidLicenser.getDeviceId(getApplicationContext());
+            //TODO ???
+//            deviceid = AndroidLicenser.getDeviceId(getApplicationContext());
             sendMessage(RequestConfig.sendDeviceId, deviceid, "SUCCESS", null);
         }
 

@@ -9,6 +9,7 @@ import com.baidu.idl.face.main.activity.FaceAuthActicity;
 import com.baidu.idl.face.main.listener.SdkInitListener;
 import com.baidu.idl.face.main.manager.FaceSDKManager;
 import com.baidu.idl.face.main.model.SingleBaseConfig;
+import com.baidu.idl.face.main.patrol.dialog.CommonUtils;
 import com.baidu.idl.face.main.utils.ConfigUtils;
 import com.baidu.idl.face.main.utils.ToastUtils;
 import com.baidu.idl.main.facesdk.FaceAuth;
@@ -22,12 +23,13 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
         mContext = this;
+        CommonUtils.init(this);
         if (FaceSDKManager.getInstance().initStatus == FaceSDKManager.SDK_UNACTIVATION) {
             initLicense();
         } else {
             initLicense(2);
         }
-        initcfg();
+
     }
     /**
      * 启动应用程序，如果之前初始过，自动初始化鉴权和模型（可以添加到Application 中）
@@ -42,7 +44,7 @@ public class App extends Application {
 
                 @Override
                 public void initLicenseSuccess() {
-
+                    initcfg();
                 }
 
                 @Override

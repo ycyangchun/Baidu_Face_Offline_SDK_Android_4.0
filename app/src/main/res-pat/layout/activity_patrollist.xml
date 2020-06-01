@@ -46,7 +46,7 @@
 
             <com.flyco.roundview.RoundTextView
                 style="@style/AppTheme.Label.Title.Large"
-                android:id="@+id/photos"
+                android:id="@+id/scan"
                 android:layout_below="@id/assistant"
                 android:layout_toEndOf="@id/avatar"
                 android:layout_toRightOf="@id/avatar"
@@ -62,13 +62,13 @@
                 app:rv_cornerRadius_BL="@dimen/dimenPaddingDiminutive"
                 app:rv_backgroundColor="@android:color/white"
                 app:rv_strokeWidth="1dp"
-                app:rv_strokeColor="@android:color/darker_gray"/>
+                app:rv_strokeColor="android:color/white"/>
 
             <com.flyco.roundview.RoundTextView style="@style/AppTheme.Label.Title.Large"
-                android:id="@+id/fllowing"
+                android:id="@+id/photo"
                 android:layout_below="@id/assistant"
-                android:layout_toEndOf="@id/photos"
-                android:layout_toRightOf="@id/photos"
+                android:layout_toEndOf="@id/scan"
+                android:layout_toRightOf="@id/scan"
                 android:layout_marginTop="@dimen/dimenPaddingDiminutive"
                 android:paddingTop="@dimen/dimenPaddingCommon"
                 android:paddingLeft="@dimen/dimenPaddingHorizontal"
@@ -81,7 +81,7 @@
                 android:textSize="@dimen/textsize_content"
                 app:rv_backgroundColor="@android:color/white"
                 app:rv_strokeWidth="1dp"
-                app:rv_strokeColor="@android:color/darker_gray"/>
+                app:rv_strokeColor="@android:color/white"/>
 
         </RelativeLayout>
     </FrameLayout>

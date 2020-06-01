@@ -75,4 +75,5 @@
     <dimen name="dimenTextTitleLarge">19sp</dimen>
     <dimen name="dimenTextTitleBar">20sp</dimen>
     <dimen name="dimenTextEditText">14sp</dimen>
+    <dimen name="ts_12">12sp</dimen>
 </resources>
