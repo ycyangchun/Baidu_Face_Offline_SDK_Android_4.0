@@ -1,0 +1,78 @@
+<resources>
+    <dimen name="title_height">48dp</dimen>
+    <dimen name="padding_05">0.5dp</dimen>
+    <dimen name="padding_1">1dp</dimen>
+    <dimen name="padding_2">2dp</dimen>
+    <dimen name="padding_3">3dp</dimen>
+    <dimen name="padding_4">4dp</dimen>
+    <dimen name="padding_5">5dp</dimen>
+    <dimen name="padding_6">6dp</dimen>
+    <dimen name="padding_7">7dp</dimen>
+    <dimen name="padding_8">8dp</dimen>
+    <dimen name="padding_9">9dp</dimen>
+    <dimen name="padding_10">10dp</dimen>
+    <dimen name="padding_11">11dp</dimen>
+    <dimen name="padding_12">12dp</dimen>
+    <dimen name="padding_13">13dp</dimen>
+    <dimen name="padding_14">14dp</dimen>
+    <dimen name="padding_15">15dp</dimen>
+    <dimen name="padding_16">16dp</dimen>
+    <dimen name="padding_17">17dp</dimen>
+    <dimen name="padding_18">18dp</dimen>
+    <dimen name="padding_19">19dp</dimen>
+    <dimen name="padding_20">20dp</dimen>
+    <dimen name="padding_21">21dp</dimen>
+    <dimen name="padding_22">22dp</dimen>
+    <dimen name="padding_24">24dp</dimen>
+    <dimen name="padding_27">27dp</dimen>
+    <dimen name="padding_28">28dp</dimen>
+    <dimen name="padding_30">30dp</dimen>
+    <dimen name="padding_34">34dp</dimen>
+    <dimen name="padding_36">36dp</dimen>
+    <dimen name="padding_38">38dp</dimen>
+    <dimen name="padding_48">48dp</dimen>
+    <dimen name="padding_50">50dp</dimen>
+    <dimen name="padding_55">55dp</dimen>
+
+    <dimen name="main_bottom_height">60dp</dimen>
+    <dimen name="login_input_ll_height">70dp</dimen>
+    <dimen name="login_input_ll_width">240dp</dimen>
+    <dimen name="login_not_input_width">230dp</dimen>
+
+    <dimen name="toast_padding">13.0dip</dimen>
+
+    <dimen name="forget_password_height">41dp</dimen>
+    <dimen name="personal_information_item_height">47dp</dimen>
+    <dimen name="button_height_dlg">45dp</dimen>
+
+    <dimen name="ts_16" >16sp</dimen>
+    <dimen name="ts_18">18sp</dimen>
+
+
+    <dimen name="division_line">0.5dp</dimen>
+    <dimen name="dimenPaddingMin">2.5dp</dimen>
+    <dimen name="dimenPaddingDiminutive">5dp</dimen>
+    <dimen name="dimenPaddingCommon">10dp</dimen>
+    <dimen name="dimenPaddingVertical">10dp</dimen>
+    <dimen name="dimenPaddingMiddle">12.5dp</dimen>
+    <dimen name="dimenPaddingHorizontal">15dp</dimen>
+    <dimen name="dimenPaddingBig">20dp</dimen>
+    <dimen name="dimenPaddingLarge">25dp</dimen>
+
+
+    <dimen name="textsize_small">12sp</dimen>
+    <dimen name="textsize_content">14sp</dimen>
+    <dimen name="textsize_titlesmall">16sp</dimen>
+    <dimen name="textsize_title">17sp</dimen>
+    <dimen name="textsize_titlelarge">19sp</dimen>
+    <dimen name="textsize_titlebar">20sp</dimen>
+
+    <dimen name="dimenTextMin">10sp</dimen>
+    <dimen name="dimenTextSmall">12sp</dimen>
+    <dimen name="dimenTextContent">14sp</dimen>
+    <dimen name="dimenTextTitleSmall">16sp</dimen>
+    <dimen name="dimenTextTitle">17sp</dimen>
+    <dimen name="dimenTextTitleLarge">19sp</dimen>
+    <dimen name="dimenTextTitleBar">20sp</dimen>
+    <dimen name="dimenTextEditText">14sp</dimen>
+</resources>

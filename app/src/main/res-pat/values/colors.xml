@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="c_ffffff">#FFFFFF</color> <!-- 白色 -->
+    <color name="possible_result_points">#c0ffbd21</color> <!-- Android standard ICS color -->
+    <color name="result_minor_text">#ffc0c0c0</color>
+    <color name="result_points">#c099cc00</color> <!-- Android standard ICS color -->
+    <color name="result_text">#ffffffff</color>
+    <color name="result_view">#b0000000</color>
+    <color name="status_text">#ffffffff</color>
+    <color name="viewfinder_laser">#ffcc0000</color> <!-- Android standard ICS color -->
+    <color name="viewfinder_mask">#7F000000</color>
+    <color name="capture_text_cover_bg">#CC000000</color>
+    <color name="seek_bar_text">#fff6f6f6</color>
+    <color name="capture_50_black">#7F000000</color>
+    <color name="capture_70_black">#B2000000</color>
+    <color name="c_383838">#383838</color>
+    <color name="c_742300">#742300</color>
+    <color name="c_B41717">#B41717</color>
+    <color name="c_6F3501">#6F3501</color>
+    <color name="c_852D11">#852D11</color>
+    <color name="c_202020">#202020</color>
+    <color name="c_e6e6e6" >#e6e6e6</color>
+
+    <color name="c_text11">	#e73030</color>
+    <color name="c_text11_f">#d32e2e</color>
+    <color name="c_btn_text_00">#c3c3c3</color>
+    <color name="c_text02">#9e9e9e</color> <!-- 常规辅助文字色1（没有标注灰色的文字都是此色） -->
+    <color name="c_text02_f">#f0f0f0</color>
+
+    <color name="colorTextTitle">#333333</color>
+    <color name="colorTextContent">#444444</color>
+    <color name="colorTextAssistant">#888888</color>
+
+    <color name="colorBackground">#FFFFFF</color>
+    <color name="colorBackgroundDark">#f2f2f2</color>
+    <color name="colorDivision">#33aaaaaa</color>
+</resources>

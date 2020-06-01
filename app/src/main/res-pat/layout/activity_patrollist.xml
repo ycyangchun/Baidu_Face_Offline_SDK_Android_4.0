@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/colorPrimaryDark"
+    android:orientation="vertical">
+    <FrameLayout
+        android:id="@+id/profile"
+        android:clickable="true"
+        android:focusable="true"
+        android:layout_width="match_parent"
+        android:layout_height="130dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/dimenPaddingHorizontal">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/avatar"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginLeft="@dimen/dimenPaddingCommon"
+                android:layout_marginRight="@dimen/dimenPaddingCommon"
+                app:civ_border_width="3dp"
+                app:civ_border_color="@android:color/white"
+                android:src="@drawable/image_avatar_6"/>
+
+            <TextView  style="@style/AppTheme.Label.Title.Large"
+                android:id="@+id/title"
+                android:layout_toEndOf="@id/avatar"
+                android:layout_toRightOf="@id/avatar"
+                android:textColor="@android:color/white"
+                android:text="许三多"/>
+
+            <TextView  style="@style/AppTheme.Label.Assistant"
+                android:id="@+id/assistant"
+                android:layout_marginTop="@dimen/dimenPaddingDiminutive"
+                android:layout_marginBottom="@dimen/dimenPaddingDiminutive"
+                android:layout_toEndOf="@id/avatar"
+                android:layout_toRightOf="@id/avatar"
+                android:layout_below="@+id/title"
+                android:textColor="@android:color/white"
+                android:text="班长"/>
+
+            <com.flyco.roundview.RoundTextView
+                style="@style/AppTheme.Label.Title.Large"
+                android:id="@+id/photos"
+                android:layout_below="@id/assistant"
+                android:layout_toEndOf="@id/avatar"
+                android:layout_toRightOf="@id/avatar"
+                android:layout_marginTop="@dimen/dimenPaddingDiminutive"
+                android:paddingTop="@dimen/dimenPaddingCommon"
+                android:paddingLeft="@dimen/dimenPaddingHorizontal"
+                android:paddingRight="@dimen/dimenPaddingHorizontal"
+                android:paddingBottom="@dimen/dimenPaddingCommon"
+                android:textColor="@color/colorPrimaryDark"
+                android:text="扫码"
+                android:textSize="@dimen/textsize_content"
+                app:rv_cornerRadius_TL="@dimen/dimenPaddingDiminutive"
+                app:rv_cornerRadius_BL="@dimen/dimenPaddingDiminutive"
+                app:rv_backgroundColor="@android:color/white"
+                app:rv_strokeWidth="1dp"
+                app:rv_strokeColor="@android:color/darker_gray"/>
+
+            <com.flyco.roundview.RoundTextView style="@style/AppTheme.Label.Title.Large"
+                android:id="@+id/fllowing"
+                android:layout_below="@id/assistant"
+                android:layout_toEndOf="@id/photos"
+                android:layout_toRightOf="@id/photos"
+                android:layout_marginTop="@dimen/dimenPaddingDiminutive"
+                android:paddingTop="@dimen/dimenPaddingCommon"
+                android:paddingLeft="@dimen/dimenPaddingHorizontal"
+                android:paddingRight="@dimen/dimenPaddingHorizontal"
+                android:paddingBottom="@dimen/dimenPaddingCommon"
+                android:textColor="@color/colorPrimaryDark"
+                android:text="拍照"
+                app:rv_cornerRadius_TR="@dimen/dimenPaddingDiminutive"
+                app:rv_cornerRadius_BR="@dimen/dimenPaddingDiminutive"
+                android:textSize="@dimen/textsize_content"
+                app:rv_backgroundColor="@android:color/white"
+                app:rv_strokeWidth="1dp"
+                app:rv_strokeColor="@android:color/darker_gray"/>
+
+        </RelativeLayout>
+    </FrameLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</LinearLayout>

@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 26
+    compileSdkVersion 28
     buildToolsVersion '28.0.3'
     defaultConfig {
         applicationId "com.baidu.idl.face.demo"
@@ -61,9 +61,14 @@ android {
 }
 
 dependencies {
-    implementation fileTree(include: ['*.jar','*.aar'], dir: 'libs')
-    implementation 'com.android.support:appcompat-v7:26+'
-    implementation 'com.android.support:recyclerview-v7:26+'
+    implementation fileTree(include: ['*.jar', '*.aar'], dir: 'libs')
+    implementation 'com.android.support:appcompat-v7:28.0.0'
+    implementation 'com.android.support:support-v4:28.0.0'
+    implementation 'com.android.support:recyclerview-v7:28.0.0'
     implementation project(':facelibrary')
-    implementation 'com.google.code.gson:gson:2.6.2'
+    implementation 'com.google.code.gson:gson:2.8.6'
+    implementation 'com.flyco.roundview:FlycoRoundView_Lib:1.1.4@aar'
+    implementation 'de.hdodenhof:circleimageview:2.2.0'
+    implementation files('libs/android-core-3.1.1-SNAPSHOT.jar')
+    implementation files('libs/core-3.1.1-SNAPSHOT.jar')
 }
