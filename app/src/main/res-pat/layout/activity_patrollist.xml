@@ -62,7 +62,7 @@
                 app:rv_cornerRadius_BL="@dimen/dimenPaddingDiminutive"
                 app:rv_backgroundColor="@android:color/white"
                 app:rv_strokeWidth="1dp"
-                app:rv_strokeColor="android:color/white"/>
+                app:rv_strokeColor="@android:color/white"/>
 
             <com.flyco.roundview.RoundTextView style="@style/AppTheme.Label.Title.Large"
                 android:id="@+id/photo"

@@ -19,12 +19,11 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.baidu.idl.face.main.activity.BaseActivity;
-import com.baidu.idl.face.main.patrol.dialog.CustomDialog2;
+import com.baidu.idl.face.main.patrol.utils.CustomDialog2;
 import com.baidu.idl.face.main.patrol.scanner.camera.CameraManager;
 import com.baidu.idl.face.main.patrol.scanner.decode.CaptureActivityHandler;
 import com.baidu.idl.face.main.patrol.scanner.view.ViewfinderBase;
 import com.baidu.idl.face.main.patrol.scanner.view.ViewfinderView;
-import com.baidu.idl.face.main.view.CustomDialog;
 import com.baidu.idl.facesdkdemo.R;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.DecodeHintType;

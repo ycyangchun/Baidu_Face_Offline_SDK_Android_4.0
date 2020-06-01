@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paths>
+    <!--相机拍照-->
+    <root-path
+        name="external_path"
+        path="" />
+    <!--相机相册裁剪-->
+    <external-files-path
+        name="camera_has_sdcard"
+        path="file/" />
+    <external-path
+        name="external_files"
+        path="." />
+</paths>
+

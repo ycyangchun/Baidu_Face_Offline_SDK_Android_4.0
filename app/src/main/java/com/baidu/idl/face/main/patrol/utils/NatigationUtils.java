@@ -1,4 +1,4 @@
-package com.baidu.idl.face.main.patrol.dialog;
+package com.baidu.idl.face.main.patrol.utils;
 
 import android.annotation.TargetApi;
 import android.content.Context;

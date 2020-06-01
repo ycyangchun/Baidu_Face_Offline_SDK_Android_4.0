@@ -17,7 +17,6 @@
 package com.baidu.idl.face.main.patrol.scanner.camera;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.hardware.Camera;
@@ -27,8 +26,8 @@ import android.view.SurfaceHolder;
 
 
 import com.baidu.idl.face.main.patrol.MyConstants;
-import com.baidu.idl.face.main.patrol.dialog.CommonUtils;
-import com.baidu.idl.face.main.patrol.dialog.NatigationUtils;
+import com.baidu.idl.face.main.patrol.utils.CommonUtils;
+import com.baidu.idl.face.main.patrol.utils.NatigationUtils;
 import com.google.zxing.PlanarYUVLuminanceSource;
 
 import java.io.IOException;

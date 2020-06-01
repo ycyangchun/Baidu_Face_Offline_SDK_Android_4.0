@@ -3,13 +3,12 @@ package com.baidu.idl.face.main.patrol;
 import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
-import android.widget.Toast;
 
 import com.baidu.idl.face.main.activity.FaceAuthActicity;
 import com.baidu.idl.face.main.listener.SdkInitListener;
 import com.baidu.idl.face.main.manager.FaceSDKManager;
 import com.baidu.idl.face.main.model.SingleBaseConfig;
-import com.baidu.idl.face.main.patrol.dialog.CommonUtils;
+import com.baidu.idl.face.main.patrol.utils.CommonUtils;
 import com.baidu.idl.face.main.utils.ConfigUtils;
 import com.baidu.idl.face.main.utils.ToastUtils;
 import com.baidu.idl.main.facesdk.FaceAuth;

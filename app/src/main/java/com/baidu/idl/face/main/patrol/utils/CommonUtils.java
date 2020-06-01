@@ -1,4 +1,4 @@
-package com.baidu.idl.face.main.patrol.dialog;
+package com.baidu.idl.face.main.patrol.utils;
 
 import android.app.Activity;
 import android.app.ActivityManager;
