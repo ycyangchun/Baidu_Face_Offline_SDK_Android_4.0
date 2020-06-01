@@ -169,11 +169,11 @@ public class FaceRGBRegisterActivity extends BaseActivity implements View.OnClic
      */
     private void startCameraPreview() {
         // 设置前置摄像头
-//        CameraPreviewManager.getInstance().setCameraFacing(CameraPreviewManager.CAMERA_FACING_FRONT);
+        CameraPreviewManager.getInstance().setCameraFacing(CameraPreviewManager.CAMERA_FACING_FRONT);
         // 设置后置摄像头
 //         CameraPreviewManager.getInstance().setCameraFacing(CameraPreviewManager.CAMERA_FACING_BACK);
         // 设置USB摄像头
-        CameraPreviewManager.getInstance().setCameraFacing(CameraPreviewManager.CAMERA_USB);
+//        CameraPreviewManager.getInstance().setCameraFacing(CameraPreviewManager.CAMERA_USB);
 
         // TODO 在得力设备和部分手机上出现过 CameraPreviewManager 崩溃的问题
         CameraPreviewManager.getInstance().startPreview(this, mPreviewView, mWidth, mHeight, new CameraDataCallback() {

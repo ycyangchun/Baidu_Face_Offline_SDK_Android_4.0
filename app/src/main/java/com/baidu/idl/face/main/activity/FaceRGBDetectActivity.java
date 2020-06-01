@@ -153,11 +153,11 @@ public class FaceRGBDetectActivity extends BaseActivity {
      */
     private void startCameraPreview() {
         // 设置前置摄像头
-        // CameraPreviewManager.getInstance().setCameraFacing(CameraPreviewManager.CAMERA_FACING_FRONT);
+         CameraPreviewManager.getInstance().setCameraFacing(CameraPreviewManager.CAMERA_FACING_FRONT);
         // 设置后置摄像头
 //         CameraPreviewManager.getInstance().setCameraFacing(CameraPreviewManager.CAMERA_FACING_BACK);
         // 设置USB摄像头
-        CameraPreviewManager.getInstance().setCameraFacing(CameraPreviewManager.CAMERA_USB);
+//        CameraPreviewManager.getInstance().setCameraFacing(CameraPreviewManager.CAMERA_USB);
 
         CameraPreviewManager.getInstance().startPreview(this, mPreviewView, mWidth, mHeight, new CameraDataCallback() {
             @Override

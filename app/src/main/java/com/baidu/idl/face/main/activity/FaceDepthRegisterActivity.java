@@ -242,11 +242,11 @@ public class FaceDepthRegisterActivity extends BaseOrbbecActivity implements Ope
      */
     private void startCameraPreview() {
         // 设置前置摄像头
-        // CameraPreviewManager.getInstance().setCameraFacing(CameraPreviewManager.CAMERA_FACING_FRONT);
+         CameraPreviewManager.getInstance().setCameraFacing(CameraPreviewManager.CAMERA_FACING_FRONT);
         // 设置后置摄像头
         // CameraPreviewManager.getInstance().setCameraFacing(CameraPreviewManager.CAMERA_FACING_BACK);
         // 设置USB摄像头
-        CameraPreviewManager.getInstance().setCameraFacing(CameraPreviewManager.CAMERA_USB);
+//        CameraPreviewManager.getInstance().setCameraFacing(CameraPreviewManager.CAMERA_USB);
 
         CameraPreviewManager.getInstance().startPreview(this, rgbTexture,
                 RGB_WIDTH, RGB_HEIGHT, new CameraDataCallback() {

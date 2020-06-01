@@ -45,8 +45,7 @@ public class PatrolSplashActivity extends BaseActivity {
 
     private Context mContext;
     public static final int PAGE_TYPE = 999;
-    private Boolean isInitConfig;
-    private Boolean isConfigExit;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,7 +53,7 @@ public class PatrolSplashActivity extends BaseActivity {
 
         mContext = this;
         initView();
-        initcfg();
+
     }
 
     /**
@@ -101,20 +100,6 @@ public class PatrolSplashActivity extends BaseActivity {
 
 
 
-    private void initcfg() {
-        // todo shangrong 增加配置信息初始化操作
-        isConfigExit = ConfigUtils.isConfigExit();
-        isInitConfig = ConfigUtils.initConfig();
-        if (isInitConfig && isConfigExit) {
-//            Toast.makeText(PatrolSplashActivity.this, "初始配置加载成功", Toast.LENGTH_SHORT).show();
-        } else {
-            Toast.makeText(PatrolSplashActivity.this, "初始配置失败,将重置文件内容为默认配置", Toast.LENGTH_SHORT).show();
-            ConfigUtils.modityJson();
-        }
-        // 属性开启属性检测
-        SingleBaseConfig.getBaseConfig().setAttribute(true);
-        FaceSDKManager.getInstance().initConfig();
 
-    }
 
 }

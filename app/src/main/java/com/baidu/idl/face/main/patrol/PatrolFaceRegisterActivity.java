@@ -53,7 +53,7 @@ public class PatrolFaceRegisterActivity extends BaseActivity implements View.OnC
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_face_register);
+        setContentView(R.layout.activity_face_register_patrol);
 
         initView();
 

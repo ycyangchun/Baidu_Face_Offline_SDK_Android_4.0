@@ -3,16 +3,21 @@ package com.baidu.idl.face.main.patrol;
 import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
+import android.widget.Toast;
 
 import com.baidu.idl.face.main.activity.FaceAuthActicity;
 import com.baidu.idl.face.main.listener.SdkInitListener;
 import com.baidu.idl.face.main.manager.FaceSDKManager;
+import com.baidu.idl.face.main.model.SingleBaseConfig;
+import com.baidu.idl.face.main.utils.ConfigUtils;
 import com.baidu.idl.face.main.utils.ToastUtils;
 import com.baidu.idl.main.facesdk.FaceAuth;
 import com.baidu.idl.main.facesdk.callback.Callback;
 
 public class App extends Application {
     Context mContext;
+    private Boolean isInitConfig;
+    private Boolean isConfigExit;
     @Override
     public void onCreate() {
         super.onCreate();
@@ -22,6 +27,7 @@ public class App extends Application {
         } else {
             initLicense(2);
         }
+        initcfg();
     }
     /**
      * 启动应用程序，如果之前初始过，自动初始化鉴权和模型（可以添加到Application 中）
@@ -100,5 +106,21 @@ public class App extends Application {
                 }
             });
         }
+    }
+
+    private void initcfg() {
+        // todo shangrong 增加配置信息初始化操作
+        isConfigExit = ConfigUtils.isConfigExit();
+        isInitConfig = ConfigUtils.initConfig();
+        if (isInitConfig && isConfigExit) {
+//            Toast.makeText(PatrolSplashActivity.this, "初始配置加载成功", Toast.LENGTH_SHORT).show();
+        } else {
+//            Toast.makeText(PatrolSplashActivity.this, "初始配置失败,将重置文件内容为默认配置", Toast.LENGTH_SHORT).show();
+            ConfigUtils.modityJson();
+        }
+        // 属性开启属性检测
+        SingleBaseConfig.getBaseConfig().setAttribute(true);
+        FaceSDKManager.getInstance().initConfig();
+
     }
 }
