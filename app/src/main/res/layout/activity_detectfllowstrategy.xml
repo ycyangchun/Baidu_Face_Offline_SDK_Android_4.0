@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="30dp"
+                android:gravity="center"
+                android:text="检测跟踪策略"
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+            <RadioButton
+                android:id="@+id/dfs_full_line_detect"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="15dp"
+                android:buttonTint="@color/black"
+                android:gravity="center_vertical"
+                android:textColor="@color/black"
+                android:text="全屏线框检测模式" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="15dp"
+                android:gravity="center_vertical"
+                android:text="实时在视频流中，显示人脸区域的追踪线框，也反应实时人脸图片采集的帧率情况，适用于识别或对比的实时回显。此模式会不停地将人脸图片送到后端进行活体检测或特征抽取，具备较好的业务通过率，且具备业务连续操作的特点"
+                android:textColor="@color/black"
+                android:textSize="17sp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="15dp"
+                android:src="@mipmap/full_line_frame" />
+
+
+            <RadioButton
+                android:id="@+id/dfs_speciall_area"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="15dp"
+                android:gravity="center_vertical"
+                android:buttonTint="@color/black"
+                android:textColor="@color/black"
+                android:text="固定检测区域模式" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="15dp"
+                android:gravity="center_vertical"
+                android:text="通常用于单张图片的采集，如人脸对比、人脸注册等，只有固定区域内才可以采集到人脸，也没有实时跟踪框。此模式应用时，质量检测模块默认一定会开启，确保在指定区域，采集到经过质量控制筛选的人脸图片"
+                android:textColor="@color/black"
+                android:textSize="17sp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="15dp"
+                android:src="@mipmap/special_area_detect" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:layout_marginTop="40dp"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/dfs_save"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bt_set_round"
+                    android:text="保存"
+                    android:textColor="#ffffff" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

@@ -1,0 +1,69 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 26
+    buildToolsVersion '28.0.3'
+    defaultConfig {
+        applicationId "com.baidu.idl.face.demo"
+        minSdkVersion 21
+        targetSdkVersion 26
+        versionCode 4
+        versionName "4.0"
+        multiDexEnabled true
+
+        ndk {
+            moduleName "facesdk"
+            ldLibs "log"
+            abiFilters "armeabi-v7a" // "armeabi", "x86", "arm64-v8a"
+        }
+    }
+    signingConfigs {
+        debug {
+            storeFile file("signature/facesdk-library.keystore")
+            storePassword 'android'
+            keyAlias 'androiddebugkey'
+            keyPassword 'android'
+        }
+        release {
+            storeFile file("signature/facesdk-library.keystore")
+            storePassword 'android'
+            keyAlias 'androiddebugkey'
+            keyPassword 'android'
+        }
+    }
+    buildTypes {
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.debug
+            debuggable true
+            jniDebuggable true
+        }
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+            debuggable false
+            jniDebuggable false
+        }
+    }
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+            java.srcDirs = ['src/main/java/', 'src/main/aidl']
+            res.srcDirs = [
+                    'src/main/res-pat/',
+                    'src/main/res',
+            ]
+
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar','*.aar'], dir: 'libs')
+    implementation 'com.android.support:appcompat-v7:26+'
+    implementation 'com.android.support:recyclerview-v7:26+'
+    implementation project(':facelibrary')
+    implementation 'com.google.code.gson:gson:2.6.2'
+}

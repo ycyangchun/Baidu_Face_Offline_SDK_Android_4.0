@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!--<Button-->
+        <!--android:id="@+id/bt_return"-->
+        <!--android:layout_width="60dp"-->
+        <!--android:layout_height="30dp"-->
+        <!--android:layout_marginLeft="15dp"-->
+        <!--android:layout_marginTop="15dp"-->
+        <!--android:background="@drawable/fillet_style_return_selector"-->
+        <!--android:text="返回"-->
+        <!--android:textColor="#ffffff" />-->
+
+    <!--<TextView-->
+        <!--android:id="@+id/textView4"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginTop="15dp"-->
+        <!--android:gravity="center"-->
+        <!--android:text="视频流动态人脸搜索"-->
+        <!--android:textColor="#363636"-->
+        <!--android:textSize="22dp"-->
+        <!--android:textStyle="bold" />-->
+
+    <!--<Button-->
+        <!--android:id="@+id/bt_setting"-->
+        <!--android:layout_width="60dp"-->
+        <!--android:layout_height="30dp"-->
+        <!--android:layout_alignTop="@+id/textView4"-->
+        <!--android:layout_alignParentEnd="true"-->
+        <!--android:layout_marginEnd="14dp"-->
+        <!--android:background="@drawable/fillet_style_button_selector"-->
+        <!--android:text="设置"-->
+        <!--android:textColor="#ffffff" />-->
+
+    <!--<View-->
+        <!--android:id="@+id/shang_view"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="1dp"-->
+        <!--android:layout_below="@id/bt_return"-->
+        <!--android:layout_marginTop="15dp"-->
+        <!--android:background="#898989" />-->
+
+    <!--&lt;!&ndash;开启debug模式&ndash;&gt;-->
+    <!--<include-->
+        <!--android:id="@+id/open_debug"-->
+        <!--layout="@layout/activity_search_open_debug"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_below="@id/shang_view"-->
+        <!--android:visibility="gone" />-->
+
+    <!--&lt;!&ndash;关闭debug 模式&ndash;&gt;-->
+    <!--<include-->
+        <!--android:id="@+id/close_debug"-->
+        <!--layout="@layout/activity_search_close_debug"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_below="@id/shang_view"-->
+        <!--android:visibility="visible" />-->
+</RelativeLayout>

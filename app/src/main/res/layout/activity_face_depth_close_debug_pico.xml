@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/all_relative"
+    android:layout_width="match_parent"
+    android:background="@color/white"
+    android:layout_height="match_parent">
+
+    <include
+        android:id="@+id/search_title"
+        layout="@layout/layout_search_title" />
+
+    <Button
+        android:id="@+id/debug_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/search_title"
+        android:layout_margin="5dp"
+        android:textColor="#000"
+        android:background="@drawable/logout_selector"
+        android:text="开启调试" />
+
+	<android.opengl.GLSurfaceView
+        android:id="@+id/depth_camera_preview_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/search_title"
+        android:layout_above="@+id/layout_info"
+        android:visibility="invisible" />
+	
+    <android.opengl.GLSurfaceView
+        android:id="@+id/ir_camera_preview_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/search_title"
+        android:layout_above="@+id/layout_info"
+        android:visibility="invisible" />
+
+    <android.opengl.GLSurfaceView
+        android:id="@+id/camera_preview_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/search_title"
+        android:layout_above="@+id/layout_info"
+        android:visibility="invisible" />
+
+    <com.baidu.idl.face.main.camera.PicoAutoTexturePreviewView
+        android:id="@+id/auto_camera_preview_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/layout_info"
+        android:layout_below="@id/search_title" />
+
+    <TextureView
+        android:id="@+id/draw_detect_face_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/layout_info"
+        android:layout_below="@id/search_title" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/auto_camera_preview_view"
+        android:background="#898989" />
+
+    <TextView
+        android:id="@+id/track_txt"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_above="@+id/layout_info"
+        android:layout_alignParentStart="true"
+        android:background="#016838"
+        android:gravity="center"
+        android:textColor="#ffffff"
+        android:visibility="gone" />
+
+    <RelativeLayout
+        android:id="@+id/layout_info"
+        android:layout_width="match_parent"
+        android:layout_height="195dp"
+        android:layout_alignParentBottom="true"
+        android:gravity="center_horizontal">
+
+        <include layout="@layout/activity_search_itme" />
+
+    </RelativeLayout>
+</RelativeLayout>

@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout"
+    android:layout_width="wrap_content"
+    android:background="@color/white"
+    android:layout_height="wrap_content">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp">
+
+        <Button
+            android:id="@+id/id_reg_ir_back"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_centerVertical="true"
+            android:layout_margin="5dp"
+            android:background="@drawable/fillet_style_return_selector"
+            android:text="返回"
+            android:textColor="@color/white"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="注册"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/id_reg_ir_setting"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_margin="5dp"
+            android:background="#FF009688"
+            android:text="设置"
+            android:textColor="@color/white"
+            android:textSize="14sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_alignParentBottom="true"
+            android:background="@color/black" />
+    </RelativeLayout>
+
+
+
+    <FrameLayout
+        android:id="@+id/auto_preview_ir_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="60dp"
+        android:layout_marginBottom="220dp">
+
+        // RGB预览
+        <com.baidu.idl.face.main.camera.AutoTexturePreviewView
+            android:id="@+id/face_ir_detect_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+        </com.baidu.idl.face.main.camera.AutoTexturePreviewView>
+
+        <TextureView
+            android:id="@+id/draw_detect_face_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </FrameLayout>
+
+
+    // 遮罩视图
+    <com.baidu.idl.face.main.view.FaceRoundView
+        android:id="@+id/rect_view_ir"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="60dp"
+        android:layout_marginBottom="220dp"
+        android:visibility="gone" />
+
+    // ir 视图
+    <TextureView
+        android:id="@+id/texture_preview_ir"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_alignBottom="@+id/auto_preview_ir_layout"
+        android:layout_alignLeft="@+id/auto_preview_ir_layout"
+        />
+
+    // RGB 检测图片测试
+    <ImageView
+        android:id="@+id/test_ir_imgView"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:scaleType="fitCenter"
+        android:layout_alignRight="@+id/auto_preview_ir_layout"
+        android:layout_alignBottom="@+id/auto_preview_ir_layout"
+        android:visibility="invisible"
+        />
+
+    // 底部视图
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/auto_camera_preview_view"
+        android:background="#898989" />
+
+    <TextView
+        android:id="@+id/track_txt"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_above="@+id/layout_info"
+        android:layout_alignParentStart="true"
+        android:gravity="center"
+        android:textColor="#ffffff" />
+
+    <RelativeLayout
+        android:id="@+id/layout_info"
+        android:layout_width="match_parent"
+        android:layout_height="220dp"
+        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/auto_camera_preview_view"
+        android:gravity="center_horizontal"
+        android:background="@color/white">
+
+        <TextView
+            android:id="@+id/detect_reg_text"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_above="@+id/image"
+            android:layout_alignParentStart="true"
+            android:layout_marginBottom="12dp"
+            android:gravity="center"
+            android:textColor="#000000" />
+
+        <RelativeLayout
+            android:layout_width="140dp"
+            android:layout_height="140dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="40dp"
+            android:background="@drawable/fillet_style_search_item">
+
+            <com.baidu.idl.face.main.view.CircleImageView
+                android:id="@+id/detect_reg_image_item"
+                android:layout_width="134dp"
+                android:layout_height="134dp"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:src="@mipmap/ic_littleicon" />
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+</RelativeLayout>

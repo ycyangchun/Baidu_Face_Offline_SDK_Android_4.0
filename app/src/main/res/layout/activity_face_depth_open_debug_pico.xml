@@ -1,0 +1,266 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/all_relative"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:gravity="center_horizontal">
+
+    <include
+        android:id="@+id/search_title"
+        layout="@layout/layout_search_title" />
+
+    <com.baidu.idl.face.main.camera.PicoAutoTexturePreviewView
+        android:id="@+id/auto_camera_preview_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/search_title"
+        android:layout_above="@+id/relativeLayout"
+        android:layout_centerHorizontal="true" />
+
+    <TextureView
+        android:id="@+id/camera_preview_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/search_title"
+        android:layout_above="@+id/relativeLayout"
+        android:layout_centerHorizontal="true" />
+
+    <TextureView
+        android:id="@+id/draw_detect_face_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/search_title"
+        android:layout_above="@+id/relativeLayout"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:id="@+id/debug_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/search_title"
+        android:layout_margin="5dp"
+        android:background="@drawable/logout_selector"
+        android:text="关闭调试"
+        android:textColor="#000" />
+
+    <TextView
+        android:id="@+id/version_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/search_title"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="15dp"
+        android:text="版本: V3.0.0"
+        android:textColor="#000" />
+
+    <TextView
+        android:id="@+id/detect_rgb_surface_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/face_detect_image_view"
+        android:layout_alignBaseline="@+id/detect_depth_surface_text"
+        android:layout_alignBottom="@+id/detect_depth_surface_text"
+        android:layout_alignStart="@+id/face_detect_image_view"
+        android:text="RGB图片帧预览 :"
+        android:textColor="#000" />
+
+    <TextView
+        android:id="@+id/detect_depth_surface_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/face_detect_image_view"
+        android:layout_marginLeft="10dp"
+        android:text="Depth 预览:"
+        android:textColor="#000" />
+
+
+    <android.opengl.GLSurfaceView
+        android:id="@+id/depth_camera_preview_view"
+        android:layout_width="120dp"
+        android:layout_height="160dp"
+        android:layout_above="@+id/relativeLayout"
+        android:visibility="invisible" />
+
+    <TextureView
+        android:id="@+id/ir_camera_preview_view"
+        android:layout_width="120dp"
+        android:layout_height="160dp"
+        android:layout_above="@+id/relativeLayout"
+        android:visibility="invisible" />
+
+    <ImageView
+        android:id="@+id/face_detect_image_view"
+        android:layout_width="120dp"
+        android:layout_height="160dp"
+        android:layout_alignEnd="@+id/debug_btn"
+        android:layout_alignTop="@+id/depth_camera_preview_view"
+        android:visibility="invisible" />
+
+    <TextView
+        android:id="@+id/depth_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/detect_depth_surface_text"
+        android:layout_marginLeft="100dp"
+        android:textSize="18sp"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/rgb_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@id/face_detect_image_view"
+        android:layout_below="@+id/detect_rgb_surface_text"
+        android:layout_marginRight="10dp"
+        android:textSize="18sp"
+        android:visibility="gone" />
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="220dp"
+        android:layout_alignParentBottom="true"
+        android:background="#fff"
+        android:orientation="horizontal">
+
+        <View
+            android:id="@+id/view3"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#000" />
+
+        <LinearLayout
+            android:id="@+id/linear_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/view3"
+            android:layout_marginTop="5dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="43dp"
+                android:layout_marginTop="10dp"
+                android:text="底库：0个"
+                android:textColor="#ac182a" />
+
+            <TextView
+                android:id="@+id/tv_detect"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="43dp"
+                android:layout_marginTop="2dp"
+                android:text="检测：0ms"
+                android:textColor="#ac182a" />
+
+            <TextView
+                android:id="@+id/tv_live"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_detect"
+                android:layout_marginLeft="43dp"
+                android:layout_marginTop="2dp"
+                android:text="RGB活体：0ms"
+                android:textColor="#ac182a" />
+
+            <TextView
+                android:id="@+id/tv_live_score"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="43dp"
+                android:layout_marginTop="2dp"
+                android:text="RGB得分：0.0"
+                android:textColor="#ac182a" />
+
+            <TextView
+                android:id="@+id/tv_ir"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_detect"
+                android:layout_marginLeft="43dp"
+                android:layout_marginTop="2dp"
+                android:text="RGB活体：0ms"
+                android:textColor="#ac182a"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/tv_ir_score"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="43dp"
+                android:layout_marginTop="2dp"
+                android:text="RGB得分：0.0"
+                android:textColor="#ac182a"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/tv_depth"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_detect"
+                android:layout_marginLeft="43dp"
+                android:layout_marginTop="2dp"
+                android:text="RGB活体：0ms"
+                android:textColor="#ac182a"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/tv_depth_score"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="43dp"
+                android:layout_marginTop="2dp"
+                android:text="RGB得分：0.0"
+                android:textColor="#ac182a"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/tv_feature"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="43dp"
+                android:layout_marginTop="2dp"
+                android:text="特征提取：0ms"
+                android:textColor="#ac182a" />
+
+            <TextView
+                android:id="@+id/tv_all"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="43dp"
+                android:layout_marginTop="2dp"
+                android:text="检索比对：0ms"
+                android:textColor="#ac182a" />
+
+            <TextView
+                android:id="@+id/tv_all_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="43dp"
+                android:layout_marginTop="2dp"
+                android:text="总耗时：0ms"
+                android:textColor="#ac182a" />
+
+        </LinearLayout>
+
+        <View
+            android:id="@+id/view2"
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+            android:background="#000" />
+
+        <include
+            android:id="@+id/linearLayout"
+            layout="@layout/activity_search_itme"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/view2"
+            android:gravity="center"
+            android:orientation="vertical" />
+    </RelativeLayout>
+
+</RelativeLayout>

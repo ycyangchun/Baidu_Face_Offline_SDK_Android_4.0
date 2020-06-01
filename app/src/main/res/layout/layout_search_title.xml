@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+    <Button
+        android:id="@+id/btn_back"
+        android:layout_width="60dp"
+        android:layout_height="30dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/fillet_style_return_selector"
+        android:text="返回"
+        android:textColor="#ffffff" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:gravity="center"
+        android:text="视频流动态人脸搜索"
+        android:textColor="#363636"
+        android:textSize="22dp"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/btn_setting"
+        android:layout_width="60dp"
+        android:layout_height="30dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@+id/textView4"
+        android:layout_marginEnd="14dp"
+        android:background="@drawable/fillet_style_button_selector"
+        android:text="设置"
+        android:textColor="#ffffff" />
+
+    <View
+        android:id="@+id/shang_view"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/btn_back"
+        android:layout_marginTop="15dp"
+        android:background="#898989" />
+
+</RelativeLayout>

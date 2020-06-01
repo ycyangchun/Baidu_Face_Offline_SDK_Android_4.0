@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:text="镜头及活体模式设置"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
+
+            <RadioGroup
+                android:id="@+id/fls_live_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <RadioButton
+                    android:id="@+id/fls_no_live"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="50dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginRight="15dp"
+                    android:buttonTint="@color/black"
+                    android:textColor="@color/black"
+                    android:text="不使用活体检测" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="50dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginRight="15dp"
+                    android:textColor="#333"
+                    android:text="活体检测主要用于判断用户是否为真人，但如使用场景下，常有固定人员看守，则可无需活体，直接采集人脸。因为活体检测虽然保障了安全性，但却会影响一定的通过率"
+                    android:textSize="17sp" />
+
+                <RadioButton
+                    android:id="@+id/fls_rgb_live"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="50dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginRight="15dp"
+                    android:buttonTint="@color/black"
+                    android:textColor="@color/black"
+                    android:text="RGB单目活体" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="50dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginRight="15dp"
+                    android:textColor="#333"
+                    android:text="仅使用RGB活体（单目活体），可有效防止照片翻拍、屏幕等攻击，前端采集为USB单目镜头即可。"
+                    android:textSize="17sp" />
+
+                <RadioButton
+                    android:id="@+id/fls_rgbandnir_live"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="50dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginRight="15dp"
+                    android:textColor="@color/black"
+                    android:buttonTint="@color/black"
+                    android:text="RGB+NIR活体" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="50dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginRight="15dp"
+                    android:textColor="#333"
+                    android:text="RGB单目活体+NIR近红外活体，基于近红外图像的成像特点，如屏幕无法成像，不同材质反射率不同等，可对屏幕、高清照片等攻击，更加有效的防作弊。"
+                    android:textSize="17sp" />
+
+                <RadioButton
+                    android:id="@+id/fls_rgbanddepth_live"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="50dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginRight="15dp"
+                    android:textColor="@color/black"
+                    android:buttonTint="@color/black"
+                    android:text="RGB+Depth活体" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="50dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginRight="15dp"
+                    android:textColor="#333"
+                    android:text="RGB单目活体+Depth深度活体，在RGB活体的安全级别基础上，对屏幕、高清彩灯照片、视频、模具等防御力更强。硬件需要搭配3D结构光、TOF类型的镜头。"
+                    android:textSize="17sp" />
+            </RadioGroup>
+
+            <RadioGroup
+                android:id="@+id/fls_camera_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="15dp"
+                android:orientation="vertical">
+
+                <RadioButton
+                    android:id="@+id/flt_zero"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:buttonTint="@color/black"
+                    android:layout_marginTop="8dp"
+                    android:text="奥比中光Astra Mini、Mini S系列(结构光 640*480)"
+                    android:textColor="#159046"
+                    android:visibility="gone" />
+
+                <RadioButton
+                    android:id="@+id/flt_one"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="奥比中光 Astra Pro 、Pro S 、蝴蝶（结构光 640*480）"
+                    android:textColor="#159046"
+                    android:buttonTint="@color/black"
+                    android:visibility="visible" />
+
+                <RadioButton
+                    android:id="@+id/flt_two"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:buttonTint="@color/black"
+                    android:layout_marginTop="8dp"
+                    android:text="奥比中光Atlas（结构光 400*640）"
+                    android:textColor="@color/buttonBg" />
+
+                <RadioButton
+                    android:id="@+id/flt_three"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:buttonTint="@color/black"
+                    android:text="奥比中光大白、海燕(结构光 640*400)"
+                    android:textColor="#159046"
+                    android:visibility="visible" />
+
+                <RadioButton
+                    android:id="@+id/flt_four"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="奥比中光Deeyea(结构光 640*400)"
+                    android:buttonTint="@color/black"
+                    android:textColor="#159046"
+                    android:visibility="gone" />
+
+                <RadioButton
+                    android:id="@+id/flt_five"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:buttonTint="@color/black"
+                    android:text="华捷艾米A100S、A200(结构光 640*480)"
+                    android:textColor="#159046"
+                    android:visibility="gone" />
+
+                <RadioButton
+                    android:id="@+id/flt_six"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:buttonTint="@color/black"
+                    android:text="Pico Zense DCAM305(ToF 480*640)"
+                    android:textColor="#159046"
+                    android:visibility="visible" />
+            </RadioGroup>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="15dp"
+                android:text="温馨提示：更详细的镜头选型建议，请参考SDK的文档介绍"
+                android:textColor="@color/red" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="80dp"
+                android:gravity="center">
+
+                <Button
+                    android:id="@+id/fls_save"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bt_set_round"
+                    android:text="保存"
+                    android:textColor="#ffffff" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="30dp"
+        android:gravity="center"
+        android:text="最小检测人脸设置"
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="20dp"
+        android:text="说明:"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="15dp"
+        android:gravity="center_vertical"
+        android:text="最小检测人脸是指：视频流中可以检测到的人脸的最小面积，相同镜头焦距情况下，此数值设置的越小，人脸越容易被检测到，对应的可识别距离也就越大，此数值通常和分辨率一起使用。数值可调整范围为30px至200px之间，需要同时考虑分辨率大小因素影响，每次调解上下改动幅度为10px"
+        android:textColor="@color/black"
+        android:textSize="17sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="30dp"
+        android:gravity="center"
+        android:text="最小检测人脸:(像素)"
+        android:textColor="@color/black"
+        android:textSize="26dp"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/mf_Decrease"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@drawable/btn_amount"
+            android:gravity="center"
+            android:text="-"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/mf_etAmount"
+            android:layout_width="80dp"
+            android:layout_height="60dp"
+            android:layout_marginLeft="8dp"
+            android:background="@null"
+            android:focusable="false"
+            android:gravity="center"
+            android:inputType="number"
+            android:minWidth="60dp"
+            android:text=""
+            android:textSize="30sp"
+            android:textColor="@color/black"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/mf_Increase"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="8dp"
+            android:background="@drawable/btn_amount"
+            android:gravity="center"
+            android:text="+"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="80dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/mf_save"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bt_set_round"
+            android:text="保存"
+            android:textColor="#ffffff" />
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,67 @@
+<resources>
+    <string name="app_name">BaiDuFace Demo</string>
+
+    <string name="face_setting">设置</string>
+    <string name="face_id">设备ID</string>
+    <string name="face_track">人脸检测</string>
+    <string name="face_recognize">识别</string>
+    <string name="face_livness">动作活体</string>
+    <string name="face_image">图片比对</string>
+    <string name="face_image_attrs">图片活体属性</string>
+    <string name="face_image_gaze">图片注意力</string>
+    <string name="face_image_emotion">图片情绪</string>
+    <string name="face_image_quality">图片质量</string>
+    <string name="face_head_pose">图片姿态角</string>
+    <string name="face_id_phone">证件照</string>
+    <string name="face_ir">红外比对</string>
+    <string name="face_ir_silent">红外活体</string>
+    <string name="face_process">图片处理</string>
+    <string name="face_depth">深度图</string>
+    <string name="face_test">多线程</string>
+    <string name="face_attrs">属性</string>
+    <string name="face_image_crop">图片裁剪</string>
+
+    <string name="detectInfoTxt">预览区域内人脸不全</string>
+
+    <string name="min_face_size">最小检测人脸：%s px</string>
+    <string name="image_size"> 分辨率：%s p</string>
+    <string name="silent_live_type">活体模式：%s</string>
+    <string name="feature_threshold_value">识别阈值：%s 分</string>
+    <string name="rgb_live_threshold_value">RGB 活体阈值：%s</string>
+    <string name="nir_live_threshold_value">NIR 活体阈值：%s</string>
+    <string name="depth_live_threshold_value">Depth 活体阈值：%s</string>
+    <string name="detect_type">检测形式：%s</string>
+
+    <string name="import_tip">1.在SD卡根目录，创建一个文件夹，命名为Face-Import。
+    \n\n2.将需要导入的每个图片，文件名示例为username-group.jpg，即用户名-用户组名的文件命名方式。
+    \n\n3.新建一个压缩文件，命名为Face.zip，将人脸图片全部放到该zip下，并将zip文件放置到Face-Import目录下。
+    \n\n4.点击下方按钮开始解压操作，批量注册时间较长，请耐心等待，不要关闭此窗口。</string>
+
+    <string name="search_text">通过视频流方式，完成实时的动态人脸识别,
+        \n并集合了动态的活体检测，确保识别过程的\n安全性</string>
+
+    <string name="reigster_text">基于指定质量检测要求，完成人脸图像的注册
+        \n注册的人脸数据存于本地，如实际商用过程中
+        \n请使用数据接口完成特征值或图片同步</string>
+
+    <string name="user_text">包含人脸注册、更新、删除等业务能力，此处
+        \n操作的人脸信息仅存于本地，实际商用过程中
+        \n请使用数据接口对设备终端进行更新。</string>
+
+    <string name="import_text">支持人脸库的批量导入，SDK会自动基于图片
+        \n信息进行用户组和用户的创建</string>
+
+    <string name="mirror_tips">根据镜头或者使用设备差异，可能存在检测框与实际人脸方向镜像的问题，
+        可通过以下设置进行调节。常见于镜头前置后置切换。</string>
+
+    <string name="register_text_explain1">本地人脸库以人脸组的形式进行管理，每个人脸\n组下，可以注册无限个用户。
+        每个用户下默认仅\n一张人脸。 </string>
+    <string name="register_text_explain2">用户名为必填项。请输入英文或者数字，不支持\n汉字或者特殊字符。</string>
+    <string name="register_text_explain3">用户组为非必填项，如不设置用户组名，则默认\n注册到default 组下。您可以在人脸库管理中，
+        进\n行具体人脸组、人脸用户、及详细用户信息的查\n看和编辑。</string>
+    <string name="register_text_explain4">用户信息为非必填项，用于标记用户的一些其他\n信息。</string>
+
+    <string name="setting_notice">修改之后需要重启App方可生效</string>
+
+    <string name="attribute_is_available">BaseConfig的isAttribute要为true</string>
+</resources>

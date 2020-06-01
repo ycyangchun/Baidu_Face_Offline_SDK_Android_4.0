@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="30dp"
+                android:gravity="center"
+                android:text="调试模式配置"
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="10dp"
+                android:gravity="center_vertical"
+                android:text="说明："
+                android:textColor="@color/black"
+                android:textSize="20sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="15dp"
+                android:gravity="center_vertical"
+                android:text="修改在调试模式下，展现的具体信息内容，默认为全选"
+                android:textColor="@color/black"
+                android:textSize="17sp" />
+
+
+            <!--<RadioGroup-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content">-->
+
+            <!--<com.baidu.idl.face.main.view.RoundCheckBox-->
+            <!--android:id="@+id/dm_rgbdisplay"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginLeft="50dp"-->
+            <!--android:layout_marginTop="50dp"-->
+            <!--android:text="RGB检测帧回显" />-->
+
+            <!--<com.baidu.idl.face.main.view.RoundCheckBox-->
+            <!--android:id="@+id/dm_nirordepthdisplay"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginLeft="50dp"-->
+            <!--android:layout_marginTop="50dp"-->
+            <!--android:text="NIR或Depth实时视频预览" />-->
+            <!--</RadioGroup>-->
+
+
+            <CheckBox
+                android:id="@+id/dm_rgbdisplay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="30dp"
+                android:buttonTint="@color/buttonBg"
+                android:text="RGB检测帧回显"
+                android:textColor="@color/buttonBg" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="10dp"
+                android:gravity="center_vertical"
+                android:maxLines="3"
+                android:text="控制采集页面右下角的实际送检图片展示，SDK只检测人脸朝上的图片，可根据该图判断送检图片方向"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+
+            <CheckBox
+                android:id="@+id/dm_nirordepthdisplay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="30dp"
+                android:buttonTint="@color/buttonBg"
+                android:text="NIR或Depth实时视频预览"
+                android:textColor="@color/buttonBg" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="10dp"
+                android:gravity="center_vertical"
+                android:maxLines="3"
+                android:text="控制采集页面左下角的NIR、Depth预览图展示，可根据该预览图判断近红外或深度成像状态"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+
+            <CheckBox
+                android:id="@+id/dm_isdebug"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="30dp"
+                android:buttonTint="@color/buttonBg"
+                android:text="开启调试显示"
+                android:textColor="@color/buttonBg" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="10dp"
+                android:gravity="center_vertical"
+                android:text="控制1：N搜索的 调试与非调试状态"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+
+            <CheckBox
+                android:id="@+id/dm_isRGBRevert"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="30dp"
+                android:buttonTint="@color/buttonBg"
+                android:text="rgb摄像头实时预览是否镜像调节"
+                android:textColor="@color/buttonBg" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="10dp"
+                android:gravity="center_vertical"
+                android:text="若RGB预览与送检图片方向一致，人脸框方向相反，可以打开此按钮"
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+
+            <!--<LinearLayout-->
+            <!--android:id="@+id/content"-->
+            <!--android:layout_width="fill_parent"-->
+            <!--android:layout_height="0dp"-->
+            <!--android:layout_weight="1"-->
+            <!--android:orientation="vertical"></LinearLayout>-->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="80dp"
+                android:gravity="center">
+
+                <Button
+                    android:id="@+id/dm_save"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bt_set_round"
+                    android:text="保存"
+                    android:textColor="#ffffff" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

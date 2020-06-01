@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:background="@color/white">
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="百度人脸离线识别SDK"
+        android:layout_marginTop="30dp"
+        android:textColor="@color/black"
+        android:textSize="30sp"/>
+    <TextView
+        android:id="@+id/tv_version"
+        android:layout_below="@+id/tv_title"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="当前版本：4.0.0"
+        android:layout_marginTop="30dp"
+        android:textColor="@color/black"
+        android:textSize="20sp"/>
+
+    <ImageView
+        android:id="@+id/iv_icon"
+        android:layout_below="@+id/tv_version"
+        android:layout_centerHorizontal="true"
+        android:layout_width="160dp"
+        android:layout_height="160dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginBottom="60dp"
+        android:background="@mipmap/ic_smiling_face" />
+
+    <Button
+        android:layout_below="@+id/iv_icon"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/btn_select"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:layout_marginBottom="0dp"
+        android:padding="10dp"
+        android:text="立即使用"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:background="@drawable/fillet_style_button_selector"/>
+
+    <ImageView
+        android:id="@+id/iv_logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="39dp"
+        android:background="@mipmap/ic_baidu_logo" />
+</RelativeLayout>

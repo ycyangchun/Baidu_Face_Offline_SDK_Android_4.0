@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="@color/white"
+    android:layout_gravity="center_horizontal"
+    android:layout_height="match_parent">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp">
+
+        <Button
+            android:id="@+id/id_reg_back"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_centerVertical="true"
+            android:layout_margin="5dp"
+            android:background="@drawable/fillet_style_return_selector"
+            android:text="返回"
+            android:textColor="@color/white"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="17dp"
+            android:text="人脸注册"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/id_reg_setting"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_margin="5dp"
+            android:background="#FF009688"
+            android:text="设置"
+            android:textColor="@color/white"
+            android:textSize="14sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_alignParentBottom="true"
+            android:background="@color/black" />
+    </RelativeLayout>
+
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_marginTop="100dp">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:gravity="center_horizontal"
+            android:layout_height="70dp">
+
+            <TextView
+                android:id="@+id/comment"
+                android:layout_width="10dp"
+                android:layout_height="50dp"
+                android:maxLines="1"
+                android:text="*"
+                android:textAlignment="textStart"
+                android:textColor="@color/red"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/userName"
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:maxLines="1"
+                android:text="用户名:"
+                android:textAlignment="textStart"
+                android:textColor="@color/black"
+                android:textSize="20dp" />
+
+            <com.baidu.idl.face.main.view.UnderLineEditText
+                android:id="@+id/username_et"
+                android:layout_width="250dp"
+                android:layout_height="50dp"
+                android:maxLines="1"
+                android:textColor="@color/black"
+                android:textColorHighlight="#666"
+                android:hint="请输入用户名"/>
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:gravity="center_horizontal"
+            android:layout_height="70dp">
+
+            <TextView
+                android:id="@+id/group_id_group"
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:maxLines="1"
+                android:text="用户组:"
+                android:textAlignment="textStart"
+                android:textColor="@color/black"
+                android:textSize="20dp" />
+
+
+            <com.baidu.idl.face.main.view.UnderLineEditText
+                android:id="@+id/userGroup_et"
+                android:layout_width="250dp"
+                android:layout_height="50dp"
+                android:maxLines="1"
+                android:textColor="@color/black"
+                android:textColorHighlight="#666"
+                android:hint="default"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:id="@+id/user_info_layout"
+            android:gravity="center_horizontal"
+            android:layout_height="70dp">
+
+            <TextView
+                android:id="@+id/user_info"
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:maxLines="1"
+                android:text="用户信息:（可不填）"
+                android:textAlignment="textStart"
+                android:textColor="@color/black"
+                android:textSize="20dp" />
+
+
+            <com.baidu.idl.face.main.view.UnderLineEditText
+                android:id="@+id/user_info_tx"
+                android:layout_width="250dp"
+                android:layout_height="50dp"
+                android:maxLines="1"
+                android:textColor="@color/black"
+                android:textColorHighlight="#666"
+                android:hint=""/>
+
+        </LinearLayout>
+
+
+        <Button
+            android:id="@+id/auto_detect_btn"
+            android:layout_width="250dp"
+            android:layout_height="48dp"
+            android:background="@color/buttonBg"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="20dp"
+            android:textColor="@color/white"
+            android:text="开始采集人脸"/>
+
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal">
+
+            <TextView
+                android:id="@+id/text1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/register_text_explain1"
+                android:textAlignment="textStart"
+                android:textColor="#016838"
+                android:textSize="16dp" />
+
+
+            <TextView
+                android:id="@+id/text2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/text1"
+                android:layout_gravity="center"
+                android:layout_marginTop="5dp"
+                android:text="@string/register_text_explain2"
+                android:textAlignment="textStart"
+                android:textColor="#016838"
+                android:textSize="16dp" />
+
+            <TextView
+                android:id="@+id/text3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/text2"
+                android:layout_gravity="center"
+                android:layout_marginTop="5dp"
+                android:text="@string/register_text_explain3"
+                android:textAlignment="textStart"
+                android:textColor="#016838"
+                android:textSize="16dp" />
+
+            <TextView
+                android:id="@+id/text4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/text3"
+                android:layout_gravity="center"
+                android:layout_marginTop="5dp"
+                android:text="@string/register_text_explain4"
+                android:textAlignment="textStart"
+                android:textColor="#016838"
+                android:textSize="16dp" />
+
+
+        </RelativeLayout>
+
+
+
+    </LinearLayout>
+
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="39dp"
+        android:src="@mipmap/ic_baidu_logo" />
+
+
+</RelativeLayout>

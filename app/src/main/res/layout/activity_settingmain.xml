@@ -1,0 +1,549 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp">
+
+            <Button
+                android:id="@+id/sm_back"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="16dp"
+                android:background="@drawable/bt_round"
+                android:text="返回"
+                android:textColor="#ffffff" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:text="功能设置"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_alignParentBottom="true"
+                android:background="@color/black" />
+        </RelativeLayout>
+    </LinearLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="750dp"
+            android:orientation="vertical">
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="30dp"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentTop="true"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <View style="@style/SettingMainBlackPoint" />
+
+                            <TextView
+                                android:id="@+id/sm_debugmode"
+                                style="@style/SettingMainTitle"
+                                android:text="调试模式配置" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentTop="true"
+                            android:orientation="horizontal">
+
+
+                            <TextView
+                                android:id="@+id/tv_debugmode"
+                                style="@style/SettingMainExplain"
+                                android:text="调试模式下的界面设置" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="25dp"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentTop="true"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <View
+                                android:layout_width="5dp"
+                                android:layout_height="5dp"
+                                android:layout_alignParentStart="true"
+                                android:layout_centerVertical="true"
+                                android:layout_marginLeft="60dp"
+                                android:background="#000000" />
+
+                            <TextView
+                                android:id="@+id/sm_mirror"
+
+                                style="@style/SettingMainTitle"
+                                android:text="检测框镜像调节" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentTop="true"
+                            android:orientation="horizontal">
+
+
+                            <TextView
+                                android:id="@+id/tv_mirror"
+                                style="@style/SettingMainExplain"
+                                android:text="用于是否镜像显示人脸" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="25dp"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentTop="true"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <View style="@style/SettingMainBlackPoint" />
+
+                            <TextView
+                                android:id="@+id/sm_minface"
+
+                                style="@style/SettingMainTitle"
+                                android:text="最小检测人脸" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentTop="true"
+                            android:orientation="horizontal">
+
+
+                            <TextView
+                                android:id="@+id/tv_minface"
+                                style="@style/SettingMainExplain"
+                                android:text="可以检测到的最小人脸尺寸设置" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="25dp"
+                        android:orientation="vertical"
+                        android:visibility="gone">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentTop="true"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <View style="@style/SettingMainBlackPoint" />
+
+                            <TextView
+                                android:id="@+id/sm_detecttrailstrategy"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentStart="true"
+                                android:layout_alignParentTop="true"
+                                android:layout_marginLeft="10dp"
+                                android:text="检测追踪策略"
+                                android:textColor="@color/black"
+                                android:textSize="16sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentTop="true"
+                            android:orientation="horizontal">
+
+
+                            <TextView
+                                android:id="@+id/tv_detecttrailstrategy"
+                                style="@style/SettingMainExplain"
+                                android:text="检测界面的界面及策略设置" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="25dp"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentTop="true"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <View style="@style/SettingMainBlackPoint" />
+
+                            <TextView
+                                android:id="@+id/sm_facedetectangle"
+                                style="@style/SettingMainTitle"
+                                android:text="人脸检测角度" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentTop="true"
+                            android:orientation="horizontal">
+
+
+                            <TextView
+                                android:id="@+id/tv_facedetectangle"
+                                style="@style/SettingMainExplain"
+                                android:text="活体模态、镜头适配等方面的设置" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="25dp"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentTop="true"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <View style="@style/SettingMainBlackPoint" />
+
+                            <TextView
+                                android:id="@+id/sm_cameradisplayangle"
+                                style="@style/SettingMainTitle"
+                                android:text="摄像头视频流回显角度" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentTop="true"
+                            android:orientation="horizontal">
+
+
+                            <TextView
+                                android:id="@+id/tv_cameradisplayangle"
+                                style="@style/SettingMainExplain"
+                                android:text="调整视频流中的RGB实时回显内容的角度" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="25dp"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentTop="true"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <View style="@style/SettingMainBlackPoint" />
+
+                            <TextView
+                                android:id="@+id/sm_qualitycontrol"
+
+                                style="@style/SettingMainTitle"
+                                android:text="质量控制参数" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentTop="true"
+                            android:orientation="horizontal">
+
+
+                            <TextView
+                                android:id="@+id/tv_qualitycontrol"
+                                style="@style/SettingMainExplain"
+                                android:text="人脸采集的姿态、光照、模糊度、遮挡参数设置" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="25dp"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentTop="true"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <View style="@style/SettingMainBlackPoint" />
+
+                            <TextView
+                                android:id="@+id/sm_facelivinesstype"
+                                style="@style/SettingMainTitle"
+                                android:text="镜头及活体检测模式" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentTop="true"
+                            android:orientation="horizontal">
+
+
+                            <TextView
+                                android:id="@+id/tv_facelivinesstype"
+                                style="@style/SettingMainExplain"
+                                android:text="活体检测应用的模态组合配置，全局生效" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="25dp"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentTop="true"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <View style="@style/SettingMainBlackPoint" />
+
+                            <TextView
+                                android:id="@+id/sm_facelivenessthreshold"
+                                style="@style/SettingMainTitle"
+                                android:text="活体检测阈值" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentTop="true"
+                            android:orientation="horizontal">
+
+
+                            <TextView
+                                android:id="@+id/tv_facelivenessthreshold"
+                                style="@style/SettingMainExplain"
+                                android:text="活体检测各模态的阈值，全局生效" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="25dp"
+                        android:orientation="vertical"
+                        android:visibility="gone">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentTop="true"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <View style="@style/SettingMainBlackPoint" />
+
+                            <TextView
+                                android:id="@+id/sm_recognizemodletype"
+                                style="@style/SettingMainTitle"
+                                android:text="识别模型选择" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentTop="true"
+                            android:orientation="horizontal">
+
+
+                            <TextView
+                                android:id="@+id/tv_recognizemodletype"
+                                style="@style/SettingMainExplain"
+                                android:text="生活照及证件照的应用模型选择，全局生效" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="25dp"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentTop="true"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <View style="@style/SettingMainBlackPoint" />
+
+                            <TextView
+                                android:id="@+id/sm_recognizemodlethreshold"
+                                style="@style/SettingMainTitle"
+                                android:text="识别模型阈值" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentTop="true"
+                            android:orientation="horizontal">
+
+
+                            <TextView
+                                android:id="@+id/tv_recognizemodlethreshold"
+                                style="@style/SettingMainExplain"
+                                android:text="生活照和证件照模型的阈值选择，全局生效" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="25dp"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentTop="true"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <View style="@style/SettingMainBlackPoint" />
+
+                            <TextView
+                                android:id="@+id/sm_detectfollowstarategy"
+                                style="@style/SettingMainTitle"
+                                android:text="检测跟踪策略" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentTop="true"
+                            android:orientation="horizontal">
+
+
+                            <TextView
+                                android:id="@+id/tv_detectfollowstarategy"
+                                style="@style/SettingMainExplain"
+                                android:text="检测界面的界面及策略设置" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+            </ScrollView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
+            android:gravity="center"
+            android:visibility="visible">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@mipmap/ic_baidu_logo" />
+        </LinearLayout>
+    </RelativeLayout>
+
+</LinearLayout>

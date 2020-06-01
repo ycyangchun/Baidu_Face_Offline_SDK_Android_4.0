@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:text="识别模型选择"
+        android:textColor="@color/black"
+        android:textSize="20sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="10dp"
+        android:gravity="center_vertical"
+        android:text="说明："
+        android:textColor="@color/black"
+        android:textSize="20sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="15dp"
+        android:gravity="center_vertical"
+        android:text="生活照模型：所处理的图片主要为手机采集、视频摄像头采集的图片，也是闸机、门禁、娱乐营销、人脸登陆、人脸支付等场景常用的模型，推荐的人脸大小在60px-200px之间，尽可能保障是清晰的正面照片。"
+        android:textColor="@color/black"
+        android:textSize="17sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="15dp"
+        android:gravity="center_vertical"
+        android:text="证件照模型：所处理的图片主要为身份证芯片照，人脸大小很小的证件照原图等，常用于政务身份核验、社保生存证明、酒店前台人证合一等场景。"
+        android:textColor="@color/black"
+        android:textSize="17sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="10dp"
+        android:gravity="center|left"
+        android:text="注意: 只要比对业务中存在证件照类型的图片，就需要选择证件照模型。"
+        android:textColor="@color/red"
+        android:textSize="16dp"
+        android:textStyle="bold" />
+
+    <RadioButton
+        android:id="@+id/rmt_livemodle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="50dp"
+        android:text="生活照模型" />
+
+    <RadioButton
+        android:id="@+id/rmt_idmodle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="10dp"
+        android:text="证件照模型" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/rmt_save"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bt_set_round"
+            android:text="保存"
+            android:textColor="#ffffff" />
+    </LinearLayout>
+</LinearLayout>

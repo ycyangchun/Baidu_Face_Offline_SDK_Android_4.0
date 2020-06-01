@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="15dp"
+    android:paddingBottom="15dp">
+
+    <CheckBox
+        android:id="@+id/check_btn"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="10dp"
+        android:visibility="gone"
+        android:button="@null"
+        android:checked="false"
+        android:clickable="false"
+        android:focusable="false"
+        android:background="@drawable/checkbox_selector"
+        android:focusableInTouchMode="false"/>
+
+    <com.baidu.idl.face.main.view.CircleImageView
+        android:id="@+id/circle_user"
+        android:layout_toRightOf="@id/check_btn"
+        android:layout_marginLeft="15dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp" />
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/circle_user"
+        android:layout_marginLeft="20dp"
+        android:layout_alignTop="@id/circle_user"
+        android:layout_alignBottom="@id/circle_user">
+        <TextView
+            android:id="@+id/text_user_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text=""
+            android:textStyle="bold"
+            android:textColor="@color/black"/>
+
+        <TextView
+            android:id="@+id/text_user_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:layout_centerVertical="true"
+            android:visibility="visible"
+            android:textColor="@color/black"/>
+
+        <TextView
+            android:id="@+id/text_user_ctime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:layout_alignParentBottom="true"
+            android:textColor="@color/black"/>
+    </RelativeLayout>
+
+</RelativeLayout>

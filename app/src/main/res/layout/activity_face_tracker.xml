@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout_sdk_show"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.baidu.idl.face.demo.view.CameraSurfaceView
+        android:id="@+id/auto_camera_preview_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <ImageView
+        android:id="@+id/origin_img"
+        android:layout_width="80dp"
+        android:layout_height="120dp"
+        android:layout_alignParentRight="true" />
+
+    <ImageView
+        android:id="@+id/trans_img"
+        android:layout_width="80dp"
+        android:layout_height="120dp"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/origin_img" />
+
+    <ImageView
+        android:id="@+id/trans_crop"
+        android:layout_width="80dp"
+        android:layout_height="120dp"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/trans_img" />
+</RelativeLayout>

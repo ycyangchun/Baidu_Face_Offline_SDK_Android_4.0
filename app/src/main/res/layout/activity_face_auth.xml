@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <Button
+        android:id="@+id/bt_return"
+        android:layout_width="60dp"
+        android:layout_height="30dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/fillet_style_return_selector"
+        android:text="返回"
+        android:textColor="#ffffff" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:gravity="center"
+        android:text="授权激活"
+        android:textColor="#363636"
+        android:textSize="22dp"
+        android:textStyle="bold" />
+
+    <View
+        android:id="@+id/shang_view"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/bt_return"
+        android:layout_marginTop="15dp"
+        android:background="#898989" />
+
+    <TextView
+        android:id="@+id/shebeijihuo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/shang_view"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:text="激活设备"
+        android:textColor="#036838"
+        android:textSize="40dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/shebeizhiwei"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/shebeijihuo"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="25dp"
+        android:text="设备硬件指纹"
+        android:textColor="#363636"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/copy_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/shebeizhiwei"
+        android:layout_alignBottom="@+id/shebeizhiwei"
+        android:layout_marginStart="17dp"
+        android:layout_toEndOf="@+id/shebeizhiwei"
+        android:text="复制"
+        android:textColor="#3939ee"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/device_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/shebeizhiwei"
+        android:layout_below="@+id/shebeizhiwei"
+        android:layout_marginTop="12dp"
+        android:text="15C75JGUIOF89RJFH845757458FYF8F845"
+        android:textColor="#000" />
+
+    <View
+        android:id="@+id/xiahuaxian"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/device_id"
+        android:layout_marginTop="20dp"
+        android:background="#898989" />
+
+    <RelativeLayout
+        android:id="@+id/key"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/xiahuaxian"
+        android:gravity="center">
+
+        <EditText
+            android:id="@+id/et_key"
+            android:layout_width="290dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:hint="请输入序列码"
+            android:textColor="@color/black"
+            android:textSize="15sp" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/key"
+        android:gravity="center_horizontal"
+        android:text="基于序列号自动联网激活, 适用于调试阶段"
+        android:textColor="#000" />
+
+    <Button
+        android:id="@+id/bt_on_line_active"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:layout_below="@+id/textView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="14dp"
+        android:background="@drawable/fillet_style_button_selector"
+        android:text="在线激活"
+        android:textColor="#fff" />
+
+    <Button
+        android:id="@+id/bt_inspect_sdcard"
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/bt_on_line_active"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="29dp"
+        android:background="@drawable/logout_selector"
+        android:text="点击检查是否可以读取到 License 文件"
+        android:textColor="#000"
+        android:textAllCaps="false" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/bt_inspect_sdcard"
+        android:layout_marginTop="10dp"
+        android:textColor="#666"
+        android:gravity="center_horizontal"
+        android:text="请将License.zip放到SD卡根目录下" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/textView2"
+        android:gravity="center_horizontal"
+        android:textColor="#666"
+        android:text="基于License文件手动激活，设备无需联网" />
+
+    <Button
+        android:id="@+id/bt_off_line_active"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:layout_alignStart="@+id/bt_on_line_active"
+        android:layout_below="@+id/textView3"
+        android:layout_marginTop="14dp"
+        android:background="@drawable/fillet_style_button_selector"
+        android:text="离线激活"
+        android:textColor="#fff" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="39dp"
+        android:src="@mipmap/ic_baidu_logo" />
+</RelativeLayout>

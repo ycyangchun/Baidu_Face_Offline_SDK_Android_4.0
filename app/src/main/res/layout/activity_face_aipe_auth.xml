@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:text="设备激活"
+        android:textColor="@color/black"
+        android:textSize="16sp"/>
+
+
+    <TextView
+        android:id="@+id/tv_device"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:text="设备指纹"
+        android:textColor="@color/black"
+        android:textSize="16sp"/>
+
+    <EditText
+        android:id="@+id/et_key"
+        android:layout_width="240dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:hint="请输入序列码"
+        android:textSize="15sp"/>
+
+
+    <Button
+        android:id="@+id/bt_application_auth"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:background="@color/buttonColor"
+        android:text="应用授权"
+        android:textColor="@color/white"
+        android:textSize="15sp"/>
+
+    <Button
+        android:id="@+id/bt_on_line_active"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:background="@color/buttonColor"
+        android:text="在线激活"
+        android:textColor="@color/white"
+        android:textSize="15sp"/>
+
+    <Button
+        android:id="@+id/bt_off_line_active"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:background="@color/buttonColor"
+        android:text="离线激活"
+        android:textColor="@color/white"
+        android:textSize="15sp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="5dp"
+        android:text="离线激活需要将license文件(License.zip)放在SD卡根目录下"
+        android:textColor="@color/black"
+        android:textSize="12sp"/>
+
+</LinearLayout>

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="@color/white"
+    android:layout_height="match_parent">
+
+    <include
+        android:id="@+id/layout_user_title"
+        layout="@layout/layout_title" />
+
+    <LinearLayout
+        android:id="@+id/relative_user_search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:orientation="horizontal"
+        android:layout_below="@+id/layout_user_title"
+        android:gravity="center_vertical"
+        android:layout_marginTop="15dp">
+        <EditText
+            android:id="@+id/edit_user_search"
+            android:layout_width="0dp"
+            android:layout_weight="4"
+            android:layout_height="wrap_content"
+            android:hint="请输入要查询的用户名"
+            android:textColorHint="@color/black"
+            android:textColor="@color/black"/>
+
+        <Button
+            android:id="@+id/button_user_search"
+            android:layout_width="0dp"
+            android:layout_height="35dp"
+            android:layout_weight="1"
+            android:layout_marginLeft="10dp"
+            android:text="搜索"
+            android:textColor="@color/white"
+            android:background="@drawable/fillet_style_button_selector"/>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/text_user_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/relative_user_search"
+        android:layout_marginTop="15dp"
+        android:text="用户列表"
+        android:layout_marginLeft="15dp"
+        android:textSize="30sp"
+        android:textColor="@color/black"/>
+
+    <TextView
+        android:id="@+id/text_group_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="15dp"
+        android:text="组："
+        android:layout_alignBottom="@id/text_user_text"
+        android:textSize="18sp"
+        android:textColor="@color/black"/>
+
+    <View
+        android:id="@+id/view_user_line"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_below="@id/text_user_text"
+        android:layout_marginTop="15dp"
+        android:background="@color/black"/>
+
+    <LinearLayout
+        android:id="@+id/linear_operation"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp"
+        android:gravity="center_vertical"
+        android:visibility="gone"
+        android:layout_alignParentBottom="true">
+        <Button
+            android:id="@+id/button_delete"
+            android:layout_width="0dp"
+            android:layout_height="35dp"
+            android:layout_weight="1"
+            android:text="删除"
+            android:textColor="@color/white"
+            android:background="@drawable/fillet_style_delete_selector"/>
+
+        <Button
+            android:id="@+id/button_cancel"
+            android:layout_width="0dp"
+            android:layout_height="35dp"
+            android:layout_weight="1"
+            android:layout_marginLeft="20dp"
+            android:text="取消"
+            android:textColor="@color/white"
+            android:background="@drawable/fillet_style_cancel_selector"/>
+    </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_user_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/view_user_line"
+        android:layout_above="@id/linear_operation"/>
+</RelativeLayout>

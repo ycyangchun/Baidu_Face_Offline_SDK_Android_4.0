@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/relative_title"
+        android:layout_width="match_parent"
+        android:layout_height="60dp">
+
+        <Button
+            android:id="@+id/button_import_back"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_centerVertical="true"
+            android:layout_margin="5dp"
+            android:background="@drawable/fillet_style_return_selector"
+            android:text="返回"
+            android:textColor="@color/white"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/text_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="加入用户体验计划"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_alignParentBottom="true"
+            android:background="@color/black" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/text_content_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="97dp"
+        android:text="为您的场景效果助力"
+        android:textColor="@color/black"
+        android:textSize="30sp" />
+
+    <TextView
+        android:id="@+id/text_content_first"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="157dp"
+        android:layout_marginRight="30dp"
+        android:text="我们一直致力于提升人脸识别在不同场景下的表现效果，从而真正解决现实的业务的问题。加入用户体验后，我们将基于场景诊断数据，持续优化算法效果，如有必要，将与您直接取得联系并提供专人团队体验回访，并专注于帮助您解决相关工程问题。这些数据将不包含您的任何实际姓名、文件信息，我们时刻关注您的隐私，并承诺诊断数据仅用于算法优化，您可以随时关闭用户计划"
+        android:textColor="@color/black"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/text_content_second"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="507dp"
+        android:layout_marginRight="30dp"
+        android:text="是否要将部分场景数据发送给用户体验计划"
+        android:textColor="@color/black"
+        android:textSize="23sp" />
+
+    <RadioGroup
+        android:id="@+id/uop_isallow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="600dp"
+        android:layout_marginRight="15dp"
+        android:orientation="vertical">
+
+        <RadioButton
+            android:id="@+id/uop_allow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:buttonTint="@color/black"
+            android:text="是，我接受发送部分数据"
+            android:textColor="#128743"
+            android:textStyle="bold"
+            android:visibility="visible" />
+
+        <RadioButton
+            android:id="@+id/uop_refused"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:buttonTint="@color/black"
+            android:text="否，不接受发送部分数据"
+            android:textColor="#206024"
+            android:textStyle="bold"
+            android:visibility="visible" />
+    </RadioGroup>
+
+</RelativeLayout>

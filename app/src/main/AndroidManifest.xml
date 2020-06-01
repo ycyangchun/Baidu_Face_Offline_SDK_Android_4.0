@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.baidu.idl.facesdkdemo">
+
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.hardware.camera.autofocus" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature
+        android:name="android.hardware.camera.autofocus"
+        android:required="true" />
+    <uses-feature
+        android:name="android.hardware.camera.front"
+        android:required="true" />
+    <uses-feature
+        android:name="android.hardware.camera.front.autofocus"
+        android:required="true" />
+
+    <application
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:name="com.baidu.idl.face.main.patrol.App"
+        tools:ignore="GoogleAppIndexingWarning">
+<!--        <activity-->
+<!--            android:name="com.baidu.idl.face.main.activity.SplashActivity"-->
+<!--            android:launchMode="singleTop"-->
+<!--            android:theme="@style/Theme_NoTitle">-->
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
+
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
+<!--        </activity>-->
+        <activity android:name="com.baidu.idl.face.main.activity.MainActivity" />
+        <activity android:name="com.baidu.idl.face.main.activity.FaceIdCompareActivity" />
+        <activity android:name="com.baidu.idl.face.main.activity.FaceRegisterActivity" />
+        <activity android:name="com.baidu.idl.face.main.activity.FaceRGBRegisterActivity" />
+        <activity android:name="com.baidu.idl.face.main.activity.FaceRGBDetectActivity" />
+        <activity android:name="com.baidu.idl.face.main.activity.FaceMainSearchActivity" />
+        <activity android:name="com.baidu.idl.face.main.activity.FaceAuthActicity" />
+        <activity android:name="com.baidu.idl.face.main.activity.FaceUserGroupListActivity" />
+        <activity android:name="com.baidu.idl.face.main.activity.FaceUserListActivity" />
+        <activity android:name="com.baidu.idl.face.main.activity.FaceUserInfoActivity" />
+        <activity android:name="com.baidu.idl.face.main.activity.BatchImportActivity" />
+        <activity android:name="com.baidu.idl.face.main.activity.FaceIRLivenessActivity" />
+        <activity android:name="com.baidu.idl.face.main.activity.FaceDepthLivenessActivity" />
+        <activity android:name="com.baidu.idl.face.main.activity.FaceIRRegisterActivity" />
+        <activity android:name="com.baidu.idl.face.main.activity.FaceRGBOpenDebugSearchActivity" />
+        <activity android:name="com.baidu.idl.face.main.activity.FaceRGBCloseDebugSearchActivity" />
+        <activity android:name="com.baidu.idl.face.main.activity.FaceRGBIRCloseDebugSearchActivity" />
+        <activity android:name="com.baidu.idl.face.main.activity.FaceRGBIROpenDebugSearchActivity" />
+        <activity android:name="com.baidu.idl.face.main.activity.FaceRGBDepthCloseDebugSearchActivity" />
+        <activity android:name="com.baidu.idl.face.main.activity.FaceRGBDepthOpenDebugSearchActivity" />
+        <activity android:name="com.baidu.idl.face.main.activity.FaceDepthRegisterActivity" />
+        <activity android:name="com.baidu.idl.face.main.activity.FaceConfigActivity" />
+        <activity android:name="com.baidu.idl.face.main.activity.FaceAttributeRGBActivity" />
+        <activity android:name="com.baidu.idl.face.main.activity.UserOptimizePlanActivity"/>
+
+
+        <activity android:name="com.baidu.idl.face.main.activity.setting.SettingMainActivity"/>
+        <activity android:name="com.baidu.idl.face.main.activity.setting.CameraDisplayAngleActivity"/>
+        <activity android:name="com.baidu.idl.face.main.activity.setting.DebugModeActivity"/>
+        <activity android:name="com.baidu.idl.face.main.activity.setting.DetectTrailStrategyActivity"/>
+        <activity android:name="com.baidu.idl.face.main.activity.setting.FaceDetectAngleActivity"/>
+        <activity android:name="com.baidu.idl.face.main.activity.setting.FaceLivenessThresholdActivity"/>
+        <activity android:name="com.baidu.idl.face.main.activity.setting.FaceLivinessType"/>
+        <activity android:name="com.baidu.idl.face.main.activity.setting.MinFaceActivity"/>
+        <activity android:name="com.baidu.idl.face.main.activity.setting.QualityControlActivity"/>
+        <activity android:name="com.baidu.idl.face.main.activity.setting.RecognizeModleTypeAcctivity"/>
+        <activity android:name="com.baidu.idl.face.main.activity.setting.RecognizeModleThresholdActivity"/>
+        <activity android:name="com.baidu.idl.face.main.activity.setting.DetectFllowStrategyActivity"/>
+        <activity android:name="com.baidu.idl.face.main.activity.setting.MirrorSettingActivity" />
+
+
+        <activity android:name="com.baidu.idl.face.main.activity.PicoFaceRGBDepthCloseDebugSearchActivity" />
+        <activity android:name="com.baidu.idl.face.main.activity.PicoFaceRGBDepthOpenDebugSearchActivity" />
+        <activity android:name="com.baidu.idl.face.main.activity.PicoFaceDepthLivenessActivity" />
+        <activity android:name="com.baidu.idl.face.main.activity.PicoFaceAttributeRGBActivity" />
+        <activity android:name="com.baidu.idl.face.main.activity.PicoFaceDepthRegisterActivity" />
+
+        <!-- 安全设备指纹接入 start -->
+        <activity
+            android:name="com.baidu.liantian.LiantianActivity"
+            android:excludeFromRecents="true"
+            android:exported="true"
+            android:launchMode="standard"
+            android:theme="@android:style/Theme.Translucent">
+            <intent-filter>
+                <action android:name="com.baidu.action.Liantian.VIEW" />
+
+                <category android:name="com.baidu.category.liantian" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <receiver
+            android:name="com.baidu.liantian.LiantianReceiver"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.baidu.action.Liantian.VIEW" />
+
+                <category android:name="com.baidu.category.liantian" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter android:priority="2147483647">
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+
+        <provider
+            android:name="com.baidu.liantian.LiantianProvider"
+            android:authorities="com.baidu.idl.face.demo.liantian.ac.provider"
+            android:exported="false" />
+
+        <service android:name="com.baidu.idl.face.main.socket.SocketService"></service>
+
+        <service
+            android:name="com.baidu.liantian.LiantianService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.baidu.action.Liantian.VIEW" />
+
+                <category android:name="com.baidu.category.liantian" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </service>
+
+        <meta-data
+            android:name="seckey_avscan"
+            android:value="660346260f8a841a04ec2a56815b421b" />
+        <meta-data
+            android:name="appkey_avscan"
+            android:value="100034" />
+        <!-- 安全设备指纹接入 end -->
+
+    <!--   patrol     -->
+        <activity
+            android:name="com.baidu.idl.face.main.patrol.PatrolSplashActivity"
+            android:launchMode="singleTop"
+            android:theme="@style/Theme_NoTitle">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

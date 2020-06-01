@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_version"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="10dp"
+        android:gravity="right"
+        android:textColor="@color/black"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_version"
+        android:layout_marginTop="30dp"
+        android:gravity="center_horizontal"
+        android:text="百度人脸离线识别SDK"
+        android:textColor="@color/black"
+        android:textSize="30sp" />
+
+    <Button
+        android:id="@+id/btn_search"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_title"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="67dp"
+        android:background="@drawable/fillet_style_button_selector"
+        android:gravity="center_horizontal"
+        android:maxLines="1"
+        android:padding="10dp"
+        android:text="1:N 人脸搜索"
+        android:textColor="@color/white"
+        android:textSize="20sp" />
+
+    <Button
+        android:id="@+id/btn_identity"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btn_search"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="0dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/fillet_style_button_selector"
+        android:maxLines="1"
+        android:padding="10dp"
+        android:text="1:1 人证比对"
+        android:textColor="@color/white"
+        android:textSize="20sp" />
+
+
+
+    <Button
+        android:id="@+id/btn_attribute"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btn_identity"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="0dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/fillet_style_button_selector"
+        android:maxLines="1"
+        android:padding="10dp"
+        android:text="属性检测"
+        android:textColor="@color/white"
+        android:textSize="20sp" />
+
+
+
+    <Button
+        android:id="@+id/btn_setting"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btn_attribute"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="0dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/fillet_style_return_selector"
+        android:maxLines="1"
+        android:padding="10dp"
+        android:text="功能设置"
+        android:textColor="@color/white"
+        android:textSize="20sp" />
+
+    <Button
+        android:id="@+id/btn_auth"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btn_setting"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="0dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/fillet_style_return_selector"
+        android:maxLines="1"
+        android:padding="10dp"
+        android:text="授权激活"
+        android:textColor="@color/white"
+        android:textSize="20sp" />
+
+    <Button
+        android:id="@+id/btn_useroptimize"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="0dp"
+        android:background="@drawable/fillet_style_return_selector"
+        android:maxLines="1"
+        android:padding="10dp"
+        android:text="用户体验优化"
+        android:textColor="@color/white"
+        android:visibility="gone"
+        android:textSize="20sp" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="39dp"
+        android:src="@mipmap/ic_baidu_logo" />
+</RelativeLayout>

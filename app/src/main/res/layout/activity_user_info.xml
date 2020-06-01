@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="@color/white"
+    android:layout_height="match_parent">
+
+    <include
+        android:id="@+id/layout_title"
+        layout="@layout/layout_title"/>
+
+    <TextView
+        android:id="@+id/text_info_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/layout_title"
+        android:layout_marginTop="25dp"
+        android:text="用户信息"
+        android:layout_marginLeft="15dp"
+        android:textSize="30sp"
+        android:textColor="@color/black"/>
+
+    <TextView
+        android:id="@+id/text_user_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="15dp"
+        android:text="用户："
+        android:layout_alignBottom="@+id/text_info_text"
+        android:textSize="18sp"
+        android:textColor="@color/black"/>
+
+    <View
+        android:id="@+id/view_info_line"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_below="@id/text_info_text"
+        android:layout_marginTop="15dp"
+        android:background="@color/black"/>
+
+    <TextView
+        android:id="@+id/text_info_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/view_info_line"
+        android:layout_marginTop="25dp"
+        android:layout_marginLeft="30dp"
+        android:text="用户名："
+        android:textColor="@color/black"
+        android:textSize="16sp"/>
+
+    <TextView
+        android:id="@+id/text_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/text_info_name"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="30dp"
+        android:visibility="gone"
+        android:text="用户信息："
+        android:textColor="@color/black"
+        android:textSize="16sp"/>
+
+    <TextView
+        android:id="@+id/text_info_ctime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/text_info"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="30dp"
+        android:text="注册时间："
+        android:textColor="@color/black"
+        android:textSize="16sp"/>
+
+    <TextView
+        android:id="@+id/text_info_pic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/text_info_ctime"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="30dp"
+        android:text="注册图片："
+        android:textColor="@color/black"
+        android:textSize="16sp"/>
+
+    <ImageView
+        android:id="@+id/image_info_pic"
+        android:layout_width="180dp"
+        android:layout_height="140dp"
+        android:layout_below="@id/text_info_ctime"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="10dp"
+        android:scaleType="centerCrop"
+        android:layout_toRightOf="@id/text_info_pic"/>
+
+    <LinearLayout
+        android:id="@+id/linear_operation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="50dp"
+        android:paddingRight="50dp"
+        android:gravity="center_vertical"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="50dp">
+
+        <Button
+            android:id="@+id/button_update"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:text="更新人脸图片"
+            android:textColor="@color/white"
+            android:background="@drawable/fillet_style_button_selector"/>
+
+        <Button
+            android:id="@+id/button_delete"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:layout_marginLeft="20dp"
+            android:text="删除用户"
+            android:textColor="@color/white"
+            android:background="@drawable/fillet_style_delete_selector"/>
+    </LinearLayout>
+
+    <!--照相机-->
+    <RelativeLayout
+        android:id="@+id/relative_pop_window"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#7000"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_margin="10dp"
+            android:paddingBottom="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:orientation="vertical" >
+
+            <Button
+                android:id="@+id/btn_pop_album"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:text="本地相册"
+                android:textColor="@color/black"
+                android:background="#ffff"
+                android:textSize="18sp" />
+
+            <Button
+                android:id="@+id/btn_pop_camera"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:text="相机拍摄"
+                android:textColor="@color/black"
+                android:background="#ffff"
+                android:textSize="18sp" />
+
+            <Button
+                android:id="@+id/btn_pop_cancel"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginTop="10dp"
+                android:background="#ffff"
+                android:textColor="@color/black"
+                android:text="取消"
+                android:textSize="18sp" />
+        </LinearLayout>
+    </RelativeLayout>
+
+</RelativeLayout>
