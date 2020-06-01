@@ -246,8 +246,11 @@ public class FaceRGBCloseDebugSearchActivity extends BaseActivity implements Vie
                             mDetectText.setText("欢迎您， " + user.getUserName());
 
                             //TODO 自己设置
-                            FaceRGBCloseDebugSearchActivity.this.finish();
-                            Toast.makeText(FaceRGBCloseDebugSearchActivity.this, "登录成功", Toast.LENGTH_SHORT).show();
+                            if(!FaceRGBCloseDebugSearchActivity.this.isFinishing()){
+                                FaceRGBCloseDebugSearchActivity.this.finish();
+                                Toast.makeText(FaceRGBCloseDebugSearchActivity.this, user.getUserName()+"登录成功", Toast.LENGTH_SHORT).show();
+                            }
+
                         }
                     } else {
                         float rgbLivenessScore = livenessModel.getRgbLivenessScore();
@@ -278,8 +281,10 @@ public class FaceRGBCloseDebugSearchActivity extends BaseActivity implements Vie
                                 mDetectText.setText("欢迎您， " + user.getUserName());
 
                                 //TODO 自己设置
-                                FaceRGBCloseDebugSearchActivity.this.finish();
-                                Toast.makeText(FaceRGBCloseDebugSearchActivity.this, "登录成功", Toast.LENGTH_SHORT).show();
+                                if(!FaceRGBCloseDebugSearchActivity.this.isFinishing()){
+                                    FaceRGBCloseDebugSearchActivity.this.finish();
+                                    Toast.makeText(FaceRGBCloseDebugSearchActivity.this, user.getUserName()+"登录成功", Toast.LENGTH_SHORT).show();
+                                }
                             }
                         }
                     }
