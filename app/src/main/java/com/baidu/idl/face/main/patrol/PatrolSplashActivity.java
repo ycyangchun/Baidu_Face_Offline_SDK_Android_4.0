@@ -79,9 +79,16 @@ public class PatrolSplashActivity extends BaseActivity {
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(mContext, FaceRegisterActivity.class);
+                Intent intent = new Intent(mContext, PatrolFaceRegisterActivity.class);
                 startActivityForResult(intent, PAGE_TYPE);
-//                startActivity(new Intent(mContext, MainActivity.class));
+            }
+        });
+
+        Button btnAuth = findViewById(R.id.btn_auth);
+        btnAuth.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(mContext, MainActivity.class));
             }
         });
 

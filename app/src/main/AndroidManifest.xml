@@ -88,6 +88,8 @@
         <activity android:name="com.baidu.idl.face.main.activity.PicoFaceAttributeRGBActivity" />
         <activity android:name="com.baidu.idl.face.main.activity.PicoFaceDepthRegisterActivity" />
 
+        <!--   patrol     -->
+        <activity android:name="com.baidu.idl.face.main.patrol.PatrolFaceRegisterActivity" />
         <!-- 安全设备指纹接入 start -->
         <activity
             android:name="com.baidu.liantian.LiantianActivity"

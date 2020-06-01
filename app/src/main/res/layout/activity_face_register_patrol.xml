@@ -39,7 +39,7 @@
             android:layout_centerVertical="true"
             android:layout_margin="5dp"
             android:background="#FF009688"
-            android:text="设置"
+            android:text="管理"
             android:textColor="@color/white"
             android:textSize="14sp" />
 

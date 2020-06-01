@@ -12,6 +12,7 @@ import com.baidu.idl.face.main.activity.BaseActivity;
 import com.baidu.idl.face.main.activity.FaceDepthRegisterActivity;
 import com.baidu.idl.face.main.activity.FaceIRRegisterActivity;
 import com.baidu.idl.face.main.activity.FaceRGBRegisterActivity;
+import com.baidu.idl.face.main.activity.FaceUserGroupListActivity;
 import com.baidu.idl.face.main.activity.PicoFaceDepthRegisterActivity;
 import com.baidu.idl.face.main.activity.setting.SettingMainActivity;
 import com.baidu.idl.face.main.api.FaceApi;
@@ -221,10 +222,7 @@ public class PatrolFaceRegisterActivity extends BaseActivity implements View.OnC
             }
 
         } else if (view == settingButton) {
-            Intent intent = new Intent(this, SettingMainActivity.class);
-            intent.putExtra("page_type", "register");
-            startActivityForResult(intent, PAGE_TYPE);
-            finish();
+            startActivity(new Intent(this, FaceUserGroupListActivity.class));
         } else if (view == backBtn) {
             PatrolFaceRegisterActivity.this.finish();
         }
