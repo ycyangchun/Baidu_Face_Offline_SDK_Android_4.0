@@ -10,7 +10,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingLeft="@dimen/dimenPaddingCommon"
-        android:paddingRight="@dimen/dimenPaddingCommon">
+        android:paddingRight="@dimen/dimenPaddingCommon"
+        android:paddingBottom="@dimen/dimenPaddingCommon">
         <TextView style="@style/AppTheme.Label"
             android:id="@+id/item_time"
             android:textColor="@android:color/white"
@@ -35,11 +36,12 @@
                 app:rv_strokeColor="@android:color/white"
                 app:rv_strokeWidth="@dimen/division_line">
                 <ImageView
+                    android:id="@+id/item_status_iv"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_margin="@dimen/dimenPaddingCommon"
+                    android:layout_margin="@dimen/dimenPaddingDiminutive"
                     android:contentDescription="@string/app_name"
-                    app:srcCompat="@drawable/ic_feed_list_photo"/>
+                    android:background="@drawable/ic_correct_line"/>
             </com.flyco.roundview.RoundFrameLayout>
             <View
                 android:layout_width="@dimen/division_line"
@@ -54,15 +56,18 @@
             android:orientation="vertical"
             app:rv_cornerRadius_TL="@dimen/dimenPaddingDiminutive"
             app:rv_cornerRadius_TR="@dimen/dimenPaddingDiminutive">
+
             <TextView style="@style/AppTheme.Label.Title"
                 android:id="@+id/item_title"
                 android:layout_gravity="center_vertical"
                 android:layout_marginTop="@dimen/dimenPaddingDiminutive"
                 android:textColor="@android:color/white"
                 android:text="仓库一"/>
+
             <ImageView style="@style/AppTheme.Label.Title"
                 android:id="@+id/item_photo"
                 android:layout_width="match_parent"
+                android:layout_height="175dp"
                 android:layout_gravity="center_vertical"
                 android:textColor="@android:color/white"
                 android:adjustViewBounds="true"

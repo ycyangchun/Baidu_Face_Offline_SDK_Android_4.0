@@ -32,7 +32,7 @@
     <application
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:name="com.baidu.idl.face.main.patrol.App"
+        android:name="com.yc.patrol.App"
         android:allowBackup="false"
         tools:replace="android:allowBackup">
 <!--        <activity-->
@@ -102,9 +102,9 @@
         <activity android:name="com.baidu.idl.face.main.activity.PicoFaceDepthRegisterActivity" />
 
         <!--   patrol     -->
-        <activity android:name="com.baidu.idl.face.main.patrol.PatrolFaceRegisterActivity" />
-        <activity android:name="com.baidu.idl.face.main.patrol.PatrolMainActivity" />
-        <activity android:name="com.baidu.idl.face.main.patrol.scanner.CaptureActivity" />
+        <activity android:name="com.yc.patrol.PatrolFaceRegisterActivity" />
+        <activity android:name="com.yc.patrol.PatrolMainActivity" />
+        <activity android:name="com.yc.patrol.scanner.CaptureActivity" />
 
         <!-- 安全设备指纹接入 start -->
         <activity
@@ -163,7 +163,7 @@
 
     <!--   patrol     -->
         <activity
-            android:name="com.baidu.idl.face.main.patrol.PatrolSplashActivity"
+            android:name="com.yc.patrol.PatrolSplashActivity"
             android:launchMode="singleTop"
             android:theme="@style/Theme_NoTitle">
             <intent-filter>

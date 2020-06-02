@@ -11,7 +11,7 @@
         android:layout_height="fill_parent"
         android:layout_gravity="center" />
 
-    <com.baidu.idl.face.main.patrol.scanner.view.ViewfinderView
+    <com.yc.patrol.scanner.view.ViewfinderView
         android:id="@+id/capture_viewfinder_view"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
