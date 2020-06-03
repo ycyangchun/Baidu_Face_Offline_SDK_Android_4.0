@@ -10,3 +10,5 @@
 .externalNativeBuild
 facelibrary/.externalNativeBuild
 facelibrary/build
+/app/release/app-release.apk
+/app/release/output.json

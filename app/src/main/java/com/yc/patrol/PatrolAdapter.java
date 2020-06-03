@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.baidu.idl.facesdkdemo.R;
 import com.yc.patrol.utils.PhotoUtils;
+import com.yc.patrol.utils.Tools;
 
 import java.util.List;
 
@@ -56,16 +57,13 @@ public class PatrolAdapter extends RecyclerView.Adapter<PatrolAdapter.VH> {
         viewHolder.item_time.setText(patrolBean.getTime());
         viewHolder.item_title.setText(patrolBean.getPlace());
         String url = patrolBean.getPhotoUrl();
-        if(!TextUtils.isEmpty(url)) {
-            viewHolder.item_photo.setImageBitmap(PhotoUtils.getBitmapFromUri(url,mContext));
-        }else {
-            Uri uri = patrolBean.getUri();
-            if(null != uri) {
-//                viewHolder.item_photo.setImageBitmap(PhotoUtils.getBitmapFromUri(uri, mContext));
-                viewHolder.item_photo.setImageBitmap(PhotoUtils.makePhoto(mContext,uri,patrolBean.getPhotoUrlSy(),
-                        patrolBean.getPlace()));
+        String urlSy = patrolBean.getPhotoUrlSy();
+        Uri uri = patrolBean.getUri();
+        if(null != uri) {
+            viewHolder.item_photo.setImageBitmap(PhotoUtils.makePhoto(mContext,uri,urlSy,
+                    patrolBean.getPlace()));
+            Tools.deleteFile(url);
 
-            }
         }
         if(i == 0){
             viewHolder.item_status_iv.setBackgroundResource(R.drawable.ic_switch);

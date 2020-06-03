@@ -161,6 +161,16 @@ public class PhotoUtils {
         }
     }
 
+    public static int getBitmapSizeFormUri(Context ac, Uri uri) {
+        int size = 0;
+        try {
+            InputStream input = ac.getContentResolver().openInputStream(uri);
+            size = input.available();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return size;
+    }
     /**
      * 通过uri获取图片并进行压缩
      *

@@ -18,7 +18,6 @@ import java.io.IOException;
  */
 public class Tools {
 
-    public static String saveFileNames;
     public static String getMemInfoIype(Context context, String type) {
         try {
             FileReader fileReader = new FileReader("/proc/meminfo");
@@ -76,5 +75,52 @@ public class Tools {
             f.mkdirs();
         }
         return  p;
+    }
+
+
+    public static void  deleteFile(String filename) {
+        File f = new File(filename);
+        if(f.exists()){
+            deleteFile(f);
+        }
+    }
+    /**
+     * 问题在小米3。华为系列手机出现概率较大
+     * open failed: EBUSY (Device or resource busy)
+     * 删除文件安全方式
+     * @param file
+     */
+    public static void deleteFile(File file) {
+        if (file.isFile()) {
+            deleteFileSafely(file);
+            return;
+        }
+        if (file.isDirectory()) {
+            File[] childFiles = file.listFiles();
+            if (childFiles == null || childFiles.length == 0) {
+                deleteFileSafely(file);
+                return;
+            }
+            for (int i = 0; i < childFiles.length; i++) {
+                deleteFile(childFiles[i]);
+            }
+            deleteFileSafely(file);
+        }
+    }
+
+
+    /**
+     * 安全删除文件
+     * @param file
+     * @return
+     */
+    public static boolean deleteFileSafely(File file) {
+        if (file != null) {
+            String tmpPath = file.getParent() + File.separator + System.currentTimeMillis();
+            File tmp = new File(tmpPath);
+            file.renameTo(tmp);
+            return tmp.delete();
+        }
+        return false;
     }
 }

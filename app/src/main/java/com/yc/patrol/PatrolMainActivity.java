@@ -1,6 +1,7 @@
 package com.yc.patrol;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -30,7 +31,7 @@ public class PatrolMainActivity extends BaseActivity implements PatrolAdapter.It
     private final static int PHOTO_REQUEST = 100;
     private final static int SCAN_REQUEST = 101;
     private Uri imageUri,imageUriSy;
-    private File fileUriSy;
+    private File fileUri,fileUriSy;
     PatrolAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,7 +72,7 @@ public class PatrolMainActivity extends BaseActivity implements PatrolAdapter.It
      */
     private void takeCamera() {
         long time = System.currentTimeMillis();
-        File fileUri = new File(Tools.getSavePath(mContext,"pic") + time + ".jpg");
+        fileUri = new File(Tools.getSavePath(mContext,"pic") + time + ".jpg");
         fileUriSy = new File(Tools.getSavePath(mContext,"pic/sy") + time + ".jpg");
 
         imageUri = Uri.fromFile(fileUri);
@@ -103,11 +104,14 @@ public class PatrolMainActivity extends BaseActivity implements PatrolAdapter.It
             if(null == result) {
                 result = imageUri;
             }
-            patrolBean.setUri(result);
-            patrolBean.setUriSy(imageUriSy);
-            patrolBean.setPhotoUrlSy(fileUriSy.getAbsolutePath());
-            adapter.upData(position,patrolBean);
-            recyclerView.scrollToPosition(0);
+            if(PhotoUtils.getBitmapSizeFormUri(mContext,result) > 0) {
+                patrolBean.setPhotoUrl(fileUri.getAbsolutePath());
+                patrolBean.setUri(result);
+                patrolBean.setUriSy(imageUriSy);
+                patrolBean.setPhotoUrlSy(fileUriSy.getAbsolutePath());
+                adapter.upData(position, patrolBean);
+                recyclerView.scrollToPosition(0);
+            }
         }
         if(requestCode == SCAN_REQUEST){
             String place = data == null || resultCode != RESULT_OK ? null : data.getStringExtra("scan");
