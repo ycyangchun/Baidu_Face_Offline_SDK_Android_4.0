@@ -13,15 +13,19 @@ import com.baidu.idl.face.main.utils.ConfigUtils;
 import com.baidu.idl.face.main.utils.ToastUtils;
 import com.baidu.idl.main.facesdk.FaceAuth;
 import com.baidu.idl.main.facesdk.callback.Callback;
+import com.yc.patrol.utils.CrashHandler;
 
 public class App extends Application {
     Context mContext;
     private Boolean isInitConfig;
     private Boolean isConfigExit;
+    CrashHandler crashHandler;
     @Override
     public void onCreate() {
         super.onCreate();
         mContext = this;
+        crashHandler = CrashHandler.getInstance();
+        crashHandler.init(getApplicationContext());
         CommonUtils.init(this);
         if (FaceSDKManager.getInstance().initStatus == FaceSDKManager.SDK_UNACTIVATION) {
             initLicense();
@@ -30,6 +34,13 @@ public class App extends Application {
         }
 
     }
+
+    @Override
+    public void onTerminate() {
+        crashHandler = null;
+        super.onTerminate();
+    }
+
     /**
      * 启动应用程序，如果之前初始过，自动初始化鉴权和模型（可以添加到Application 中）
      */
@@ -50,7 +61,9 @@ public class App extends Application {
                 public void initLicenseFail(int errorCode, String msg) {
                     // 如果授权失败，跳转授权页面
                     ToastUtils.toast(mContext, errorCode + msg);
-                    startActivity(new Intent(mContext, FaceAuthActicity.class));
+                    Intent intent = new Intent(mContext, FaceAuthActicity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK );
+                    startActivity(intent);
                 }
 
                 @Override

@@ -41,6 +41,7 @@ public class PhotoUtils {
             intentCamera.setAction(MediaStore.ACTION_IMAGE_CAPTURE);
             //将拍照结果保存至photo_file的Uri中，不保留在相册中
             intentCamera.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
+            System.out.println(imageUri.toString());
             if (activity != null) {
                 activity.startActivityForResult(intentCamera, requestCode);
             }
@@ -67,7 +68,7 @@ public class PhotoUtils {
      * @param height      剪裁图片高度
      * @param requestCode 剪裁图片的请求码
      */
-    public static void cropImageUri(Activity activity, Uri orgUri, Uri desUri,  int width, int height, int requestCode) {
+    public static void cropImageUri(Activity activity, Uri orgUri, Uri desUri, int width, int height, int requestCode) {
         Intent intent = new Intent("com.android.camera.action.CROP");
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             //需要加上这两句话 ： uri 权限
@@ -76,8 +77,7 @@ public class PhotoUtils {
         }
         intent.setDataAndType(orgUri, "image/*");
         intent.putExtra("crop", "true");
-        if(Build.MODEL.contains("EDI-AL10")|| Build.MODEL.contains("HUAWEI"))
-        {//华为特殊处理 不然会显示圆
+        if (Build.MODEL.contains("EDI-AL10") || Build.MODEL.contains("HUAWEI")) {//华为特殊处理 不然会显示圆
             intent.putExtra("aspectX", 9998);
             intent.putExtra("aspectY", 9999);
         } else {
@@ -114,6 +114,22 @@ public class PhotoUtils {
         }
     }
 
+
+    public static Bitmap getBitmapFromUri(String url, Context mContext) {
+        try {
+            File fileUri = new File(url);
+            Uri imageUri = Uri.fromFile(fileUri);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                imageUri = FileProvider.getUriForFile(mContext, mContext.getPackageName() + ".fileprovider", fileUri);//通过FileProvider创建一个content类型的Uri
+            }
+            Bitmap bitmapFormUri = getBitmapFormUri(mContext, imageUri);
+            return bitmapFormUri;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
     /**
      * 通过uri获取图片并进行压缩
      *
@@ -133,8 +149,10 @@ public class PhotoUtils {
             return null;
         }
         //图片分辨率以480x800为标准
-        float hh = 800f;//这里设置高度为800f
-        float ww = 480f;//这里设置宽度为480f
+//        float hh = 800f;//这里设置高度为800f
+//        float ww = 480f;//这里设置宽度为480f
+        float hh = 350f;//这里设置高度为800f
+        float ww = 600f;//这里设置宽度为480f
         //缩放比。由于是固定比例缩放，只用高或者宽其中一个数据进行计算即可
         int be = 1;//be=1表示不缩放
         if (originalWidth > originalHeight && originalWidth > ww) {//如果宽度大的话根据宽度固定大小缩放
@@ -306,7 +324,7 @@ public class PhotoUtils {
             }
         } catch (Exception e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             return imageUri;
         }
 

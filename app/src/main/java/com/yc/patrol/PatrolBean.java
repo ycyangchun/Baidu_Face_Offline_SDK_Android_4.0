@@ -1,9 +1,20 @@
 package com.yc.patrol;
 
+import android.net.Uri;
+
 public class PatrolBean {
     private String time;
     private String place;
     private String photoUrl;
+    private Uri uri;
+
+    public Uri getUri() {
+        return uri;
+    }
+
+    public void setUri(Uri uri) {
+        this.uri = uri;
+    }
 
     public PatrolBean(String time, String place, String photoUrl) {
         this.time = time;

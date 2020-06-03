@@ -1,8 +1,10 @@
 package com.yc.patrol;
 
 import android.content.Context;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.baidu.idl.facesdkdemo.R;
+import com.yc.patrol.utils.PhotoUtils;
 
 import java.util.List;
 
@@ -17,7 +20,13 @@ public class PatrolAdapter extends RecyclerView.Adapter<PatrolAdapter.VH> {
 
     List<PatrolBean> mDatas;
     Context mContext;
-    public PatrolAdapter(List<PatrolBean> mDatas,Context ctx) {
+    ItemClickListener listener;
+
+    public void setListener(ItemClickListener listener) {
+        this.listener = listener;
+    }
+
+    public PatrolAdapter(List<PatrolBean> mDatas, Context ctx) {
         this.mDatas = mDatas;
         this.mContext = ctx;
     }
@@ -26,10 +35,12 @@ public class PatrolAdapter extends RecyclerView.Adapter<PatrolAdapter.VH> {
         mDatas.add(position, pb);
         notifyItemInserted(position);
     }
+
     public void upData(int position,PatrolBean pb) {
         mDatas.set(position, pb);
-        notifyItemInserted(position);
+        notifyDataSetChanged();
     }
+
     @NonNull
     @Override
     public PatrolAdapter.VH onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
@@ -39,22 +50,42 @@ public class PatrolAdapter extends RecyclerView.Adapter<PatrolAdapter.VH> {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull PatrolAdapter.VH viewHolder, int i) {
-        PatrolBean patrolBean = mDatas.get(i);
+    public void onBindViewHolder(@NonNull PatrolAdapter.VH viewHolder, final int i) {
+        final PatrolBean patrolBean = mDatas.get(i);
         viewHolder.item_time.setText(patrolBean.getTime());
         viewHolder.item_title.setText(patrolBean.getPlace());
-//        viewHolder.item_photo.setImageBitmap();
+        String url = patrolBean.getPhotoUrl();
+        if(!TextUtils.isEmpty(url)) {
+            viewHolder.item_photo.setImageBitmap(PhotoUtils.getBitmapFromUri(url,mContext));
+        }else {
+            Uri uri = patrolBean.getUri();
+            if(null != uri) {
+                viewHolder.item_photo.setImageBitmap(PhotoUtils.getBitmapFromUri(uri, mContext));
+            }
+        }
         if(i == 0){
             viewHolder.item_status_iv.setBackgroundResource(R.drawable.ic_switch);
         }else if(i == 2){
             viewHolder.item_status_iv.setBackgroundResource(R.drawable.ic_close_line);
         }
+        viewHolder.item_photo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(null != listener){
+                    listener.itemClick(i,patrolBean);
+                }
+            }
+        });
     }
 
 
     @Override
     public int getItemCount() {
         return mDatas != null ? mDatas.size() : 0;
+    }
+
+    interface ItemClickListener{
+        void itemClick(int position,PatrolBean patrolBean);
     }
 
     public static class VH extends RecyclerView.ViewHolder{

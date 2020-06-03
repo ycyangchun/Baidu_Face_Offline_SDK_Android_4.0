@@ -4,7 +4,7 @@ android {
     compileSdkVersion 28
     buildToolsVersion '28.0.3'
     defaultConfig {
-        applicationId "com.baidu.idl.face.demo"
+        applicationId "com.yc.patrol"
         minSdkVersion 21
         targetSdkVersion 26
         versionCode 4

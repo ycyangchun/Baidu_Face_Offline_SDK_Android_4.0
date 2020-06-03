@@ -16,12 +16,13 @@ import com.yc.patrol.scanner.CaptureActivity;
 import com.yc.patrol.utils.DateUtils;
 import com.yc.patrol.utils.PhotoUtils;
 import com.baidu.idl.facesdkdemo.R;
+import com.yc.patrol.utils.Tools;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PatrolMainActivity extends BaseActivity {
+public class PatrolMainActivity extends BaseActivity implements PatrolAdapter.ItemClickListener{
 
     RecyclerView recyclerView;
     PatrolMainActivity mContext;
@@ -43,7 +44,7 @@ public class PatrolMainActivity extends BaseActivity {
 
         adapter = new PatrolAdapter(list,this);
         recyclerView.setAdapter(adapter);
-
+        adapter.setListener(this);
         findViewById(R.id.scan).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -68,7 +69,7 @@ public class PatrolMainActivity extends BaseActivity {
      * 拍照
      */
     private void takeCamera() {
-        File fileUri = new File(Environment.getExternalStorageDirectory().getPath() + "/patrol/" + SystemClock.currentThreadTimeMillis() + ".jpg");
+        File fileUri = new File(Tools.getSavePath(mContext,"pic") + System.currentTimeMillis()+ ".jpg");
         imageUri = Uri.fromFile(fileUri);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             imageUri = FileProvider.getUriForFile(mContext, getPackageName() + ".fileprovider", fileUri);//通过FileProvider创建一个content类型的Uri
@@ -76,11 +77,23 @@ public class PatrolMainActivity extends BaseActivity {
         PhotoUtils.takePicture(mContext, imageUri, PHOTO_REQUEST);
     }
 
+
+    private PatrolBean patrolBean;
+    private int position;
+    @Override
+    public void itemClick(int pos, PatrolBean pb) {
+        patrolBean = pb;
+        position = pos;
+        takeCamera();
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == PHOTO_REQUEST) {
             Uri result = data == null || resultCode != RESULT_OK ? null : data.getData();
+            patrolBean.setUri(result);
+            adapter.upData(position,patrolBean);
         }
         if(requestCode == SCAN_REQUEST){
             String place = data == null || resultCode != RESULT_OK ? null : data.getStringExtra("scan");

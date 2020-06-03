@@ -39,4 +39,5 @@ public class MyConstants {
     public static boolean isAlphaStatusBar = true;
     public static int width = 0;
     public static int height = 0;
+    public static String packageName = "patrol";
 }
