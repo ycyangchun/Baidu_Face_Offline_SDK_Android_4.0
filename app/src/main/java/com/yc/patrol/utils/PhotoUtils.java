@@ -9,6 +9,8 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
@@ -114,8 +116,17 @@ public class PhotoUtils {
         }
     }
 
+    public static Drawable getDrawableFromUri(Uri uri, Context mContext) {
+        try {
+            Bitmap bitmapFormUri = getBitmapFormUri(mContext, uri);
+            return new BitmapDrawable(mContext.getResources(),bitmapFormUri);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 
-    public static Bitmap getBitmapFromUri(String url, Context mContext) {
+    public static Bitmap getBitmapFromUri(String url,Context mContext) {
         try {
             File fileUri = new File(url);
             Uri imageUri = Uri.fromFile(fileUri);
@@ -130,6 +141,15 @@ public class PhotoUtils {
         }
     }
 
+    public static Drawable getDrawableFromUri(String url, Context mContext) {
+        try {
+            Bitmap bitmapFormUri = getBitmapFromUri(url,mContext);
+            return new BitmapDrawable(mContext.getResources(),bitmapFormUri);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
     /**
      * 通过uri获取图片并进行压缩
      *
@@ -151,10 +171,10 @@ public class PhotoUtils {
         //图片分辨率以480x800为标准
 //        float hh = 800f;//这里设置高度为800f
 //        float ww = 480f;//这里设置宽度为480f
-        float hh = 350f;//这里设置高度为800f
-        float ww = 600f;//这里设置宽度为480f
+        float hh = 1980f;//这里设置高度为800f
+        float ww = 1080f;//这里设置宽度为480f
         //缩放比。由于是固定比例缩放，只用高或者宽其中一个数据进行计算即可
-        int be = 1;//be=1表示不缩放
+        int be = 5;//be=1表示不缩放
         if (originalWidth > originalHeight && originalWidth > ww) {//如果宽度大的话根据宽度固定大小缩放
             be = (int) (originalWidth / ww);
         } else if (originalWidth < originalHeight && originalHeight > hh) {//如果高度高的话根据宽度固定大小缩放

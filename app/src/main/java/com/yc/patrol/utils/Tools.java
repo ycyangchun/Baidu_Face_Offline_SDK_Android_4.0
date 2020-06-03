@@ -65,10 +65,16 @@ public class Tools {
     }
 
     public static String getSavePath(Context mContext,String file) {
+        String p;
         if (haveSD()) {
-            return getSDPath() + File.separator + MyConstants.packageName + "/" +file+ "/" ;
+            p = getSDPath() + File.separator + MyConstants.packageName + "/" +file+ "/";
         } else {
-            return mContext.getFilesDir() + File.separator + MyConstants.packageName + "/"+file+ "/" ;
+            p =  mContext.getFilesDir() + File.separator + MyConstants.packageName + "/"+file+ "/";
         }
+        File f = new File(p);
+        if(!f.exists()){
+            f.mkdirs();
+        }
+        return  p;
     }
 }

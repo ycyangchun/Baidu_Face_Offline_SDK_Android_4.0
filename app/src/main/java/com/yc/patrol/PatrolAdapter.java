@@ -1,6 +1,7 @@
 package com.yc.patrol;
 
 import android.content.Context;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;

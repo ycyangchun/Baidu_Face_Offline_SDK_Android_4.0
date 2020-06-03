@@ -92,6 +92,9 @@ public class PatrolMainActivity extends BaseActivity implements PatrolAdapter.It
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == PHOTO_REQUEST) {
             Uri result = data == null || resultCode != RESULT_OK ? null : data.getData();
+            if(null == result) {
+                result = imageUri;
+            }
             patrolBean.setUri(result);
             adapter.upData(position,patrolBean);
         }
