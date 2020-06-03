@@ -29,6 +29,7 @@ import com.baidu.idl.face.main.manager.FaceSDKManager;
 import com.baidu.idl.face.main.model.LivenessModel;
 import com.baidu.idl.face.main.model.SingleBaseConfig;
 import com.baidu.idl.face.main.model.User;
+import com.yc.patrol.App;
 import com.yc.patrol.PatrolMainActivity;
 import com.baidu.idl.face.main.utils.DensityUtils;
 import com.baidu.idl.face.main.utils.FaceOnDrawTexturViewUtil;
@@ -246,11 +247,7 @@ public class FaceRGBCloseDebugSearchActivity extends BaseActivity implements Vie
                             mDetectText.setText("欢迎您， " + user.getUserName());
 
                             //TODO 自己设置
-                            if(!FaceRGBCloseDebugSearchActivity.this.isFinishing()){
-                                FaceRGBCloseDebugSearchActivity.this.finish();
-                                Toast.makeText(FaceRGBCloseDebugSearchActivity.this, user.getUserName()+"登录成功", Toast.LENGTH_SHORT).show();
-                                startActivity(new Intent(FaceRGBCloseDebugSearchActivity.this, PatrolMainActivity.class));
-                            }
+                            toLogin(user);
 
                         }
                     } else {
@@ -282,11 +279,7 @@ public class FaceRGBCloseDebugSearchActivity extends BaseActivity implements Vie
                                 mDetectText.setText("欢迎您， " + user.getUserName());
 
                                 //TODO 自己设置
-                                if(!FaceRGBCloseDebugSearchActivity.this.isFinishing()){
-                                    FaceRGBCloseDebugSearchActivity.this.finish();
-                                    Toast.makeText(FaceRGBCloseDebugSearchActivity.this, user.getUserName()+"登录成功", Toast.LENGTH_SHORT).show();
-                                    startActivity(new Intent(FaceRGBCloseDebugSearchActivity.this, PatrolMainActivity.class));
-                                }
+                                toLogin(user);
                             }
                         }
                     }
@@ -296,6 +289,15 @@ public class FaceRGBCloseDebugSearchActivity extends BaseActivity implements Vie
         });
     }
 
+    private void toLogin(User user) {
+        //TODO 自己设置
+        if (!FaceRGBCloseDebugSearchActivity.this.isFinishing()) {
+            App.setUser(user.getUserName());
+            FaceRGBCloseDebugSearchActivity.this.finish();
+            Toast.makeText(FaceRGBCloseDebugSearchActivity.this, user.getUserName() + "登录成功", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(FaceRGBCloseDebugSearchActivity.this, PatrolMainActivity.class));
+        }
+    }
 
 
     @Override

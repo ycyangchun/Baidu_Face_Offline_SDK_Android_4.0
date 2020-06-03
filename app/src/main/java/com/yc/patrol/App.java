@@ -16,10 +16,11 @@ import com.baidu.idl.main.facesdk.callback.Callback;
 import com.yc.patrol.utils.CrashHandler;
 
 public class App extends Application {
-    Context mContext;
+    private Context mContext;
     private Boolean isInitConfig;
     private Boolean isConfigExit;
-    CrashHandler crashHandler;
+    private CrashHandler crashHandler;
+    private static UserPatrol user = new UserPatrol() ;
     @Override
     public void onCreate() {
         super.onCreate();
@@ -33,6 +34,14 @@ public class App extends Application {
             initLicense(2);
         }
 
+    }
+
+    public static void setUser(String userName) {
+        user.setName(userName);
+    }
+
+    public static UserPatrol getUser() {
+        return user;
     }
 
     @Override

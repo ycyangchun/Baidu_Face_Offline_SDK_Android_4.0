@@ -73,7 +73,8 @@ public class PatrolMainActivity extends BaseActivity implements PatrolAdapter.It
     private void takeCamera() {
         long time = System.currentTimeMillis();
         fileUri = new File(Tools.getSavePath(mContext,"pic") + time + ".jpg");
-        fileUriSy = new File(Tools.getSavePath(mContext,"pic/sy") + time + ".jpg");
+        fileUriSy = new File(Tools.getSavePath(mContext,"pic/sy/"+ App.getUser().getName() +"/"
+        + DateUtils.getCurrentDate()) + time + ".jpg");
 
         imageUri = Uri.fromFile(fileUri);
         imageUriSy = Uri.fromFile(fileUriSy);

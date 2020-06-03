@@ -59,11 +59,19 @@ public class PatrolAdapter extends RecyclerView.Adapter<PatrolAdapter.VH> {
         String url = patrolBean.getPhotoUrl();
         String urlSy = patrolBean.getPhotoUrlSy();
         Uri uri = patrolBean.getUri();
-        if(null != uri) {
-            viewHolder.item_photo.setImageBitmap(PhotoUtils.makePhoto(mContext,uri,urlSy,
-                    patrolBean.getPlace()));
-            Tools.deleteFile(url);
+        Uri uriSy = patrolBean.getUriSy();
+        if(TextUtils.isEmpty(url)){ // 扫码后创建的空数据
 
+        }else {
+            if (null != uri) {
+                viewHolder.item_photo.setImageBitmap(PhotoUtils.makePhoto(mContext, uri, urlSy,
+                        patrolBean.getPlace()));
+                Tools.deleteFile(url);
+                patrolBean.setUri(null);
+
+            } else {
+                viewHolder.item_photo.setImageBitmap(PhotoUtils.getBitmapFromUri(uriSy, mContext));
+            }
         }
         if(i == 0){
             viewHolder.item_status_iv.setBackgroundResource(R.drawable.ic_switch);

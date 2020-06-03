@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">BaiDuFace Demo</string>
+    <string name="app_name">巡更</string>
 
     <string name="face_setting">设置</string>
     <string name="face_id">设备ID</string>
