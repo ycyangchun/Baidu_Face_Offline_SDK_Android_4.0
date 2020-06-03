@@ -10,8 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingLeft="@dimen/dimenPaddingCommon"
-        android:paddingRight="@dimen/dimenPaddingCommon"
-        android:paddingBottom="@dimen/dimenPaddingCommon">
+        android:paddingRight="@dimen/dimenPaddingCommon">
         <TextView style="@style/AppTheme.Label"
             android:id="@+id/item_time"
             android:textColor="@android:color/white"

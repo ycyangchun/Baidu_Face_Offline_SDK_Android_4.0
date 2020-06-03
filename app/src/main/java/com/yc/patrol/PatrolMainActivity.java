@@ -97,10 +97,12 @@ public class PatrolMainActivity extends BaseActivity implements PatrolAdapter.It
             }
             patrolBean.setUri(result);
             adapter.upData(position,patrolBean);
+            recyclerView.scrollToPosition(0);
         }
         if(requestCode == SCAN_REQUEST){
             String place = data == null || resultCode != RESULT_OK ? null : data.getStringExtra("scan");
             adapter.addData(0,new PatrolBean(DateUtils.gethmsTime(),place,""));
+            recyclerView.scrollToPosition(0);
         }
     }
 }
