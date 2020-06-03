@@ -7,6 +7,24 @@ public class PatrolBean {
     private String place;
     private String photoUrl;
     private Uri uri;
+    private Uri uriSy;
+    private String photoUrlSy;
+
+    public Uri getUriSy() {
+        return uriSy;
+    }
+
+    public void setUriSy(Uri uriSy) {
+        this.uriSy = uriSy;
+    }
+
+    public String getPhotoUrlSy() {
+        return photoUrlSy;
+    }
+
+    public void setPhotoUrlSy(String photoUrlSy) {
+        this.photoUrlSy = photoUrlSy;
+    }
 
     public Uri getUri() {
         return uri;

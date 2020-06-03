@@ -29,7 +29,8 @@ public class PatrolMainActivity extends BaseActivity implements PatrolAdapter.It
     private final static int FILE_CHOOSER_RESULT_CODE = 128;
     private final static int PHOTO_REQUEST = 100;
     private final static int SCAN_REQUEST = 101;
-    private Uri imageUri;
+    private Uri imageUri,imageUriSy;
+    private File fileUriSy;
     PatrolAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,10 +70,17 @@ public class PatrolMainActivity extends BaseActivity implements PatrolAdapter.It
      * 拍照
      */
     private void takeCamera() {
-        File fileUri = new File(Tools.getSavePath(mContext,"pic") + System.currentTimeMillis()+ ".jpg");
+        long time = System.currentTimeMillis();
+        File fileUri = new File(Tools.getSavePath(mContext,"pic") + time + ".jpg");
+        fileUriSy = new File(Tools.getSavePath(mContext,"pic/sy") + time + ".jpg");
+
         imageUri = Uri.fromFile(fileUri);
+        imageUriSy = Uri.fromFile(fileUriSy);
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             imageUri = FileProvider.getUriForFile(mContext, getPackageName() + ".fileprovider", fileUri);//通过FileProvider创建一个content类型的Uri
+            imageUriSy = FileProvider.getUriForFile(mContext, getPackageName() + ".fileprovider", fileUriSy);//通过FileProvider创建一个content类型的Uri
+
         }
         PhotoUtils.takePicture(mContext, imageUri, PHOTO_REQUEST);
     }
@@ -96,6 +104,8 @@ public class PatrolMainActivity extends BaseActivity implements PatrolAdapter.It
                 result = imageUri;
             }
             patrolBean.setUri(result);
+            patrolBean.setUriSy(imageUriSy);
+            patrolBean.setPhotoUrlSy(fileUriSy.getAbsolutePath());
             adapter.upData(position,patrolBean);
             recyclerView.scrollToPosition(0);
         }

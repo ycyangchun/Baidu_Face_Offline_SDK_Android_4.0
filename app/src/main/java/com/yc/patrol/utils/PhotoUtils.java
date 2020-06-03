@@ -6,9 +6,14 @@ import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -22,8 +27,13 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.ref.WeakReference;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 public class PhotoUtils {
     private static final String TAG = "PhotoUtils";
@@ -119,14 +129,14 @@ public class PhotoUtils {
     public static Drawable getDrawableFromUri(Uri uri, Context mContext) {
         try {
             Bitmap bitmapFormUri = getBitmapFormUri(mContext, uri);
-            return new BitmapDrawable(mContext.getResources(),bitmapFormUri);
+            return new BitmapDrawable(mContext.getResources(), bitmapFormUri);
         } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
     }
 
-    public static Bitmap getBitmapFromUri(String url,Context mContext) {
+    public static Bitmap getBitmapFromUri(String url, Context mContext) {
         try {
             File fileUri = new File(url);
             Uri imageUri = Uri.fromFile(fileUri);
@@ -143,13 +153,14 @@ public class PhotoUtils {
 
     public static Drawable getDrawableFromUri(String url, Context mContext) {
         try {
-            Bitmap bitmapFormUri = getBitmapFromUri(url,mContext);
-            return new BitmapDrawable(mContext.getResources(),bitmapFormUri);
+            Bitmap bitmapFormUri = getBitmapFromUri(url, mContext);
+            return new BitmapDrawable(mContext.getResources(), bitmapFormUri);
         } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
     }
+
     /**
      * 通过uri获取图片并进行压缩
      *
@@ -171,7 +182,7 @@ public class PhotoUtils {
         //图片分辨率以480x800为标准
 //        float hh = 800f;//这里设置高度为800f
 //        float ww = 480f;//这里设置宽度为480f
-        float hh = 1980f;//这里设置高度为800f
+        float hh = 1920f;//这里设置高度为800f
         float ww = 1080f;//这里设置宽度为480f
         //缩放比。由于是固定比例缩放，只用高或者宽其中一个数据进行计算即可
         int be = 5;//be=1表示不缩放
@@ -413,5 +424,94 @@ public class PhotoUtils {
         return null;
     }
 
+    //添加图片水印 并保存
+    public static Bitmap makePhoto(Context context, Uri uri, String syPhotoName ,String str) {
+        FileOutputStream b = null;
+//        Bitmap bitmap = convertToBitmap(photoName, 1920, 1080);   //获取原图的缩略图500*500
+        Bitmap bitmap = null;
+        Bitmap bitmap2 = null;
+        SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINA);
+        Date curDate = new Date(System.currentTimeMillis());
+        String date = formater.format(curDate);   //获取当前的日期事件信息
+
+        try {
+            bitmap = getBitmapFormUri(context, uri);
+//            Bitmap bitmap1 = drawTextToLeftBottom(context, bitmap, date, 16, Color.RED, 45, 30);  //添加第一个时间水印
+            bitmap2 = drawTextToLeftBottom(context, bitmap, str +" " + date, 20, Color.BLUE, 50, 10); //添加坐标水印
+            b = new FileOutputStream(syPhotoName);
+            bitmap2.compress(Bitmap.CompressFormat.JPEG, 100, b);// 把图片数据写入指定的文件
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (b != null) {
+                    b.flush();   //刷新输出流
+                    b.close();   //关闭输出流
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        }
+        return bitmap2;
+    }
+
+    /**
+     * 压缩图片为位图
+     */
+    public static Bitmap convertToBitmap(String path, int w, int h) {
+        BitmapFactory.Options opts = new BitmapFactory.Options();
+        // 设置为ture只获取图片大小
+        opts.inJustDecodeBounds = true;
+        opts.inPreferredConfig = Bitmap.Config.ARGB_8888;
+        // 返回为空
+        BitmapFactory.decodeFile(path, opts);
+        int width = opts.outWidth;
+        int height = opts.outHeight;
+        float scaleWidth = 0.f, scaleHeight = 0.f;
+        if (width > w || height > h) {
+            // 缩放
+            scaleWidth = ((float) width) / w;
+            scaleHeight = ((float) height) / h;
+        }
+        opts.inJustDecodeBounds = false;
+        float scale = Math.max(scaleWidth, scaleHeight);
+        opts.inSampleSize = (int) scale;
+        WeakReference<Bitmap> weak = new WeakReference<>(
+                BitmapFactory.decodeFile(path, opts));
+        return Bitmap.createBitmap(weak.get());
+    }
+
+    public static Bitmap drawTextToLeftBottom(Context mContext, Bitmap bitmap, String text, int textSize,
+                                              int textColor, int dx, int dy) {
+        try {
+            Resources resources = mContext.getResources();
+            float scale = resources.getDisplayMetrics().density;
+
+            android.graphics.Bitmap.Config bitmapConfig = bitmap.getConfig();
+            // set default bitmap config if none
+            if (bitmapConfig == null) bitmapConfig = android.graphics.Bitmap.Config.ARGB_8888;
+            // resource bitmaps are imutable, so we need to convert it to mutable one
+            bitmap = bitmap.copy(bitmapConfig, true);
+
+            Canvas canvas = new Canvas(bitmap);
+            Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG); // new antialised Paint
+            paint.setColor(textColor);       // text color - #3D3D3D
+            paint.setTextSize((int) (textSize * scale));           // text size in pixels
+//            paint.setShadowLayer(1f, dx, dy, Color.DKGRAY); // text shadow
+
+            // draw text to the Canvas center
+            Rect bounds = new Rect();
+            paint.getTextBounds(text, 0, text.length(), bounds);
+            int x = (bitmap.getWidth() - bounds.width())  - dx;
+            int y = (bitmap.getHeight() - bounds.height()) - dy;
+
+            canvas.drawText(text, x , y , paint);
+            return bitmap;
+        } catch (Exception e) {
+            return null;
+        }
+    }
 
 }

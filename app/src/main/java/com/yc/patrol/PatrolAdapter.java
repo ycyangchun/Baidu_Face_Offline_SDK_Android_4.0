@@ -61,7 +61,10 @@ public class PatrolAdapter extends RecyclerView.Adapter<PatrolAdapter.VH> {
         }else {
             Uri uri = patrolBean.getUri();
             if(null != uri) {
-                viewHolder.item_photo.setImageBitmap(PhotoUtils.getBitmapFromUri(uri, mContext));
+//                viewHolder.item_photo.setImageBitmap(PhotoUtils.getBitmapFromUri(uri, mContext));
+                viewHolder.item_photo.setImageBitmap(PhotoUtils.makePhoto(mContext,uri,patrolBean.getPhotoUrlSy(),
+                        patrolBean.getPlace()));
+
             }
         }
         if(i == 0){
