@@ -185,7 +185,7 @@ public class PhotoUtils {
         float hh = 1920f;//这里设置高度为800f
         float ww = 1080f;//这里设置宽度为480f
         //缩放比。由于是固定比例缩放，只用高或者宽其中一个数据进行计算即可
-        int be = 5;//be=1表示不缩放
+        int be = 1;//be=1表示不缩放
         if (originalWidth > originalHeight && originalWidth > ww) {//如果宽度大的话根据宽度固定大小缩放
             be = (int) (originalWidth / ww);
         } else if (originalWidth < originalHeight && originalHeight > hh) {//如果高度高的话根据宽度固定大小缩放
@@ -215,7 +215,7 @@ public class PhotoUtils {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         image.compress(Bitmap.CompressFormat.JPEG, 100, baos);//质量压缩方法，这里100表示不压缩，把压缩后的数据存放到baos中
         int options = 100;
-        while (baos.toByteArray().length / 1024 > 100) {  //循环判断如果压缩后图片是否大于100kb,大于继续压缩
+        while (baos.toByteArray().length / 1024 > 500) {  //循环判断如果压缩后图片是否大于100kb,大于继续压缩
             baos.reset();//重置baos即清空baos
             //第一个参数 ：图片格式 ，第二个参数： 图片质量，100为最高，0为最差  ，第三个参数：保存压缩后的数据的流
             image.compress(Bitmap.CompressFormat.JPEG, options, baos);//这里压缩options%，把压缩后的数据存放到baos中
@@ -437,7 +437,7 @@ public class PhotoUtils {
         try {
             bitmap = getBitmapFormUri(context, uri);
 //            Bitmap bitmap1 = drawTextToLeftBottom(context, bitmap, date, 16, Color.RED, 45, 30);  //添加第一个时间水印
-            bitmap2 = drawTextToLeftBottom(context, bitmap, str +" " + date, 20, Color.BLUE, 50, 10); //添加坐标水印
+            bitmap2 = drawTextToLeftBottom(context, bitmap, str +" " + date, 20, Color.YELLOW, 50, 10); //添加坐标水印
             b = new FileOutputStream(syPhotoName);
             bitmap2.compress(Bitmap.CompressFormat.JPEG, 100, b);// 把图片数据写入指定的文件
 
@@ -496,10 +496,10 @@ public class PhotoUtils {
             bitmap = bitmap.copy(bitmapConfig, true);
 
             Canvas canvas = new Canvas(bitmap);
-            Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG); // new antialised Paint
+            Paint paint = new Paint(Paint.FAKE_BOLD_TEXT_FLAG); // new antialised Paint
             paint.setColor(textColor);       // text color - #3D3D3D
             paint.setTextSize((int) (textSize * scale));           // text size in pixels
-//            paint.setShadowLayer(1f, dx, dy, Color.DKGRAY); // text shadow
+            paint.setShadowLayer(20f, 1f, 1f, Color.WHITE); // text shadow
 
             // draw text to the Canvas center
             Rect bounds = new Rect();
