@@ -22,9 +22,7 @@ public class CustomDialog2 implements View.OnClickListener, DialogInterface.OnDi
     private View lloff;
     private OnDialogClickListener onDialogClickListener;
     private Object obj;
-    private LinearLayout touchid_ll;
     private LinearLayout llmessage;
-    private TextView touchid_text;
 
     public CustomDialog2(BaseActivity activity) {
         this(activity,true);
@@ -59,8 +57,6 @@ public class CustomDialog2 implements View.OnClickListener, DialogInterface.OnDi
         negativeButton = (Button) dialog.getView().findViewById(R.id.negativeButton);
         positiveButton = (Button) dialog.getView().findViewById(R.id.positiveButton);
         lloff = dialog.getView().findViewById(R.id.lloff);
-        touchid_ll = (LinearLayout) dialog.getView().findViewById(R.id.touchid_ll);
-        touchid_text = (TextView) dialog.getView().findViewById(R.id.touchid_text);
         negativeButton.setOnClickListener(this);//取消
         positiveButton.setOnClickListener(this);//确定
     }
@@ -77,7 +73,6 @@ public class CustomDialog2 implements View.OnClickListener, DialogInterface.OnDi
 
     //设置显示的消息
     public CustomDialog2 setMessage(String messageStr) {
-        touchid_ll.setVisibility(View.GONE);
         llmessage.setVisibility(View.VISIBLE);
         if (TextUtils.isEmpty(messageStr)) {
             message.setText("");
@@ -89,9 +84,7 @@ public class CustomDialog2 implements View.OnClickListener, DialogInterface.OnDi
 
     //设置显示指纹id的图片
     public CustomDialog2 setTouchid(String showTouchidStr) {
-        touchid_ll.setVisibility(View.VISIBLE);
         llmessage.setVisibility(View.GONE);
-        touchid_text.setText(showTouchidStr);
         return this;
     }
 

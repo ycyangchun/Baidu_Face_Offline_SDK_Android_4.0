@@ -1,5 +1,6 @@
 package com.yc.patrol;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -13,7 +14,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.baidu.idl.face.main.activity.BaseActivity;
+import com.google.zxing.client.result.ResultParser;
 import com.yc.patrol.scanner.CaptureActivity;
+import com.yc.patrol.utils.CustomDialog2;
 import com.yc.patrol.utils.DateUtils;
 import com.yc.patrol.utils.FileUtils2;
 import com.yc.patrol.utils.PhotoUtils;
@@ -24,7 +27,8 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PatrolMainActivity extends BaseActivity implements PatrolAdapter.ItemClickListener{
+public class PatrolMainActivity extends BaseActivity implements PatrolAdapter.ItemClickListener,
+        CustomDialog2.OnDialogClickListener{
 
     RecyclerView recyclerView;
     PatrolMainActivity mContext;
@@ -36,6 +40,7 @@ public class PatrolMainActivity extends BaseActivity implements PatrolAdapter.It
     private String patrolImage;
     PatrolAdapter adapter;
     List<PatrolBean> list;
+    private CustomDialog2 customDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +55,7 @@ public class PatrolMainActivity extends BaseActivity implements PatrolAdapter.It
         adapter = new PatrolAdapter(list,this);
         recyclerView.setAdapter(adapter);
         adapter.setListener(this);
+        initCustomDialog();
         findViewById(R.id.scan).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -61,15 +67,38 @@ public class PatrolMainActivity extends BaseActivity implements PatrolAdapter.It
         findViewById(R.id.finish).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                try {
-                    Tools.createDOMXml(list,new UserPatrol());
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                customDialog.show();
             }
         });
     }
 
+    @Override
+    public void OnDialogClickCallBack(boolean isPositive, Object obj) {
+        if(isPositive){
+            try {
+                Tools.createDOMXml(list,new UserPatrol(),mContext);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    @Override
+    public void onDismiss(DialogInterface dialog, Object obj) {
+
+    }
+
+    private void initCustomDialog() {
+        if (customDialog == null) {
+            customDialog = new CustomDialog2(this);
+            customDialog.setMessage("确认巡逻完成,导出数据？")
+                    .setData("0")
+                    .setButton("确认","取消")
+                    .setCancelable(true);
+
+            customDialog.setOnDialogClickListener(this);
+        }
+    }
     /**
      * 选择图片
      */

@@ -263,7 +263,7 @@ public class CaptureActivity extends BaseActivity implements SurfaceHolder.Callb
 		beepManager.playBeepSoundAndVibrate();
         initPlayer(CaptureActivity.this, R.raw.beep);
         startPlayer(CaptureActivity.this, R.raw.beep);
-//        initCustomDialog();
+//        CustomDialog2();
 //        customDialog.setMessage("识别结果:" + ResultParser.parseResult(rawResult).toString())
 //                    .setData("0")
 //                    .setPositiveButton("知道了")

@@ -2,9 +2,12 @@ package com.yc.patrol.utils;
 
 import android.content.Context;
 import android.os.Environment;
+import android.text.TextUtils;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.baidu.idl.face.main.utils.FileUtils;
+import com.baidu.idl.face.main.utils.ToastUtils;
 import com.yc.patrol.MyConstants;
 import com.yc.patrol.PatrolBean;
 import com.yc.patrol.UserPatrol;
@@ -171,7 +174,7 @@ public class Tools {
         }
     }
 
-    public  static void  createDOMXml(List<PatrolBean> beans, UserPatrol userPatrol) throws Exception{
+    public  static void  createDOMXml(List<PatrolBean> beans, UserPatrol userPatrol ,Context context) throws Exception{
         //创建一个DocumentBuilderFactory的对象
         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
         //创建一个DocumentBuider的对象
@@ -182,26 +185,26 @@ public class Tools {
         document.setXmlStandalone(true); //设置xml里面不显示standlone
         //创建文档下的一个根节点
         org.w3c.dom.Element people = document.createElement("People");
-        people.setAttribute("id",userPatrol.getId());
-        people.setAttribute("PatrolTime",DateUtils.getCurrentDate());
-        people.setAttribute("LineId",userPatrol.getLineId());
-        people.setAttribute("TodayIsAbnormal",userPatrol.getTodayIsAbnormal());
+        people.setAttribute("id",getCtx(userPatrol.getId()));
+        people.setAttribute("PatrolTime",getCtx(DateUtils.getCurrentDate()));
+        people.setAttribute("LineId",getCtx(userPatrol.getLineId()));
+        people.setAttribute("TodayIsAbnormal",getCtx(userPatrol.getTodayIsAbnormal()));
 
         //向bookstore添加子节点
         for(int i = 0 ; i < beans.size() ; i++) {
             PatrolBean pb = beans.get(i);
             org.w3c.dom.Element point = document.createElement("PatrolPoint");
-            point.setAttribute("id", userPatrol.getId());
-            point.setAttribute("ArriveTime", pb.getTime());
-            point.setAttribute("IsAbnormal", pb.getIsAbnormal());
-            point.setAttribute("QRcode", pb.getPlace());
-            point.setAttribute("PatrolImage", pb.getPatrolImage());
+            point.setAttribute("id", getCtx(userPatrol.getId()));
+            point.setAttribute("ArriveTime", getCtx(pb.getTime()));
+            point.setAttribute("IsAbnormal", getCtx(pb.getIsAbnormal()));
+            point.setAttribute("QRcode", getCtx(pb.getPlace()));
+            point.setAttribute("PatrolImage", getCtx(pb.getPatrolImage()));
 
             for(int j = 0 ; j < beans.size() ; j++) {
                 //添加子节点
                 org.w3c.dom.Element pro = document.createElement("PatrolProject");
-                pro.setAttribute("objId", j+"");
-                pro.setAttribute("Result", "000000000");
+                pro.setAttribute("objId", getCtx(j+""));
+                pro.setAttribute("Result", getCtx("000000000"));
 //            pro.setTextContent("西游记");
 //            pro.appendChild(name);
                 point.appendChild(pro);
@@ -222,6 +225,16 @@ public class Tools {
         //将document转换成xml文件
         String paths = FileUtils2.getCacheFilePath(MyConstants.DATAPATH + File.separator + userPatrol.getName()+".xml");
         tf.transform(new DOMSource(document), new StreamResult(new File(paths)) );
+        ToastUtils.toast(context, "导出成功");
+    }
 
+    public static String getCtx(String str){
+        String s = "";
+        if(TextUtils.isEmpty(str)){
+
+        }else {
+            s = str;
+        }
+        return s;
     }
 }
