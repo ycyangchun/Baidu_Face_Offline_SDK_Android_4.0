@@ -66,6 +66,27 @@
                 app:rv_strokeColor="@android:color/white"/>
 
 
+            <com.flyco.roundview.RoundTextView
+                style="@style/AppTheme.Label.Title.Large"
+                android:id="@+id/finish"
+                android:layout_below="@id/assistant"
+                android:layout_toEndOf="@id/scan"
+                android:layout_toRightOf="@id/scan"
+                android:layout_marginLeft="@dimen/padding_10"
+                android:layout_width="100dp"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/dimenPaddingDiminutive"
+                android:paddingTop="@dimen/dimenPaddingCommon"
+                android:paddingLeft="@dimen/dimenPaddingHorizontal"
+                android:paddingRight="@dimen/dimenPaddingHorizontal"
+                android:paddingBottom="@dimen/dimenPaddingCommon"
+                android:textColor="@color/colorPrimaryDark"
+                android:text="完成巡逻"
+                android:textSize="@dimen/textsize_content"
+                app:rv_cornerRadius="@dimen/dimenPaddingDiminutive"
+                app:rv_backgroundColor="@android:color/white"
+                app:rv_strokeWidth="1dp"
+                app:rv_strokeColor="@android:color/white"/>
         </RelativeLayout>
     </FrameLayout>
 

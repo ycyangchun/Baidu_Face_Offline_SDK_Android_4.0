@@ -4,7 +4,10 @@ import android.content.Context;
 import android.os.Environment;
 import android.util.Log;
 
+import com.baidu.idl.face.main.utils.FileUtils;
 import com.yc.patrol.MyConstants;
+import com.yc.patrol.PatrolBean;
+import com.yc.patrol.UserPatrol;
 
 import org.jsoup.Jsoup;
 import org.openni.DeviceInfo;
@@ -168,7 +171,7 @@ public class Tools {
         }
     }
 
-    public void createDOMXml() throws Exception{
+    public  static void  createDOMXml(List<PatrolBean> beans, UserPatrol userPatrol) throws Exception{
         //创建一个DocumentBuilderFactory的对象
         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
         //创建一个DocumentBuider的对象
@@ -178,32 +181,36 @@ public class Tools {
         org.w3c.dom.Document document = db.newDocument();
         document.setXmlStandalone(true); //设置xml里面不显示standlone
         //创建文档下的一个根节点
-        org.w3c.dom.Element bookstore = document.createElement("bookstore");
+        org.w3c.dom.Element people = document.createElement("People");
+        people.setAttribute("id",userPatrol.getId());
+        people.setAttribute("PatrolTime",DateUtils.getCurrentDate());
+        people.setAttribute("LineId",userPatrol.getLineId());
+        people.setAttribute("TodayIsAbnormal",userPatrol.getTodayIsAbnormal());
+
         //向bookstore添加子节点
-        org.w3c.dom.Element book = document.createElement("book");
+        for(int i = 0 ; i < beans.size() ; i++) {
+            PatrolBean pb = beans.get(i);
+            org.w3c.dom.Element point = document.createElement("PatrolPoint");
+            point.setAttribute("id", userPatrol.getId());
+            point.setAttribute("ArriveTime", pb.getTime());
+            point.setAttribute("IsAbnormal", pb.getIsAbnormal());
+            point.setAttribute("QRcode", pb.getPlace());
+            point.setAttribute("PatrolImage", pb.getPatrolImage());
 
-        //book添加属性
-        book.setAttribute("id", "1");
-        //添加子节点
-        org.w3c.dom.Element name = document.createElement("name");
-        //name.setNodeValue("西游记"); //nodevalue 读取时为null
-        name.setTextContent("西游记");
-
-        org.w3c.dom.Element author = document.createElement("author");
-        author.setTextContent("吴承恩");
-        org.w3c.dom.Element year = document.createElement("year");
-        year.setTextContent("明朝");
-        org.w3c.dom.Element price = document.createElement("price");
-        price.setTextContent("110");
-        //添加子节点
-        book.appendChild(name);
-        book.appendChild(author);
-        book.appendChild(year);
-        book.appendChild(price);
-        //将book添加book
-        bookstore.appendChild(book);
+            for(int j = 0 ; j < beans.size() ; j++) {
+                //添加子节点
+                org.w3c.dom.Element pro = document.createElement("PatrolProject");
+                pro.setAttribute("objId", j+"");
+                pro.setAttribute("Result", "000000000");
+//            pro.setTextContent("西游记");
+//            pro.appendChild(name);
+                point.appendChild(pro);
+            }
+            //将book添加book
+            people.appendChild(point);
+        }
         //添加根节点（已经包含了book）
-        document.appendChild(bookstore);
+        document.appendChild(people);
 
         //将dom树保存成xml文件
 
@@ -213,7 +220,8 @@ public class Tools {
         //设置换行
         tf.setOutputProperty(OutputKeys.INDENT,"yes");
         //将document转换成xml文件
-        tf.transform(new DOMSource(document), new StreamResult(new File("book1.xml")) );
+        String paths = FileUtils2.getCacheFilePath(MyConstants.DATAPATH + File.separator + userPatrol.getName()+".xml");
+        tf.transform(new DOMSource(document), new StreamResult(new File(paths)) );
 
     }
 }

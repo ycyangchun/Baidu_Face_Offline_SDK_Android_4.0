@@ -55,18 +55,24 @@ public class FileUtils2 {
     private static File APP_CACHE_FILE ;
     private static String APP_CACHE_PATH;
 
+    private static Context context;
 
 
     /**
      * 在初始化时创建APP所需要的基础文件夹
      * 在6.0以上版本时需要进行权限申请
-     * @param context 上下文
+     * @param ctx 上下文
      */
-    public static void initCache(Context context) {
+    public static void initCache(Context ctx) {
+        context = ctx;
         APP_CACHE_FILE = createFileDir(context, CACHE);
         APP_CACHE_PATH = APP_CACHE_FILE.getPath();
+        initUser(context, "user");
     }
 
+    public static void initUser(Context context,String uF) {
+        createFileDir(context, uF);
+    }
 
     /*
      * 创建目录
@@ -92,7 +98,6 @@ public class FileUtils2 {
 
         return destDir;
     }
-
 
 
     public static boolean needMkdirs(String cache_path,String fileName) {
@@ -128,10 +133,16 @@ public class FileUtils2 {
         return  APP_CACHE_PATH + File.separator + fileName;
     }
 
-
-
-
-
+    // 本应用文件路径 xx/xx/cache/file/fileName
+    public static String getCacheFilePath(String fileName){
+        if(APP_CACHE_PATH == null) throw new UnsupportedOperationException("FileUtils innerCache()");
+        File f = new File(APP_CACHE_PATH);
+        if(!f.exists()){
+            initCache(context);// 目录被删除后重建目录
+        }
+        needMkdirs(APP_CACHE_PATH,fileName);
+        return  APP_CACHE_PATH + File.separator + fileName;
+    }
 
 
     public static void  deleteFile(String filename) {

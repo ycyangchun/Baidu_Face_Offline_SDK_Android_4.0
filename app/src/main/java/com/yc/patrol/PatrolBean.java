@@ -9,6 +9,25 @@ public class PatrolBean {
     private Uri uri;
     private Uri uriSy;
     private String photoUrlSy;
+    private String isAbnormal;
+    private String patrolImage;
+
+
+    public String getPatrolImage() {
+        return patrolImage;
+    }
+
+    public void setPatrolImage(String patrolImage) {
+        this.patrolImage = patrolImage;
+    }
+
+    public String getIsAbnormal() {
+        return isAbnormal;
+    }
+
+    public void setIsAbnormal(String isAbnormal) {
+        this.isAbnormal = isAbnormal;
+    }
 
     public Uri getUriSy() {
         return uriSy;

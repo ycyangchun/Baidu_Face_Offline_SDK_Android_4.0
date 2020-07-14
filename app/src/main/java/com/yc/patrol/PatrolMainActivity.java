@@ -33,7 +33,9 @@ public class PatrolMainActivity extends BaseActivity implements PatrolAdapter.It
     private final static int SCAN_REQUEST = 101;
     private Uri imageUri,imageUriSy;
     private File fileUri,fileUriSy;
+    private String patrolImage;
     PatrolAdapter adapter;
+    List<PatrolBean> list;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,7 +43,7 @@ public class PatrolMainActivity extends BaseActivity implements PatrolAdapter.It
         mContext = this;
         recyclerView = this.findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        List<PatrolBean> list = new ArrayList<>();
+        list = new ArrayList<>();
 
         list.add(new PatrolBean(DateUtils.gethmsTime(),"打卡",""));
 
@@ -56,6 +58,16 @@ public class PatrolMainActivity extends BaseActivity implements PatrolAdapter.It
             }
         });
 
+        findViewById(R.id.finish).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try {
+                    Tools.createDOMXml(list,new UserPatrol());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 
     /**
@@ -74,7 +86,8 @@ public class PatrolMainActivity extends BaseActivity implements PatrolAdapter.It
     private void takeCamera() {
         String time = DateUtils.getNowTime();
         fileUri = new File(FileUtils2.getCacheFilePath(mContext,MyConstants.DATAPATH + File.separator +"tempPic"+ File.separator + time + ".jpg") );
-        fileUriSy = new File( FileUtils2.getCacheFilePath(mContext, MyConstants.DATAPATH + File.separator + place + time + ".jpg") );
+        patrolImage = place + time + ".jpg";
+        fileUriSy = new File( FileUtils2.getCacheFilePath(mContext, MyConstants.DATAPATH + File.separator + patrolImage) );
 
         imageUri = Uri.fromFile(fileUri);
         imageUriSy = Uri.fromFile(fileUriSy);
@@ -112,6 +125,7 @@ public class PatrolMainActivity extends BaseActivity implements PatrolAdapter.It
                 patrolBean.setUri(result);
                 patrolBean.setUriSy(imageUriSy);
                 patrolBean.setPhotoUrlSy(fileUriSy.getAbsolutePath());
+                patrolBean.setPatrolImage(patrolImage);
                 adapter.upData(position, patrolBean);
                 recyclerView.scrollToPosition(0);
             }
