@@ -72,4 +72,5 @@ dependencies {
     implementation 'de.hdodenhof:circleimageview:2.2.0'
     implementation files('libs/android-core-3.1.1-SNAPSHOT.jar')
     implementation files('libs/core-3.1.1-SNAPSHOT.jar')
+    implementation files('libs/jsoup-1.8.2.jar')
 }

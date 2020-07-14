@@ -7,6 +7,7 @@ public class MyConstants {
 
     public static String BaseUrl = "";
     public static boolean isDubug = false;
+    public static String DATAPATH = "";
     public static void setType(int type) {
         switch (type) {
             case ZhengShi:

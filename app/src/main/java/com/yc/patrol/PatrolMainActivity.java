@@ -15,6 +15,7 @@ import android.view.View;
 import com.baidu.idl.face.main.activity.BaseActivity;
 import com.yc.patrol.scanner.CaptureActivity;
 import com.yc.patrol.utils.DateUtils;
+import com.yc.patrol.utils.FileUtils2;
 import com.yc.patrol.utils.PhotoUtils;
 import com.baidu.idl.facesdkdemo.R;
 import com.yc.patrol.utils.Tools;
@@ -71,10 +72,9 @@ public class PatrolMainActivity extends BaseActivity implements PatrolAdapter.It
      * 拍照
      */
     private void takeCamera() {
-        long time = System.currentTimeMillis();
-        fileUri = new File(Tools.getSavePath(mContext,"pic") + time + ".jpg");
-        fileUriSy = new File(Tools.getSavePath(mContext,"pic/sy/"+ App.getUser().getName() +"/"
-        + DateUtils.getCurrentDate()) + time + ".jpg");
+        String time = DateUtils.getNowTime();
+        fileUri = new File(FileUtils2.getCacheFilePath(mContext,MyConstants.DATAPATH + File.separator +"tempPic"+ File.separator + time + ".jpg") );
+        fileUriSy = new File( FileUtils2.getCacheFilePath(mContext, MyConstants.DATAPATH + File.separator + place + time + ".jpg") );
 
         imageUri = Uri.fromFile(fileUri);
         imageUriSy = Uri.fromFile(fileUriSy);
@@ -90,10 +90,12 @@ public class PatrolMainActivity extends BaseActivity implements PatrolAdapter.It
 
     private PatrolBean patrolBean;
     private int position;
+    private String place;
     @Override
     public void itemClick(int pos, PatrolBean pb) {
         patrolBean = pb;
         position = pos;
+        place = pb.getPlace();
         takeCamera();
     }
 

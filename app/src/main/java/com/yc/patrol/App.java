@@ -14,6 +14,7 @@ import com.baidu.idl.face.main.utils.ToastUtils;
 import com.baidu.idl.main.facesdk.FaceAuth;
 import com.baidu.idl.main.facesdk.callback.Callback;
 import com.yc.patrol.utils.CrashHandler;
+import com.yc.patrol.utils.FileUtils2;
 
 public class App extends Application {
     private Context mContext;
@@ -28,6 +29,7 @@ public class App extends Application {
         crashHandler = CrashHandler.getInstance();
         crashHandler.init(getApplicationContext());
         CommonUtils.init(this);
+        FileUtils2.initCache(this);
         if (FaceSDKManager.getInstance().initStatus == FaceSDKManager.SDK_UNACTIVATION) {
             initLicense();
         } else {

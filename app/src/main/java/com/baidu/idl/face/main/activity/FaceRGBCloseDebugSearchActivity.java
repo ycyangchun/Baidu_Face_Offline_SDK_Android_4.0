@@ -30,6 +30,7 @@ import com.baidu.idl.face.main.model.LivenessModel;
 import com.baidu.idl.face.main.model.SingleBaseConfig;
 import com.baidu.idl.face.main.model.User;
 import com.yc.patrol.App;
+import com.yc.patrol.MyConstants;
 import com.yc.patrol.PatrolMainActivity;
 import com.baidu.idl.face.main.utils.DensityUtils;
 import com.baidu.idl.face.main.utils.FaceOnDrawTexturViewUtil;
@@ -37,6 +38,10 @@ import com.baidu.idl.face.main.utils.FileUtils;
 import com.baidu.idl.face.main.view.CircleImageView;
 import com.baidu.idl.facesdkdemo.R;
 import com.baidu.idl.main.facesdk.FaceInfo;
+import com.yc.patrol.utils.DateUtils;
+import com.yc.patrol.utils.FileUtils2;
+
+import java.io.File;
 
 import static com.baidu.idl.face.main.activity.FaceMainSearchActivity.PAGE_TYPE;
 
@@ -293,6 +298,7 @@ public class FaceRGBCloseDebugSearchActivity extends BaseActivity implements Vie
         //TODO 自己设置
         if (!FaceRGBCloseDebugSearchActivity.this.isFinishing()) {
             App.setUser(user.getUserName());
+            MyConstants.DATAPATH = File.separator+ DateUtils.getCurrentDate() + File.separator + user.getUserName() ;
             FaceRGBCloseDebugSearchActivity.this.finish();
             Toast.makeText(FaceRGBCloseDebugSearchActivity.this, user.getUserName() + "登录成功", Toast.LENGTH_SHORT).show();
             startActivity(new Intent(FaceRGBCloseDebugSearchActivity.this, PatrolMainActivity.class));
