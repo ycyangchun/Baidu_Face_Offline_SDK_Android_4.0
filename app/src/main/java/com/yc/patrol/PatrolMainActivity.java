@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.content.FileProvider;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -65,6 +66,7 @@ public class PatrolMainActivity extends BaseActivity implements PatrolAdapter.It
             list.add(new PatrolBean("打卡"));
 
             adapter = new PatrolAdapter(list,this);
+            recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
             recyclerView.setAdapter(adapter);
             adapter.setListener(this);
         }

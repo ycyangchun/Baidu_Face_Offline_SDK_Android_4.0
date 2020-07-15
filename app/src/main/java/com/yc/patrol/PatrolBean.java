@@ -19,7 +19,7 @@ public class PatrolBean {
     private String qRcode;
     private String linePlaceName;
     private String patrolImage;
-    private List<PatrolProject2> patrolProject2s;
+    private List<ProjectResult> projectResults;
     //
     private String photoUrl;
     private Uri uri;
@@ -45,20 +45,20 @@ public class PatrolBean {
         this.qRcode = patrolPoint.getqRcode();
         this.linePlaceName = patrolPoint.getLinePlaceName();
 
-        this.patrolProject2s = new ArrayList<>();
+        this.projectResults = new ArrayList<>();
         if(null != projectList){
             for(People.PatrolProject p : projectList){
-                PatrolProject2 project2 = new PatrolProject2();
+                ProjectResult project2 = new ProjectResult();
                 project2.objId = p.getObjId();
                 project2.objDesc = p.getObjDesc();
                 project2.objName = p.getObjName();
-                this.patrolProject2s.add(project2);
+                this.projectResults.add(project2);
             }
         }
     }
 
 
-    public static class PatrolProject2 {
+    public static class ProjectResult {
         private String objId;
         private String result;
         private String isAbnormal;
@@ -178,12 +178,12 @@ public class PatrolBean {
         this.patrolImage = patrolImage;
     }
 
-    public List<PatrolProject2> getPatrolProject2s() {
-        return patrolProject2s;
+    public List<ProjectResult> getProjectResults() {
+        return projectResults;
     }
 
-    public void setPatrolProject2s(List<PatrolProject2> patrolProject2s) {
-        this.patrolProject2s = patrolProject2s;
+    public void setProjectResults(List<ProjectResult> projectResults) {
+        this.projectResults = projectResults;
     }
 
     public String getPhotoUrl() {

@@ -63,6 +63,12 @@
                 android:textColor="@android:color/white"
                 android:text="仓库一"/>
 
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler_sub"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/padding_5"/>
+
             <ImageView style="@style/AppTheme.Label.Title"
                 android:id="@+id/item_photo"
                 android:layout_width="wrap_content"

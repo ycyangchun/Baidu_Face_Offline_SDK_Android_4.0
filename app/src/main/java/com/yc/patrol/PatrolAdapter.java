@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -16,6 +17,7 @@ import com.baidu.idl.facesdkdemo.R;
 import com.yc.patrol.utils.PhotoUtils;
 import com.yc.patrol.utils.Tools;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class PatrolAdapter extends RecyclerView.Adapter<PatrolAdapter.VH> {
@@ -54,6 +56,20 @@ public class PatrolAdapter extends RecyclerView.Adapter<PatrolAdapter.VH> {
     @Override
     public void onBindViewHolder(@NonNull PatrolAdapter.VH viewHolder, final int i) {
         final PatrolBean patrolBean = mDatas.get(i);
+
+        if(null != patrolBean.getProjectResults()) {
+            viewHolder.list.clear();
+            viewHolder.list.addAll(patrolBean.getProjectResults());
+            if (viewHolder.patrolSubAdapter == null) {
+                viewHolder.patrolSubAdapter = new PatrolSubAdapter(viewHolder.list, mContext);
+                viewHolder.recycler_sub.setLayoutManager(new LinearLayoutManager(mContext));
+                viewHolder.recycler_sub.setAdapter(viewHolder.patrolSubAdapter);
+            } else {
+                viewHolder.patrolSubAdapter.setPosition(i);
+                viewHolder.patrolSubAdapter.notifyDataSetChanged();
+            }
+
+        }
         viewHolder.item_time.setText(patrolBean.getArriveTime());
         viewHolder.item_title.setText(patrolBean.getLinePlaceName());
         String url = patrolBean.getPhotoUrl();
@@ -104,12 +120,16 @@ public class PatrolAdapter extends RecyclerView.Adapter<PatrolAdapter.VH> {
         TextView item_title;
         ImageView item_photo;
         ImageView item_status_iv;
+        RecyclerView recycler_sub;
+        PatrolSubAdapter patrolSubAdapter;
+        List<PatrolBean.ProjectResult> list = new ArrayList<>();
         public VH(@NonNull View itemView) {
             super(itemView);
             item_time = itemView.findViewById(R.id.item_time);
             item_title = itemView.findViewById(R.id.item_title);
             item_photo = itemView.findViewById(R.id.item_photo);
             item_status_iv = itemView.findViewById(R.id.item_status_iv);
+            recycler_sub = itemView.findViewById(R.id.recycler_sub);
 
         }
     }

@@ -250,11 +250,11 @@ public class Tools {
                 point.setAttribute("QRcode", getCtx(pb.getqRcode()));
                 point.setAttribute("PatrolImage", getCtx(pb.getPatrolImage()));
 
-                List<PatrolBean.PatrolProject2> pObjs = pb.getPatrolProject2s();
+                List<PatrolBean.ProjectResult> pObjs = pb.getProjectResults();
                 if(null != pObjs) {
                     for (int j = 0; j < pObjs.size(); j++) {
                         //添加子节点
-                        PatrolBean.PatrolProject2 obj = pObjs.get(j);
+                        PatrolBean.ProjectResult obj = pObjs.get(j);
                         Element pro = document.createElement("PatrolProject");
                         pro.setAttribute("objId", getCtx(obj.getObjId()));
                         pro.setAttribute("Result", getCtx(obj.getResult()));
