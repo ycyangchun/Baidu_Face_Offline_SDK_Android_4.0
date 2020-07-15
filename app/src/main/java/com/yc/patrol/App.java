@@ -16,16 +16,21 @@ import com.baidu.idl.main.facesdk.callback.Callback;
 import com.yc.patrol.utils.CrashHandler;
 import com.yc.patrol.utils.FileUtils2;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class App extends Application {
     private Context mContext;
     private Boolean isInitConfig;
     private Boolean isConfigExit;
     private CrashHandler crashHandler;
-    private static UserPatrol user = new UserPatrol() ;
+    private static People user = null ;
+    private static List<People> patrolPlan = null;
     @Override
     public void onCreate() {
         super.onCreate();
         mContext = this;
+        patrolPlan = new ArrayList<>();
         crashHandler = CrashHandler.getInstance();
         crashHandler.init(getApplicationContext());
         CommonUtils.init(this);
@@ -38,12 +43,34 @@ public class App extends Application {
 
     }
 
-    public static void setUser(String userName) {
-        user.setName(userName);
+    public static void setUserByFullName(String fullName) {
+        if (patrolPlan == null){
+
+        }
+
+        if (patrolPlan != null){
+            for (int i = 0 ; i < patrolPlan.size() ; i++) {
+                People p = patrolPlan.get(i);
+                if(fullName.equals(p.getFullName())){
+                    user = p;
+                    break;
+                }
+            }
+        }
     }
 
-    public static UserPatrol getUser() {
+//    public static void setUser(String userName) {
+//        user.setName(userName);
+//    }
+
+    public static People getUser() {
         return user;
+    }
+
+
+    public static void setPatrolPlan(List<People> patrolPlan) {
+        if(App.patrolPlan != null ) App.patrolPlan.clear();
+        App.patrolPlan = patrolPlan;
     }
 
     @Override

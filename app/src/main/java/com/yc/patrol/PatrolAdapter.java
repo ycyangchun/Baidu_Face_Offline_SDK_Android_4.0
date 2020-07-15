@@ -54,8 +54,8 @@ public class PatrolAdapter extends RecyclerView.Adapter<PatrolAdapter.VH> {
     @Override
     public void onBindViewHolder(@NonNull PatrolAdapter.VH viewHolder, final int i) {
         final PatrolBean patrolBean = mDatas.get(i);
-        viewHolder.item_time.setText(patrolBean.getTime());
-        viewHolder.item_title.setText(patrolBean.getPlace());
+        viewHolder.item_time.setText(patrolBean.getArriveTime());
+        viewHolder.item_title.setText(patrolBean.getLinePlaceName());
         String url = patrolBean.getPhotoUrl();
         String urlSy = patrolBean.getPhotoUrlSy();
         Uri uri = patrolBean.getUri();
@@ -65,7 +65,7 @@ public class PatrolAdapter extends RecyclerView.Adapter<PatrolAdapter.VH> {
         }else {
             if (null != uri) {
                 viewHolder.item_photo.setImageBitmap(PhotoUtils.makePhoto(mContext, uri, urlSy,
-                        patrolBean.getPlace()));
+                        patrolBean.getqRcode()));
                 Tools.deleteFile(url);
                 patrolBean.setUri(null);
 
@@ -73,11 +73,12 @@ public class PatrolAdapter extends RecyclerView.Adapter<PatrolAdapter.VH> {
                 viewHolder.item_photo.setImageBitmap(PhotoUtils.getBitmapFromUri(uriSy, mContext));
             }
         }
-        if(i == 0){
-            viewHolder.item_status_iv.setBackgroundResource(R.drawable.ic_switch);
-        }else if(i == 2){
-            viewHolder.item_status_iv.setBackgroundResource(R.drawable.ic_close_line);
-        }
+        viewHolder.item_status_iv.setBackgroundResource(R.drawable.ic_switch);
+//        if(i == 0){
+//            viewHolder.item_status_iv.setBackgroundResource(R.drawable.ic_switch);
+//        }else if(i == 2){
+//            viewHolder.item_status_iv.setBackgroundResource(R.drawable.ic_close_line);
+//        }
         viewHolder.item_photo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -11,6 +11,7 @@ import android.graphics.PorterDuff;
 import android.graphics.RectF;
 import android.hardware.Camera;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.TextureView;
 import android.view.View;
@@ -29,6 +30,7 @@ import com.baidu.idl.face.main.manager.FaceSDKManager;
 import com.baidu.idl.face.main.model.LivenessModel;
 import com.baidu.idl.face.main.model.SingleBaseConfig;
 import com.baidu.idl.face.main.model.User;
+import com.baidu.idl.face.main.utils.ToastUtils;
 import com.yc.patrol.App;
 import com.yc.patrol.MyConstants;
 import com.yc.patrol.PatrolMainActivity;
@@ -297,10 +299,15 @@ public class FaceRGBCloseDebugSearchActivity extends BaseActivity implements Vie
     private void toLogin(User user) {
         //TODO 自己设置
         if (!FaceRGBCloseDebugSearchActivity.this.isFinishing()) {
-            App.setUser(user.getUserName());
-            MyConstants.DATAPATH = File.separator+ DateUtils.getCurrentDate() + File.separator + user.getUserName() ;
+            String userName = user.getUserName();
+            String name = user.getUserInfo();
+            if(TextUtils.isEmpty(name)){
+                name = userName;
+            }
+            App.setUserByFullName(userName);
+            MyConstants.DATAPATH = File.separator+ DateUtils.getCurrentDate() + File.separator + userName ;
             FaceRGBCloseDebugSearchActivity.this.finish();
-            Toast.makeText(FaceRGBCloseDebugSearchActivity.this, user.getUserName() + "登录成功", Toast.LENGTH_SHORT).show();
+            Toast.makeText(FaceRGBCloseDebugSearchActivity.this, name + "登录成功", Toast.LENGTH_SHORT).show();
             startActivity(new Intent(FaceRGBCloseDebugSearchActivity.this, PatrolMainActivity.class));
         }
     }

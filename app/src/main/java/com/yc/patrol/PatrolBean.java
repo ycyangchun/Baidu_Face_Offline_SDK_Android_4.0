@@ -2,16 +2,173 @@ package com.yc.patrol;
 
 import android.net.Uri;
 
+import com.yc.patrol.utils.DateUtils;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class PatrolBean {
-    private String time;
-    private String place;
+    private String id;
+    private String patrolTime;
+    private String lineId;
+    private String todayIsAbnormal;
+    //
+    private String pointId;
+    private String arriveTime;
+    private String isAbnormal;
+    private String qRcode;
+    private String linePlaceName;
+    private String patrolImage;
+    private List<PatrolProject2> patrolProject2s;
+    //
     private String photoUrl;
     private Uri uri;
     private Uri uriSy;
     private String photoUrlSy;
-    private String isAbnormal;
-    private String patrolImage;
 
+    public PatrolBean(){
+
+    }
+
+    public PatrolBean(String linePlaceName) {
+        this.patrolTime = DateUtils.getCurrentDate();
+        this.arriveTime = DateUtils.gethmsTime();
+        this.linePlaceName = linePlaceName;
+    }
+
+    public PatrolBean(People people,People.PatrolPoint patrolPoint,List<People.PatrolProject> projectList) {
+        this.patrolTime = DateUtils.getCurrentDate();
+        this.arriveTime = DateUtils.gethmsTime();
+        this.id = people.getId();
+        this.lineId = people.getLine().getlId();
+        this.pointId = patrolPoint.getPid();
+        this.qRcode = patrolPoint.getqRcode();
+        this.linePlaceName = patrolPoint.getLinePlaceName();
+
+        this.patrolProject2s = new ArrayList<>();
+        if(null != projectList){
+            for(People.PatrolProject p : projectList){
+                PatrolProject2 project2 = new PatrolProject2();
+                project2.objId = p.getObjId();
+                project2.objDesc = p.getObjDesc();
+                project2.objName = p.getObjName();
+                this.patrolProject2s.add(project2);
+            }
+        }
+    }
+
+
+    public static class PatrolProject2 {
+        private String objId;
+        private String result;
+        private String isAbnormal;
+        private String objDesc;
+        private String objName;
+
+        public String getObjDesc() {
+            return objDesc;
+        }
+
+        public void setObjDesc(String objDesc) {
+            this.objDesc = objDesc;
+        }
+
+        public String getObjName() {
+            return objName;
+        }
+
+        public void setObjName(String objName) {
+            this.objName = objName;
+        }
+
+        public String getObjId() {
+            return objId;
+        }
+
+        public void setObjId(String objId) {
+            this.objId = objId;
+        }
+
+        public String getResult() {
+            return result;
+        }
+
+        public void setResult(String result) {
+            this.result = result;
+        }
+
+        public String getIsAbnormal() {
+            return isAbnormal;
+        }
+
+        public void setIsAbnormal(String isAbnormal) {
+            this.isAbnormal = isAbnormal;
+        }
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getPatrolTime() {
+        return patrolTime;
+    }
+
+    public void setPatrolTime(String patrolTime) {
+        this.patrolTime = patrolTime;
+    }
+
+    public String getLineId() {
+        return lineId;
+    }
+
+    public void setLineId(String lineId) {
+        this.lineId = lineId;
+    }
+
+    public String getTodayIsAbnormal() {
+        return todayIsAbnormal;
+    }
+
+    public void setTodayIsAbnormal(String todayIsAbnormal) {
+        this.todayIsAbnormal = todayIsAbnormal;
+    }
+
+    public String getPointId() {
+        return pointId;
+    }
+
+    public void setPointId(String pointId) {
+        this.pointId = pointId;
+    }
+
+    public String getArriveTime() {
+        return arriveTime;
+    }
+
+    public void setArriveTime(String arriveTime) {
+        this.arriveTime = arriveTime;
+    }
+
+    public String getIsAbnormal() {
+        return isAbnormal;
+    }
+
+    public void setIsAbnormal(String isAbnormal) {
+        this.isAbnormal = isAbnormal;
+    }
+
+    public String getqRcode() {
+        return qRcode;
+    }
+
+    public void setqRcode(String qRcode) {
+        this.qRcode = qRcode;
+    }
 
     public String getPatrolImage() {
         return patrolImage;
@@ -21,12 +178,28 @@ public class PatrolBean {
         this.patrolImage = patrolImage;
     }
 
-    public String getIsAbnormal() {
-        return isAbnormal;
+    public List<PatrolProject2> getPatrolProject2s() {
+        return patrolProject2s;
     }
 
-    public void setIsAbnormal(String isAbnormal) {
-        this.isAbnormal = isAbnormal;
+    public void setPatrolProject2s(List<PatrolProject2> patrolProject2s) {
+        this.patrolProject2s = patrolProject2s;
+    }
+
+    public String getPhotoUrl() {
+        return photoUrl;
+    }
+
+    public void setPhotoUrl(String photoUrl) {
+        this.photoUrl = photoUrl;
+    }
+
+    public Uri getUri() {
+        return uri;
+    }
+
+    public void setUri(Uri uri) {
+        this.uri = uri;
     }
 
     public Uri getUriSy() {
@@ -45,41 +218,11 @@ public class PatrolBean {
         this.photoUrlSy = photoUrlSy;
     }
 
-    public Uri getUri() {
-        return uri;
+    public String getLinePlaceName() {
+        return linePlaceName;
     }
 
-    public void setUri(Uri uri) {
-        this.uri = uri;
-    }
-
-    public PatrolBean(String time, String place, String photoUrl) {
-        this.time = time;
-        this.place = place;
-        this.photoUrl = photoUrl;
-    }
-
-    public String getTime() {
-        return time;
-    }
-
-    public void setTime(String time) {
-        this.time = time;
-    }
-
-    public String getPlace() {
-        return place;
-    }
-
-    public void setPlace(String place) {
-        this.place = place;
-    }
-
-    public String getPhotoUrl() {
-        return photoUrl;
-    }
-
-    public void setPhotoUrl(String photoUrl) {
-        this.photoUrl = photoUrl;
+    public void setLinePlaceName(String linePlaceName) {
+        this.linePlaceName = linePlaceName;
     }
 }

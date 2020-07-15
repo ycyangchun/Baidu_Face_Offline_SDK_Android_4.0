@@ -37,7 +37,6 @@ public class PatrolSplashActivity extends BaseActivity {
 
         mContext = this;
         initView();
-
         batchImport();
     }
 
@@ -99,6 +98,6 @@ public class PatrolSplashActivity extends BaseActivity {
             ToastUtils.toastL(mContext,"没有PatrolPlan.xml");
             return;
         }
-        Tools.ReadXmlFromSdcardByJsoup(Environment.getExternalStorageDirectory().toString()+ File.separator + xml);
+        Tools.ReadXml(Environment.getExternalStorageDirectory().toString()+ File.separator + xml);
     }
 }

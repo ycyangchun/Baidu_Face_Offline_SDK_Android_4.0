@@ -2,19 +2,17 @@ package com.yc.patrol;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
-import android.os.SystemClock;
 import android.support.v4.content.FileProvider;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.TextView;
 
 import com.baidu.idl.face.main.activity.BaseActivity;
-import com.google.zxing.client.result.ResultParser;
+import com.baidu.idl.face.main.utils.ToastUtils;
 import com.yc.patrol.scanner.CaptureActivity;
 import com.yc.patrol.utils.CustomDialog2;
 import com.yc.patrol.utils.DateUtils;
@@ -38,23 +36,47 @@ public class PatrolMainActivity extends BaseActivity implements PatrolAdapter.It
     private Uri imageUri,imageUriSy;
     private File fileUri,fileUriSy;
     private String patrolImage;
-    PatrolAdapter adapter;
-    List<PatrolBean> list;
+    private PatrolAdapter adapter;
+    private List<PatrolBean> list;
     private CustomDialog2 customDialog;
+    private TextView name;
+    private People people;
+    private List<People.PatrolProject> projectList;
+    private List<People.PatrolPoint> pointList;
+    private People.Line line;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_patrollist);
         mContext = this;
+        initView();
+        initData();
+    }
+
+    private void initData() {
+        people = App.getUser();
+        if(null != people){
+            projectList = people.getPatrolProjects();
+            pointList = people.getPatrolPoints();
+            line = people.getLine();
+            name.setText(people.getName());
+
+            list = new ArrayList<>();
+            list.add(new PatrolBean("打卡"));
+
+            adapter = new PatrolAdapter(list,this);
+            recyclerView.setAdapter(adapter);
+            adapter.setListener(this);
+        }
+
+    }
+
+
+    private void initView() {
+        name = this.findViewById(R.id.title);
         recyclerView = this.findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        list = new ArrayList<>();
 
-        list.add(new PatrolBean(DateUtils.gethmsTime(),"打卡",""));
-
-        adapter = new PatrolAdapter(list,this);
-        recyclerView.setAdapter(adapter);
-        adapter.setListener(this);
         initCustomDialog();
         findViewById(R.id.scan).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,11 +97,7 @@ public class PatrolMainActivity extends BaseActivity implements PatrolAdapter.It
     @Override
     public void OnDialogClickCallBack(boolean isPositive, Object obj) {
         if(isPositive){
-            try {
-                Tools.createDOMXml(list,new UserPatrol(),mContext);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            Tools.createDOMXml(list,mContext);
         }
     }
 
@@ -115,7 +133,7 @@ public class PatrolMainActivity extends BaseActivity implements PatrolAdapter.It
     private void takeCamera() {
         String time = DateUtils.getNowTime();
         fileUri = new File(FileUtils2.getCacheFilePath(mContext,MyConstants.DATAPATH + File.separator +"tempPic"+ File.separator + time + ".jpg") );
-        patrolImage = place + "-"+ time + ".jpg";
+        patrolImage = qRcode + "-"+ time + ".jpg";
         fileUriSy = new File( FileUtils2.getCacheFilePath(mContext, MyConstants.DATAPATH + File.separator + patrolImage) );
 
         imageUri = Uri.fromFile(fileUri);
@@ -132,12 +150,12 @@ public class PatrolMainActivity extends BaseActivity implements PatrolAdapter.It
 
     private PatrolBean patrolBean;
     private int position;
-    private String place;
+    private String qRcode;
     @Override
     public void itemClick(int pos, PatrolBean pb) {
         patrolBean = pb;
         position = pos;
-        place = pb.getPlace();
+        qRcode = pb.getqRcode();
         takeCamera();
     }
 
@@ -160,9 +178,20 @@ public class PatrolMainActivity extends BaseActivity implements PatrolAdapter.It
             }
         }
         if(requestCode == SCAN_REQUEST){
-            String place = data == null || resultCode != RESULT_OK ? null : data.getStringExtra("scan");
-            adapter.addData(0,new PatrolBean(DateUtils.gethmsTime(),place,""));
-            recyclerView.scrollToPosition(0);
+            String qrcode = data == null || resultCode != RESULT_OK ? null : data.getStringExtra("scan");
+            boolean isHave = false;
+            for(People.PatrolPoint point : pointList){
+                if(qrcode.equals(point.getqRcode())){
+                    isHave = true;
+                    adapter.addData(0,new PatrolBean(people,point,projectList));
+                    recyclerView.scrollToPosition(0);
+                    break;
+                }
+            }
+
+            if(!isHave){
+                ToastUtils.toastL(mContext,"没有此任务！");
+            }
         }
     }
 }
