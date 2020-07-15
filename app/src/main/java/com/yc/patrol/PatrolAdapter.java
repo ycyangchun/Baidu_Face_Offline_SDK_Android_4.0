@@ -65,7 +65,7 @@ public class PatrolAdapter extends RecyclerView.Adapter<PatrolAdapter.VH> {
         }else {
             if (null != uri) {
                 viewHolder.item_photo.setImageBitmap(PhotoUtils.makePhoto(mContext, uri, urlSy,
-                        patrolBean.getqRcode()));
+                        patrolBean.getLinePlaceName()));
                 Tools.deleteFile(url);
                 patrolBean.setUri(null);
 

@@ -131,7 +131,7 @@ public class PatrolMainActivity extends BaseActivity implements PatrolAdapter.It
      * 拍照
      */
     private void takeCamera() {
-        String time = DateUtils.getNowTime();
+        String time = DateUtils.getStringTime();
         fileUri = new File(FileUtils2.getCacheFilePath(mContext,MyConstants.DATAPATH + File.separator +"tempPic"+ File.separator + time + ".jpg") );
         patrolImage = qRcode + "-"+ time + ".jpg";
         fileUriSy = new File( FileUtils2.getCacheFilePath(mContext, MyConstants.DATAPATH + File.separator + patrolImage) );
@@ -155,7 +155,7 @@ public class PatrolMainActivity extends BaseActivity implements PatrolAdapter.It
     public void itemClick(int pos, PatrolBean pb) {
         patrolBean = pb;
         position = pos;
-        qRcode = pb.getqRcode();
+        qRcode = pb.getLinePlaceName();
         takeCamera();
     }
 

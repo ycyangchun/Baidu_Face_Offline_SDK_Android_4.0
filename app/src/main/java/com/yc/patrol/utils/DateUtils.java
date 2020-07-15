@@ -48,12 +48,13 @@ public class DateUtils {
         return sdf.format(Calendar.getInstance().getTime());
     }
 
+
     /**
      * 获取系统时间(格式：yyyyMMddHHmmss)
      * @return String 返回时间
      */
     public static String getStringTime() {
-        SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmmss");
+        SimpleDateFormat df = new SimpleDateFormat(DATE_FULL_STR);
         return df.format(new Date());
     }
 

@@ -447,7 +447,7 @@ public class PhotoUtils {
         try {
             bitmap = getBitmapFormUri(context, uri);
 //            Bitmap bitmap1 = drawTextToLeftBottom(context, bitmap, date, 16, Color.RED, 45, 30);  //添加第一个时间水印
-            bitmap2 = drawTextToLeftBottom(context, bitmap, str +" " + date, 20, Color.YELLOW, 50, 10); //添加坐标水印
+            bitmap2 = drawTextToLeftBottom(context, bitmap, str +" " + date, 20, Color.BLUE, 50, 10); //添加坐标水印
             b = new FileOutputStream(syPhotoName);
             bitmap2.compress(Bitmap.CompressFormat.JPEG, 100, b);// 把图片数据写入指定的文件
 
