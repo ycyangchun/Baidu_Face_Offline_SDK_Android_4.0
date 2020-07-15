@@ -18,6 +18,14 @@ public class ToastUtils {
         });
     }
 
+    public static void toastL(final Context context, final String text) {
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(context, text, Toast.LENGTH_LONG).show();
+            }
+        });
+    }
     public static void toast(final Context context, final int resId) {
         handler.post(new Runnable() {
             @Override

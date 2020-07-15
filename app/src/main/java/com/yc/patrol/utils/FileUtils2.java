@@ -67,7 +67,7 @@ public class FileUtils2 {
         context = ctx;
         APP_CACHE_FILE = createFileDir(context, CACHE);
         APP_CACHE_PATH = APP_CACHE_FILE.getPath();
-        initUser(context, "user");
+
     }
 
     public static void initUser(Context context,String uF) {

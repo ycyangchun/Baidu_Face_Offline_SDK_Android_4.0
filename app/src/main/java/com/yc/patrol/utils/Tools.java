@@ -4,23 +4,19 @@ import android.content.Context;
 import android.os.Environment;
 import android.text.TextUtils;
 import android.util.Log;
-import android.widget.Toast;
 
-import com.baidu.idl.face.main.utils.FileUtils;
 import com.baidu.idl.face.main.utils.ToastUtils;
 import com.yc.patrol.MyConstants;
 import com.yc.patrol.PatrolBean;
 import com.yc.patrol.UserPatrol;
 
 import org.jsoup.Jsoup;
-import org.openni.DeviceInfo;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -151,19 +147,15 @@ public class Tools {
      * Jsoup - 读取XML数据（本质是document）
      * 直观明了，但是要预加载所有数据，对xml比较大占内存比较多
      */
-    private static void ReadXmlFromSdcardByJsoup(String xmlPath) {
+    public static void ReadXmlFromSdcardByJsoup(String xmlPath) {
         File xmlFile = new File(xmlPath);
         if (xmlFile.exists()) {
             try {
-                StringBuilder sb = new StringBuilder();
-                sb.append(" -- Jsoup --\n");
-
                 org.jsoup.nodes.Document document = Jsoup.parse(xmlFile, "UTF-8");
-                org.jsoup.select.Elements userE = document.getElementsByTag("user");
+                org.jsoup.select.Elements userE = document.getElementsByTag("People");
                 for (int i = 0; i < userE.size(); i++) {
-                    sb.append("user.name=" + userE.get(i).attr("name") + "\n");
+                    System.out.println("xml "+ userE.attr("Id"));
                 }
-
 
             } catch (IOException e) {
                 e.printStackTrace();
@@ -223,9 +215,21 @@ public class Tools {
         //设置换行
         tf.setOutputProperty(OutputKeys.INDENT,"yes");
         //将document转换成xml文件
-        String paths = FileUtils2.getCacheFilePath(MyConstants.DATAPATH + File.separator + userPatrol.getName()+".xml");
-        tf.transform(new DOMSource(document), new StreamResult(new File(paths)) );
-        ToastUtils.toast(context, "导出成功");
+        String fn = MyConstants.DATAPATH.replace(File.separator, "") ;
+        String paths = FileUtils2.getCacheFilePath(MyConstants.DATAPATH + File.separator + fn +".xml");
+        DOMSource domSource = new DOMSource(document);
+        tf.transform(domSource, new StreamResult(new File(paths)) );
+//        ToastUtils.toastL(context, "导出到目录\n"+paths);
+
+        //输出第二份
+        TransformerFactory factory2 = TransformerFactory.newInstance();
+        Transformer tf2 = factory2.newTransformer();
+        //设置换行
+        tf2.setOutputProperty(OutputKeys.INDENT,"yes");
+        String path2  = Environment.getExternalStorageDirectory().toString() + File.separator + fn + ".xml";
+        tf2.transform(domSource, new StreamResult(new File(path2)) );
+        ToastUtils.toastL(context, "导出到目录\n"+path2);
+
     }
 
     public static String getCtx(String str){

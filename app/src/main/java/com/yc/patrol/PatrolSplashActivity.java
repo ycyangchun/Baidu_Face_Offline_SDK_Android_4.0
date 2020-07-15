@@ -3,6 +3,7 @@ package com.yc.patrol;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.Button;
@@ -10,9 +11,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.baidu.idl.face.main.activity.BaseActivity;
+import com.baidu.idl.face.main.activity.BatchImportActivity;
 import com.baidu.idl.face.main.activity.FaceRGBCloseDebugSearchActivity;
-import com.baidu.idl.face.main.activity.MainActivity;
+import com.baidu.idl.face.main.utils.FileUtils;
+import com.baidu.idl.face.main.utils.LogUtils;
+import com.baidu.idl.face.main.utils.ToastUtils;
 import com.baidu.idl.facesdkdemo.R;
+import com.yc.patrol.utils.Tools;
+
+import java.io.File;
 
 /**
  * 闪屏页面，展示SDK版本信息...
@@ -21,6 +28,7 @@ public class PatrolSplashActivity extends BaseActivity {
 
     private Context mContext;
     public static final int PAGE_TYPE = 999;
+    private static final String TAG = "PatrolSplashActivity";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -30,6 +38,7 @@ public class PatrolSplashActivity extends BaseActivity {
         mContext = this;
         initView();
 
+        batchImport();
     }
 
     /**
@@ -64,12 +73,10 @@ public class PatrolSplashActivity extends BaseActivity {
         btnAuth.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                startActivity(new Intent(mContext, MainActivity.class));
-                startActivity(new Intent(mContext, PatrolMainActivity.class));
+                startActivity(new Intent(mContext, BatchImportActivity.class));
 
             }
         });
-
 
 
         // logo 图
@@ -77,14 +84,21 @@ public class PatrolSplashActivity extends BaseActivity {
         mIvIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(mContext, MainActivity.class));
+                batchImport();
             }
         });
     }
 
-
-
-
-
-
+    public void batchImport() {
+        // 获取导入目录 /sdcard/Face-Import
+        String xml = "PatrolPlan.xml";
+        // 判断Face.zip是否存在
+        File zipFile = FileUtils.isFileExist(Environment.getExternalStorageDirectory().toString(), xml);
+        if (zipFile == null) {
+            LogUtils.i(TAG, "导入数据的文件夹没有PatrolPlan.xml");
+            ToastUtils.toastL(mContext,"没有PatrolPlan.xml");
+            return;
+        }
+        Tools.ReadXmlFromSdcardByJsoup(Environment.getExternalStorageDirectory().toString()+ File.separator + xml);
+    }
 }

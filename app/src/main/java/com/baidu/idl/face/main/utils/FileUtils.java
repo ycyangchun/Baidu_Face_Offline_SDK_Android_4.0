@@ -101,6 +101,17 @@ public class FileUtils {
         return file;
     }
 
+    public static File getBatchImportDirectory(String f) {
+        File sdRootFile = getSDRootFile();
+        File file = null;
+        if (sdRootFile != null && sdRootFile.exists()) {
+            file = new File(sdRootFile, f);
+            if (!file.exists()) {
+                file.mkdirs();
+            }
+        }
+        return file;
+    }
     /**
      * 获取导入图片成功的目录信息
      */

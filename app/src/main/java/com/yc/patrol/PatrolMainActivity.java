@@ -91,7 +91,7 @@ public class PatrolMainActivity extends BaseActivity implements PatrolAdapter.It
     private void initCustomDialog() {
         if (customDialog == null) {
             customDialog = new CustomDialog2(this);
-            customDialog.setMessage("确认巡逻完成,导出数据？")
+            customDialog.setMessage("确认巡更完成,导出数据？")
                     .setData("0")
                     .setButton("确认","取消")
                     .setCancelable(true);
@@ -115,7 +115,7 @@ public class PatrolMainActivity extends BaseActivity implements PatrolAdapter.It
     private void takeCamera() {
         String time = DateUtils.getNowTime();
         fileUri = new File(FileUtils2.getCacheFilePath(mContext,MyConstants.DATAPATH + File.separator +"tempPic"+ File.separator + time + ".jpg") );
-        patrolImage = place + time + ".jpg";
+        patrolImage = place + "-"+ time + ".jpg";
         fileUriSy = new File( FileUtils2.getCacheFilePath(mContext, MyConstants.DATAPATH + File.separator + patrolImage) );
 
         imageUri = Uri.fromFile(fileUri);

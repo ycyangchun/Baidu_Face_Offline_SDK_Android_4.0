@@ -81,7 +81,7 @@
                 android:paddingRight="@dimen/dimenPaddingHorizontal"
                 android:paddingBottom="@dimen/dimenPaddingCommon"
                 android:textColor="@color/colorPrimaryDark"
-                android:text="完成巡逻"
+                android:text="完成巡更"
                 android:textSize="@dimen/textsize_content"
                 app:rv_cornerRadius="@dimen/dimenPaddingDiminutive"
                 app:rv_backgroundColor="@android:color/white"
