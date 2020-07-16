@@ -222,7 +222,76 @@ public class Tools {
         }
     }
 
+    public static void createBeanXml(Context context, People people, List<PatrolBean> oldBean) {
+        List<People.PatrolProject> projectList;
+        List<People.PatrolPoint> pointList;
+        People.Line line;
+        List<PatrolBean> patrolBeanList = new ArrayList<>();
+        if (null != people) {
+            projectList = people.getPatrolProjects();
+            pointList = people.getPatrolPoints();
+            line = people.getLine();
+
+            for (int i = pointList.size() -1 ; i >= 0 ; i--) {
+                PatrolBean patrolBean = new PatrolBean();
+                People.PatrolPoint point = pointList.get(i);
+                patrolBean.setPatrolTime(DateUtils.getCurrentDate());
+                patrolBean.setId(people.getId());
+                patrolBean.setLineId(line.getlId());
+                patrolBean.setTodayIsAbnormal("1");
+                patrolBean.setIsShow("0");
+                patrolBean.setPointId(point.getPid());
+                patrolBean.setIsAbnormal("1");
+                patrolBean.setqRcode(point.getqRcode());
+                patrolBean.setLinePlaceName(point.getLinePlaceName());
+
+                if (null != oldBean) {
+                    patrolBean.setPhotoUrl(oldBean.get(i).getPhotoUrl());
+                    patrolBean.setPhotoUrlSy(oldBean.get(i).getPhotoUrlSy());
+                    patrolBean.setPatrolImage(oldBean.get(i).getPatrolImage());
+                }
+                List<PatrolBean.ProjectResult> projectResults = new ArrayList<>();
+                for (int j = 0; j < projectList.size(); j++) {
+                    People.PatrolProject project = projectList.get(j);
+
+                    PatrolBean.ProjectResult result = new PatrolBean.ProjectResult();
+                    result.setObjId(project.getObjId());
+                    result.setResult("1");
+                    result.setIsAbnormal("1");
+                    result.setObjDesc(project.getObjDesc());
+                    result.setObjName(project.getObjName());
+                    projectResults.add(result);
+                }
+                patrolBean.setProjectResults(projectResults);
+                patrolBeanList.add(patrolBean);
+            }
+            ////
+            PatrolBean patrolBean0 = new PatrolBean();
+            patrolBean0.setPatrolTime("");
+            patrolBean0.setTodayIsAbnormal("1");
+            patrolBean0.setIsShow("1");
+            patrolBean0.setLinePlaceName("登录");
+            if (null != oldBean && oldBean.size() -1 >= 0) {
+                patrolBean0.setPatrolImage(oldBean.get(oldBean.size() -1 ).getPatrolImage());
+            }
+            patrolBeanList.add(patrolBean0);
+
+
+            String fn = MyConstants.DATAPATH.replace(File.separator, "");
+            String paths = FileUtils2.getCacheFilePath(MyConstants.DATAPATH
+                    + File.separator+ "tempPic" + File.separator + fn + "_temp.xml");
+            createDOMXml(patrolBeanList, context, paths, false);
+        }
+
+    }
+
     public static void createDOMXml(List<PatrolBean> userPatrol, Context context) {
+        String fn = MyConstants.DATAPATH.replace(File.separator, "");
+        String paths = FileUtils2.getCacheFilePath(MyConstants.DATAPATH + File.separator + fn + ".xml");
+        createDOMXml(userPatrol, context, paths, true);
+    }
+
+    public static void createDOMXml(List<PatrolBean> userPatrol, Context context, String paths, boolean toast) {
         try {
             //创建一个DocumentBuilderFactory的对象
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
@@ -251,7 +320,7 @@ public class Tools {
                 point.setAttribute("PatrolImage", getCtx(pb.getPatrolImage()));
 
                 List<PatrolBean.ProjectResult> pObjs = pb.getProjectResults();
-                if(null != pObjs) {
+                if (null != pObjs) {
                     for (int j = 0; j < pObjs.size(); j++) {
                         //添加子节点
                         PatrolBean.ProjectResult obj = pObjs.get(j);
@@ -275,11 +344,12 @@ public class Tools {
             //设置换行
             tf.setOutputProperty(OutputKeys.INDENT, "yes");
             //将document转换成xml文件
-            String fn = MyConstants.DATAPATH.replace(File.separator, "");
-            String paths = FileUtils2.getCacheFilePath(MyConstants.DATAPATH + File.separator + fn + ".xml");
+
             DOMSource domSource = new DOMSource(document);
             tf.transform(domSource, new StreamResult(new File(paths)));
-            ToastUtils.toastL(context, "导出到目录\n"+paths);
+            if (toast) {
+                ToastUtils.toastL(context, "导出到目录\n" + paths);
+            }
 
             //输出第二份
 //            TransformerFactory factory2 = TransformerFactory.newInstance();

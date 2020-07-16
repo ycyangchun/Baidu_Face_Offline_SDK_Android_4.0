@@ -15,12 +15,13 @@ import com.baidu.idl.main.facesdk.FaceAuth;
 import com.baidu.idl.main.facesdk.callback.Callback;
 import com.yc.patrol.utils.CrashHandler;
 import com.yc.patrol.utils.FileUtils2;
+import com.yc.patrol.utils.Tools;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class App extends Application {
-    private Context mContext;
+    private static Context mContext;
     private Boolean isInitConfig;
     private Boolean isConfigExit;
     private CrashHandler crashHandler;
@@ -44,15 +45,13 @@ public class App extends Application {
     }
 
     public static void setUserByFullName(String fullName) {
-        if (patrolPlan == null){
-
-        }
 
         if (patrolPlan != null){
             for (int i = 0 ; i < patrolPlan.size() ; i++) {
                 People p = patrolPlan.get(i);
                 if(fullName.equals(p.getFullName())){
                     user = p;
+                    Tools.createBeanXml(mContext,p,null);
                     break;
                 }
             }

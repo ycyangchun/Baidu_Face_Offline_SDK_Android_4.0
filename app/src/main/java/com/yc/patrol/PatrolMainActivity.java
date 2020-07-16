@@ -28,24 +28,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PatrolMainActivity extends BaseActivity implements PatrolAdapter.ItemClickListener,
-        CustomDialog2.OnDialogClickListener{
+        CustomDialog2.OnDialogClickListener {
 
     RecyclerView recyclerView;
     PatrolMainActivity mContext;
     private final static int FILE_CHOOSER_RESULT_CODE = 128;
     private final static int PHOTO_REQUEST = 100;
     private final static int SCAN_REQUEST = 101;
-    private Uri imageUri,imageUriSy;
-    private File fileUri,fileUriSy;
+    private Uri imageUri, imageUriSy;
+    private File fileUri, fileUriSy;
     private String patrolImage;
     private PatrolAdapter adapter;
-    public  static List<PatrolBean> list;
+    public List<PatrolBean> list;
     private CustomDialog2 customDialog;
     private TextView name;
     private static People people;
     private static List<People.PatrolProject> projectList;
     private static List<People.PatrolPoint> pointList;
     private static People.Line line;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,23 +65,23 @@ public class PatrolMainActivity extends BaseActivity implements PatrolAdapter.It
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
-        if(null != savedInstanceState){
+        if (null != savedInstanceState) {
             list = savedInstanceState.getParcelableArrayList("list");
         }
     }
 
     private void initData() {
         people = App.getUser();
-        if(null != people){
+        if (null != people) {
             projectList = people.getPatrolProjects();
             pointList = people.getPatrolPoints();
             line = people.getLine();
             name.setText(people.getName());
 
             list = new ArrayList<>();
-            list.add(new PatrolBean("打卡"));
+            list.add(new PatrolBean("登录"));
 
-            adapter = new PatrolAdapter(list,this);
+            adapter = new PatrolAdapter(list, this);
             recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
             recyclerView.setAdapter(adapter);
             adapter.setListener(this);
@@ -113,8 +114,8 @@ public class PatrolMainActivity extends BaseActivity implements PatrolAdapter.It
 
     @Override
     public void OnDialogClickCallBack(boolean isPositive, Object obj) {
-        if(isPositive){
-            Tools.createDOMXml(list,mContext);
+        if (isPositive) {
+            Tools.createDOMXml(list, mContext);
         }
     }
 
@@ -128,12 +129,13 @@ public class PatrolMainActivity extends BaseActivity implements PatrolAdapter.It
             customDialog = new CustomDialog2(this);
             customDialog.setMessage("确认巡更完成,导出数据？")
                     .setData("0")
-                    .setButton("确认","取消")
+                    .setButton("确认", "取消")
                     .setCancelable(true);
 
             customDialog.setOnDialogClickListener(this);
         }
     }
+
     /**
      * 选择图片
      */
@@ -149,9 +151,9 @@ public class PatrolMainActivity extends BaseActivity implements PatrolAdapter.It
      */
     private void takeCamera() {
         String time = DateUtils.getStringTime();
-        fileUri = new File(FileUtils2.getCacheFilePath(mContext,MyConstants.DATAPATH + File.separator +"tempPic"+ File.separator + time + ".jpg") );
-        patrolImage = qRcode + "-"+ time + ".jpg";
-        fileUriSy = new File( FileUtils2.getCacheFilePath(mContext, MyConstants.DATAPATH + File.separator + patrolImage) );
+        fileUri = new File(FileUtils2.getCacheFilePath(mContext, MyConstants.DATAPATH + File.separator + "tempPic" + File.separator + time + ".jpg"));
+        patrolImage = qRcode + "-" + time + ".jpg";
+        fileUriSy = new File(FileUtils2.getCacheFilePath(mContext, MyConstants.DATAPATH + File.separator + patrolImage));
 
         imageUri = Uri.fromFile(fileUri);
         imageUriSy = Uri.fromFile(fileUriSy);
@@ -168,6 +170,7 @@ public class PatrolMainActivity extends BaseActivity implements PatrolAdapter.It
     private PatrolBean patrolBean;
     private int position;
     private String qRcode;
+
     @Override
     public void itemClick(int pos, PatrolBean pb) {
         patrolBean = pb;
@@ -182,10 +185,10 @@ public class PatrolMainActivity extends BaseActivity implements PatrolAdapter.It
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == PHOTO_REQUEST) {
             Uri result = data == null || resultCode != RESULT_OK ? null : data.getData();
-            if(null == result) {
+            if (null == result) {
                 result = imageUri;
             }
-            if(PhotoUtils.getBitmapSizeFormUri(mContext,result) > 0) {
+            if (PhotoUtils.getBitmapSizeFormUri(mContext, result) > 0) {
                 patrolBean.setPhotoUrl(fileUri.getAbsolutePath());
                 patrolBean.setUri(result);
                 patrolBean.setUriSy(imageUriSy);
@@ -195,20 +198,20 @@ public class PatrolMainActivity extends BaseActivity implements PatrolAdapter.It
                 recyclerView.scrollToPosition(0);
             }
         }
-        if(requestCode == SCAN_REQUEST){
+        if (requestCode == SCAN_REQUEST) {
             String qrcode = data == null || resultCode != RESULT_OK ? null : data.getStringExtra("scan");
             boolean isHave = false;
-            for(People.PatrolPoint point : pointList){
-                if(qrcode.equals(point.getqRcode())){
+            for (People.PatrolPoint point : pointList) {
+                if (qrcode.equals(point.getqRcode())) {
                     isHave = true;
-                    adapter.addData(0,new PatrolBean(people,point,projectList));
+                    adapter.addData(0, new PatrolBean(people, point, projectList));
                     recyclerView.scrollToPosition(0);
                     break;
                 }
             }
 
-            if(!isHave){
-                ToastUtils.toastL(mContext,"没有此任务！");
+            if (!isHave) {
+                ToastUtils.toastL(mContext, "没有此任务！");
             }
         }
     }

@@ -27,6 +27,7 @@ public class PatrolBean implements Parcelable {
     private Uri uri;
     private Uri uriSy;
     private String photoUrlSy;
+    private String isShow;
 
     public PatrolBean(){
 
@@ -269,6 +270,13 @@ public class PatrolBean implements Parcelable {
         this.linePlaceName = linePlaceName;
     }
 
+    public String getIsShow() {
+        return isShow;
+    }
+
+    public void setIsShow(String isShow) {
+        this.isShow = isShow;
+    }
 
     @Override
     public int describeContents() {
@@ -287,11 +295,12 @@ public class PatrolBean implements Parcelable {
         dest.writeString(this.qRcode);
         dest.writeString(this.linePlaceName);
         dest.writeString(this.patrolImage);
-        dest.writeList(this.projectResults);
+        dest.writeTypedList(this.projectResults);
         dest.writeString(this.photoUrl);
         dest.writeParcelable(this.uri, flags);
         dest.writeParcelable(this.uriSy, flags);
         dest.writeString(this.photoUrlSy);
+        dest.writeString(this.isShow);
     }
 
     protected PatrolBean(Parcel in) {
@@ -305,12 +314,12 @@ public class PatrolBean implements Parcelable {
         this.qRcode = in.readString();
         this.linePlaceName = in.readString();
         this.patrolImage = in.readString();
-        this.projectResults = new ArrayList<ProjectResult>();
-        in.readList(this.projectResults, ProjectResult.class.getClassLoader());
+        this.projectResults = in.createTypedArrayList(ProjectResult.CREATOR);
         this.photoUrl = in.readString();
         this.uri = in.readParcelable(Uri.class.getClassLoader());
         this.uriSy = in.readParcelable(Uri.class.getClassLoader());
         this.photoUrlSy = in.readString();
+        this.isShow = in.readString();
     }
 
     public static final Creator<PatrolBean> CREATOR = new Creator<PatrolBean>() {
