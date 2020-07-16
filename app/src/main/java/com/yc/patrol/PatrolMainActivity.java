@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v4.content.FileProvider;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -38,7 +39,7 @@ public class PatrolMainActivity extends BaseActivity implements PatrolAdapter.It
     private File fileUri,fileUriSy;
     private String patrolImage;
     private PatrolAdapter adapter;
-    public  List<PatrolBean> list;
+    public  static List<PatrolBean> list;
     private CustomDialog2 customDialog;
     private TextView name;
     private static People people;
@@ -52,6 +53,20 @@ public class PatrolMainActivity extends BaseActivity implements PatrolAdapter.It
         mContext = this;
         initView();
         initData();
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        outState.putParcelableArrayList("list", (ArrayList<? extends Parcelable>) list);
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        if(null != savedInstanceState){
+            list = savedInstanceState.getParcelableArrayList("list");
+        }
     }
 
     private void initData() {

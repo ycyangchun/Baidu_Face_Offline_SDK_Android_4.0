@@ -1,13 +1,15 @@
 package com.yc.patrol;
 
 import android.net.Uri;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 import com.yc.patrol.utils.DateUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class PatrolBean {
+public class PatrolBean implements Parcelable {
     private String id;
     private String patrolTime;
     private String lineId;
@@ -62,7 +64,7 @@ public class PatrolBean {
 
 
 
-    public static class ProjectResult {
+    public static class ProjectResult implements Parcelable {
         private String objId;
         private String result;
         private String isAbnormal;
@@ -108,6 +110,43 @@ public class PatrolBean {
         public void setIsAbnormal(String isAbnormal) {
             this.isAbnormal = isAbnormal;
         }
+
+        @Override
+        public int describeContents() {
+            return 0;
+        }
+
+        @Override
+        public void writeToParcel(Parcel dest, int flags) {
+            dest.writeString(this.objId);
+            dest.writeString(this.result);
+            dest.writeString(this.isAbnormal);
+            dest.writeString(this.objDesc);
+            dest.writeString(this.objName);
+        }
+
+        public ProjectResult() {
+        }
+
+        protected ProjectResult(Parcel in) {
+            this.objId = in.readString();
+            this.result = in.readString();
+            this.isAbnormal = in.readString();
+            this.objDesc = in.readString();
+            this.objName = in.readString();
+        }
+
+        public static final Creator<ProjectResult> CREATOR = new Creator<ProjectResult>() {
+            @Override
+            public ProjectResult createFromParcel(Parcel source) {
+                return new ProjectResult(source);
+            }
+
+            @Override
+            public ProjectResult[] newArray(int size) {
+                return new ProjectResult[size];
+            }
+        };
     }
 
     public String getId() {
@@ -229,4 +268,60 @@ public class PatrolBean {
     public void setLinePlaceName(String linePlaceName) {
         this.linePlaceName = linePlaceName;
     }
+
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.id);
+        dest.writeString(this.patrolTime);
+        dest.writeString(this.lineId);
+        dest.writeString(this.todayIsAbnormal);
+        dest.writeString(this.pointId);
+        dest.writeString(this.arriveTime);
+        dest.writeString(this.isAbnormal);
+        dest.writeString(this.qRcode);
+        dest.writeString(this.linePlaceName);
+        dest.writeString(this.patrolImage);
+        dest.writeList(this.projectResults);
+        dest.writeString(this.photoUrl);
+        dest.writeParcelable(this.uri, flags);
+        dest.writeParcelable(this.uriSy, flags);
+        dest.writeString(this.photoUrlSy);
+    }
+
+    protected PatrolBean(Parcel in) {
+        this.id = in.readString();
+        this.patrolTime = in.readString();
+        this.lineId = in.readString();
+        this.todayIsAbnormal = in.readString();
+        this.pointId = in.readString();
+        this.arriveTime = in.readString();
+        this.isAbnormal = in.readString();
+        this.qRcode = in.readString();
+        this.linePlaceName = in.readString();
+        this.patrolImage = in.readString();
+        this.projectResults = new ArrayList<ProjectResult>();
+        in.readList(this.projectResults, ProjectResult.class.getClassLoader());
+        this.photoUrl = in.readString();
+        this.uri = in.readParcelable(Uri.class.getClassLoader());
+        this.uriSy = in.readParcelable(Uri.class.getClassLoader());
+        this.photoUrlSy = in.readString();
+    }
+
+    public static final Creator<PatrolBean> CREATOR = new Creator<PatrolBean>() {
+        @Override
+        public PatrolBean createFromParcel(Parcel source) {
+            return new PatrolBean(source);
+        }
+
+        @Override
+        public PatrolBean[] newArray(int size) {
+            return new PatrolBean[size];
+        }
+    };
 }
