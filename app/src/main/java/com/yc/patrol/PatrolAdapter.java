@@ -62,23 +62,24 @@ public class PatrolAdapter extends RecyclerView.Adapter<PatrolAdapter.VH> {
                     // List<PatrolBean.ProjectResult>
                     pbUpdate.setProjectResults(results);
 
+                    int k = 1;
+                    for(int i = 0 ; i < results.size(); i++){
+                        k *= Integer.parseInt(getCtx(results.get(i).getResult()));
+                    }
+                    //IsAbnormal
+                    pbUpdate.setIsAbnormal(k+"");
+                    patrolBeanList.set(position,pbUpdate);
+
+                    int m = 1;
+                    for(int i = 0 ; i < patrolBeanList.size(); i++){
+                        m *= Integer.parseInt(getCtx(patrolBeanList.get(i).getIsAbnormal()));
+                    }
+                    //TodayIsAbnormal
+                    pbUpdate.setTodayIsAbnormal(m+"");
+                    patrolBeanList.set(position,pbUpdate);
                 }
 
-                int k = 1;
-                for(int i = 0 ; i < results.size(); i++){
-                    k *= Integer.parseInt(getCtx(results.get(i).getResult()));
-                }
-                //IsAbnormal
-                pbUpdate.setIsAbnormal(k+"");
-                patrolBeanList.set(position,pbUpdate);
 
-                int m = 1;
-                for(int i = 0 ; i < results.size(); i++){
-                    m *= Integer.parseInt(getCtx(patrolBeanList.get(i).getIsAbnormal()));
-                }
-                //TodayIsAbnormal
-                pbUpdate.setTodayIsAbnormal(m+"");
-                patrolBeanList.set(position,pbUpdate);
             }
         }
 

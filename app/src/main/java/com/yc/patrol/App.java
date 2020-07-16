@@ -83,6 +83,7 @@ public class App extends Application {
      * 启动应用程序，如果之前初始过，自动初始化鉴权和模型（可以添加到Application 中）
      */
     private void initLicense() {
+        initcfg();
         if (FaceSDKManager.initStatus != FaceSDKManager.SDK_MODEL_LOAD_SUCCESS) {
             FaceSDKManager.getInstance().init(mContext, new SdkInitListener() {
                 @Override

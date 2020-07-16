@@ -305,7 +305,7 @@ public class FaceRGBCloseDebugSearchActivity extends BaseActivity implements Vie
                 name = userName;
             }
             App.setUserByFullName(userName);
-            MyConstants.DATAPATH = File.separator+ DateUtils.getCurrentDate() + File.separator + userName ;
+            MyConstants.DATAPATH = DateUtils.getCurrentDate() + File.separator + userName ;
             FaceRGBCloseDebugSearchActivity.this.finish();
             Toast.makeText(FaceRGBCloseDebugSearchActivity.this, name + "登录成功", Toast.LENGTH_SHORT).show();
             startActivity(new Intent(FaceRGBCloseDebugSearchActivity.this, PatrolMainActivity.class));
