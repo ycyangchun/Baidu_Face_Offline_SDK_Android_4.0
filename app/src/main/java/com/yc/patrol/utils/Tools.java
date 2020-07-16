@@ -279,16 +279,16 @@ public class Tools {
             String paths = FileUtils2.getCacheFilePath(MyConstants.DATAPATH + File.separator + fn + ".xml");
             DOMSource domSource = new DOMSource(document);
             tf.transform(domSource, new StreamResult(new File(paths)));
-//        ToastUtils.toastL(context, "导出到目录\n"+paths);
+            ToastUtils.toastL(context, "导出到目录\n"+paths);
 
             //输出第二份
-            TransformerFactory factory2 = TransformerFactory.newInstance();
-            Transformer tf2 = factory2.newTransformer();
-            //设置换行
-            tf2.setOutputProperty(OutputKeys.INDENT, "yes");
-            String path2 = Environment.getExternalStorageDirectory().toString() + File.separator + fn + ".xml";
-            tf2.transform(domSource, new StreamResult(new File(path2)));
-            ToastUtils.toastL(context, "导出到目录\n" + path2);
+//            TransformerFactory factory2 = TransformerFactory.newInstance();
+//            Transformer tf2 = factory2.newTransformer();
+//            //设置换行
+//            tf2.setOutputProperty(OutputKeys.INDENT, "yes");
+//            String path2 = Environment.getExternalStorageDirectory().toString() + File.separator + fn + ".xml";
+//            tf2.transform(domSource, new StreamResult(new File(path2)));
+//            ToastUtils.toastL(context, "导出到目录\n" + path2);
         } catch (ParserConfigurationException e) {
             e.printStackTrace();
         } catch (TransformerException e) {

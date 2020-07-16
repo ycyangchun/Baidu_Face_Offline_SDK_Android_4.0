@@ -38,13 +38,13 @@ public class PatrolMainActivity extends BaseActivity implements PatrolAdapter.It
     private File fileUri,fileUriSy;
     private String patrolImage;
     private PatrolAdapter adapter;
-    private List<PatrolBean> list;
+    public  List<PatrolBean> list;
     private CustomDialog2 customDialog;
     private TextView name;
-    private People people;
-    private List<People.PatrolProject> projectList;
-    private List<People.PatrolPoint> pointList;
-    private People.Line line;
+    private static People people;
+    private static List<People.PatrolProject> projectList;
+    private static List<People.PatrolPoint> pointList;
+    private static People.Line line;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -160,6 +160,7 @@ public class PatrolMainActivity extends BaseActivity implements PatrolAdapter.It
         qRcode = pb.getLinePlaceName();
         takeCamera();
     }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

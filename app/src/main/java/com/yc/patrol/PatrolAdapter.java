@@ -22,29 +22,77 @@ import java.util.List;
 
 public class PatrolAdapter extends RecyclerView.Adapter<PatrolAdapter.VH> {
 
-    List<PatrolBean> mDatas;
+    List<PatrolBean> patrolBeanList;
     Context mContext;
     ItemClickListener listener;
+    PatrolAdapter adapter;
 
     public void setListener(ItemClickListener listener) {
         this.listener = listener;
     }
 
     public PatrolAdapter(List<PatrolBean> mDatas, Context ctx) {
-        this.mDatas = mDatas;
+        this.patrolBeanList = mDatas;
         this.mContext = ctx;
+        adapter = this;
     }
 
     public void addData(int position,PatrolBean pb) {
-        mDatas.add(position, pb);
+        patrolBeanList.add(position, pb);
         notifyItemInserted(position);
     }
 
     public void upData(int position,PatrolBean pb) {
-        mDatas.set(position, pb);
+        patrolBeanList.set(position, pb);
         notifyDataSetChanged();
     }
 
+    //更新巡更状态
+    public void updateStatus(int position,int subPosition,String objResult){
+        if(null != patrolBeanList && patrolBeanList.size() > 0 ) {
+            if(position < patrolBeanList.size()) {
+                PatrolBean pbUpdate = patrolBeanList.get(position);
+                List<PatrolBean.ProjectResult> results = pbUpdate.getProjectResults();
+                PatrolBean.ProjectResult projectResult = results.get(subPosition);
+
+                if(!objResult.equals(projectResult.getResult())){
+                    //result
+                    projectResult.setResult(objResult);
+                    results.set(subPosition,projectResult);
+                    // List<PatrolBean.ProjectResult>
+                    pbUpdate.setProjectResults(results);
+
+                }
+
+                int k = 1;
+                for(int i = 0 ; i < results.size(); i++){
+                    k *= Integer.parseInt(getCtx(results.get(i).getResult()));
+                }
+                //IsAbnormal
+                pbUpdate.setIsAbnormal(k+"");
+                patrolBeanList.set(position,pbUpdate);
+
+                int m = 1;
+                for(int i = 0 ; i < results.size(); i++){
+                    m *= Integer.parseInt(getCtx(patrolBeanList.get(i).getIsAbnormal()));
+                }
+                //TodayIsAbnormal
+                pbUpdate.setTodayIsAbnormal(m+"");
+                patrolBeanList.set(position,pbUpdate);
+            }
+        }
+
+    }
+
+    public static String getCtx(String str) {
+        String s = "1";
+        if (TextUtils.isEmpty(str)) {
+
+        } else {
+            s = str;
+        }
+        return s;
+    }
     @NonNull
     @Override
     public PatrolAdapter.VH onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
@@ -55,13 +103,18 @@ public class PatrolAdapter extends RecyclerView.Adapter<PatrolAdapter.VH> {
 
     @Override
     public void onBindViewHolder(@NonNull PatrolAdapter.VH viewHolder, final int i) {
-        final PatrolBean patrolBean = mDatas.get(i);
+        final PatrolBean patrolBean = patrolBeanList.get(i);
 
         if(null != patrolBean.getProjectResults()) {
             viewHolder.list.clear();
             viewHolder.list.addAll(patrolBean.getProjectResults());
+            if(viewHolder.list != null && viewHolder.list.size() > 0){
+                viewHolder.recycler_sub.setVisibility(View.VISIBLE);
+            }else{
+                viewHolder.recycler_sub.setVisibility(View.GONE);
+            }
             if (viewHolder.patrolSubAdapter == null) {
-                viewHolder.patrolSubAdapter = new PatrolSubAdapter(viewHolder.list, mContext);
+                viewHolder.patrolSubAdapter = new PatrolSubAdapter(viewHolder.list,i,adapter,mContext);
                 viewHolder.recycler_sub.setLayoutManager(new LinearLayoutManager(mContext));
                 viewHolder.recycler_sub.setAdapter(viewHolder.patrolSubAdapter);
             } else {
@@ -108,7 +161,7 @@ public class PatrolAdapter extends RecyclerView.Adapter<PatrolAdapter.VH> {
 
     @Override
     public int getItemCount() {
-        return mDatas != null ? mDatas.size() : 0;
+        return patrolBeanList != null ? patrolBeanList.size() : 0;
     }
 
     interface ItemClickListener{

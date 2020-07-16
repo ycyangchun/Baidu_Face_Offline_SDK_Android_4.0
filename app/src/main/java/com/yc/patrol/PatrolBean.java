@@ -44,18 +44,22 @@ public class PatrolBean {
         this.pointId = patrolPoint.getPid();
         this.qRcode = patrolPoint.getqRcode();
         this.linePlaceName = patrolPoint.getLinePlaceName();
+        this.todayIsAbnormal = "1";// 默认正常
+        this.isAbnormal = "1";
 
         this.projectResults = new ArrayList<>();
         if(null != projectList){
             for(People.PatrolProject p : projectList){
-                ProjectResult project2 = new ProjectResult();
-                project2.objId = p.getObjId();
-                project2.objDesc = p.getObjDesc();
-                project2.objName = p.getObjName();
-                this.projectResults.add(project2);
+                ProjectResult result = new ProjectResult();
+                result.objId = p.getObjId();
+                result.objDesc = p.getObjDesc();
+                result.objName = p.getObjName();
+                result.result = "1";
+                this.projectResults.add(result);
             }
         }
     }
+
 
 
     public static class ProjectResult {

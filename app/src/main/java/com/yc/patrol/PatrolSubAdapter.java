@@ -16,14 +16,18 @@ import java.util.List;
 
 public class PatrolSubAdapter extends RecyclerView.Adapter<PatrolSubAdapter.VH> {
 
-    List<PatrolBean.ProjectResult> mDatas;
+    List<PatrolBean.ProjectResult> projectResultList;
     Context mContext;
-    private int mPosition;
-
-    public PatrolSubAdapter(List<PatrolBean.ProjectResult> mDatas, Context ctx) {
-        this.mDatas = mDatas;
+    private int parentPosition ,subPosition;
+    PatrolAdapter parentAdapter;
+    public PatrolSubAdapter(List<PatrolBean.ProjectResult> mDatas,
+                            int position, PatrolAdapter parentAdapter,Context ctx) {
+        this.projectResultList = mDatas;
         this.mContext = ctx;
+        this.parentPosition = position;
+        this.parentAdapter = parentAdapter;
     }
+
 
     /**
      * 新增方法
@@ -31,7 +35,7 @@ public class PatrolSubAdapter extends RecyclerView.Adapter<PatrolSubAdapter.VH> 
      * @param position 位置
      */
     public void setPosition(int position) {
-        this.mPosition = position;
+        this.subPosition = position;
     }
 
 
@@ -45,13 +49,23 @@ public class PatrolSubAdapter extends RecyclerView.Adapter<PatrolSubAdapter.VH> 
 
     @Override
     public void onBindViewHolder(@NonNull PatrolSubAdapter.VH viewHolder, final int i) {
-        PatrolBean.ProjectResult result = mDatas.get(i);
+        PatrolBean.ProjectResult result = projectResultList.get(i);
         String str = result.getObjName() + " "+ result.getObjDesc();
         viewHolder.tv_item.setText(str);
         viewHolder.switch_item.setTag(i+"_"+str);
+
         viewHolder.switch_item.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                String result;
+                if(isChecked){
+                    result = "1";
+                }else {
+                    result = "0";
+                }
+                if(null != parentAdapter){
+                    parentAdapter.updateStatus(parentPosition,i,result);
+                }
                 System.out.println(buttonView.getTag().toString()+ " "+ isChecked);
 
             }
@@ -61,7 +75,7 @@ public class PatrolSubAdapter extends RecyclerView.Adapter<PatrolSubAdapter.VH> 
 
     @Override
     public int getItemCount() {
-        return mDatas != null ? mDatas.size() : 0;
+        return projectResultList != null ? projectResultList.size() : 0;
     }
 
 
@@ -76,4 +90,7 @@ public class PatrolSubAdapter extends RecyclerView.Adapter<PatrolSubAdapter.VH> 
         }
     }
 
+    interface ItemSubClickListener{
+        void updateStatus(List<PatrolBean> patrolBeanList , int position,int subPosition,String objResult);
+    }
 }
