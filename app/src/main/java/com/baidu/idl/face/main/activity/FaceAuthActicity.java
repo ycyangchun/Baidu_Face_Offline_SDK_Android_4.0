@@ -17,12 +17,15 @@ import android.widget.Toast;
 
 import com.baidu.idl.face.main.listener.SdkInitListener;
 import com.baidu.idl.face.main.manager.FaceSDKManager;
+import com.baidu.idl.face.main.model.SingleBaseConfig;
+import com.baidu.idl.face.main.utils.ConfigUtils;
 import com.baidu.idl.face.main.utils.ToastUtils;
 import com.baidu.idl.facesdkdemo.R;
 import com.baidu.idl.main.facesdk.FaceAuth;
 import com.baidu.idl.main.facesdk.callback.Callback;
 import com.baidu.idl.main.facesdk.utils.FileUitls;
 import com.baidu.idl.main.facesdk.utils.PreferencesUtil;
+import com.yc.patrol.App;
 
 /**
  * 设备激活 （在线激活、离线激活）
@@ -166,6 +169,9 @@ public class FaceAuthActicity extends BaseActivity implements View.OnClickListen
                 @Override
                 public void onResponse(final int code, final String response) {
                     if (code == 0) {
+                        ConfigUtils.modityJson();
+                        // 属性开启属性检测
+                        SingleBaseConfig.getBaseConfig().setAttribute(true);
                         FaceSDKManager.getInstance().initModel(mContext, new SdkInitListener() {
                             @Override
                             public void initStart() {
@@ -196,6 +202,7 @@ public class FaceAuthActicity extends BaseActivity implements View.OnClickListen
                     } else {
                         ToastUtils.toast(mContext, response);
                     }
+
                 }
             });
         }
