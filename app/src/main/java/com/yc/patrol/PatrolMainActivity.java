@@ -65,31 +65,40 @@ public class PatrolMainActivity extends BaseActivity implements PatrolAdapter.It
     @Override
     protected void onResume() {
         super.onResume();
-        List<PatrolBean> localList = Tools.ReadPatrolBeanXml();
-        if(null !=localList && localList.size() > 0 ){
+        if(null == list || list.size() == 0) {
+            List<PatrolBean> localList = Tools.ReadPatrolBeanXml();
+            if (null != localList && localList.size() > 0) {
 
-            PatrolBean lastPb = localList.get(localList.size() -1);
-            if(null != nameTv){
-                nameTv.setText(lastPb.getName());
+                PatrolBean lastPb = localList.get(localList.size() - 1);
+                if (null != nameTv) {
+                    nameTv.setText(lastPb.getName());
+                }
+                String aTime = lastPb.getArriveTime();
+                if (TextUtils.isEmpty(aTime)) {
+                    //登录时间
+                    lastPb.setArriveTime(DateUtils.gethmsTime());
+                    localList.set(localList.size() - 1, lastPb);
+                }
+                list.clear();
+                list.addAll(localList);
+                adapter.notifyDataSetChanged();
+                recyclerView.scrollToPosition(0);
             }
-            String aTime = lastPb.getArriveTime();
-            if(TextUtils.isEmpty(aTime)){
-                //登录时间
-                lastPb.setArriveTime(DateUtils.gethmsTime());
-                localList.set(localList.size() -1,lastPb);
-            }
-            list.clear();
-            list.addAll(localList);
-            adapter.notifyDataSetChanged();
-            recyclerView.scrollToPosition(0);
         }
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        if(null != adapter)
-        Tools.createDOMXml(adapter.getPatrolBeanList(), mContext, MyConstants.tempXml, false);
+        if(null != adapter) {
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    Tools.createDOMXml(adapter.getPatrolBeanList(), mContext, MyConstants.tempXml, false);
+                }
+            }).start();
+
+        }
     }
 
     private void initView() {
