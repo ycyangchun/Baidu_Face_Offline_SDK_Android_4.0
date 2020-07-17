@@ -28,6 +28,7 @@ public class PatrolBean implements Parcelable {
     private Uri uriSy;
     private String photoUrlSy;
     private String isShow;
+    private String name;
 
     public PatrolBean(){
 
@@ -68,7 +69,6 @@ public class PatrolBean implements Parcelable {
     public static class ProjectResult implements Parcelable {
         private String objId;
         private String result;
-        private String isAbnormal;
         private String objDesc;
         private String objName;
 
@@ -104,13 +104,6 @@ public class PatrolBean implements Parcelable {
             this.result = result;
         }
 
-        public String getIsAbnormal() {
-            return isAbnormal;
-        }
-
-        public void setIsAbnormal(String isAbnormal) {
-            this.isAbnormal = isAbnormal;
-        }
 
         @Override
         public int describeContents() {
@@ -121,7 +114,6 @@ public class PatrolBean implements Parcelable {
         public void writeToParcel(Parcel dest, int flags) {
             dest.writeString(this.objId);
             dest.writeString(this.result);
-            dest.writeString(this.isAbnormal);
             dest.writeString(this.objDesc);
             dest.writeString(this.objName);
         }
@@ -132,7 +124,6 @@ public class PatrolBean implements Parcelable {
         protected ProjectResult(Parcel in) {
             this.objId = in.readString();
             this.result = in.readString();
-            this.isAbnormal = in.readString();
             this.objDesc = in.readString();
             this.objName = in.readString();
         }
@@ -148,6 +139,14 @@ public class PatrolBean implements Parcelable {
                 return new ProjectResult[size];
             }
         };
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getId() {
@@ -278,6 +277,7 @@ public class PatrolBean implements Parcelable {
         this.isShow = isShow;
     }
 
+
     @Override
     public int describeContents() {
         return 0;
@@ -301,6 +301,7 @@ public class PatrolBean implements Parcelable {
         dest.writeParcelable(this.uriSy, flags);
         dest.writeString(this.photoUrlSy);
         dest.writeString(this.isShow);
+        dest.writeString(this.name);
     }
 
     protected PatrolBean(Parcel in) {
@@ -320,6 +321,7 @@ public class PatrolBean implements Parcelable {
         this.uriSy = in.readParcelable(Uri.class.getClassLoader());
         this.photoUrlSy = in.readString();
         this.isShow = in.readString();
+        this.name = in.readString();
     }
 
     public static final Creator<PatrolBean> CREATOR = new Creator<PatrolBean>() {

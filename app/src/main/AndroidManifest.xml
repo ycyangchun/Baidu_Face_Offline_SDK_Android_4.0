@@ -103,7 +103,8 @@
 
         <!--   patrol     -->
         <activity android:name="com.yc.patrol.PatrolFaceRegisterActivity" />
-        <activity android:name="com.yc.patrol.PatrolMainActivity" >
+        <activity android:name="com.yc.patrol.PatrolMainActivity"
+            android:fitsSystemWindows="true">
             <intent-filter>
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>

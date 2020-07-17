@@ -12,6 +12,7 @@ import com.yc.patrol.PatrolBean;
 import com.yc.patrol.People;
 
 import org.jsoup.Jsoup;
+import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -222,68 +223,6 @@ public class Tools {
         }
     }
 
-    public static void createBeanXml(Context context, People people, List<PatrolBean> oldBean) {
-        List<People.PatrolProject> projectList;
-        List<People.PatrolPoint> pointList;
-        People.Line line;
-        List<PatrolBean> patrolBeanList = new ArrayList<>();
-        if (null != people) {
-            projectList = people.getPatrolProjects();
-            pointList = people.getPatrolPoints();
-            line = people.getLine();
-
-            for (int i = pointList.size() -1 ; i >= 0 ; i--) {
-                PatrolBean patrolBean = new PatrolBean();
-                People.PatrolPoint point = pointList.get(i);
-                patrolBean.setPatrolTime(DateUtils.getCurrentDate());
-                patrolBean.setId(people.getId());
-                patrolBean.setLineId(line.getlId());
-                patrolBean.setTodayIsAbnormal("1");
-                patrolBean.setIsShow("0");
-                patrolBean.setPointId(point.getPid());
-                patrolBean.setIsAbnormal("1");
-                patrolBean.setqRcode(point.getqRcode());
-                patrolBean.setLinePlaceName(point.getLinePlaceName());
-
-                if (null != oldBean) {
-                    patrolBean.setPhotoUrl(oldBean.get(i).getPhotoUrl());
-                    patrolBean.setPhotoUrlSy(oldBean.get(i).getPhotoUrlSy());
-                    patrolBean.setPatrolImage(oldBean.get(i).getPatrolImage());
-                }
-                List<PatrolBean.ProjectResult> projectResults = new ArrayList<>();
-                for (int j = 0; j < projectList.size(); j++) {
-                    People.PatrolProject project = projectList.get(j);
-
-                    PatrolBean.ProjectResult result = new PatrolBean.ProjectResult();
-                    result.setObjId(project.getObjId());
-                    result.setResult("1");
-                    result.setIsAbnormal("1");
-                    result.setObjDesc(project.getObjDesc());
-                    result.setObjName(project.getObjName());
-                    projectResults.add(result);
-                }
-                patrolBean.setProjectResults(projectResults);
-                patrolBeanList.add(patrolBean);
-            }
-            ////
-            PatrolBean patrolBean0 = new PatrolBean();
-            patrolBean0.setPatrolTime("");
-            patrolBean0.setTodayIsAbnormal("1");
-            patrolBean0.setIsShow("1");
-            patrolBean0.setLinePlaceName("登录");
-            if (null != oldBean && oldBean.size() -1 >= 0) {
-                patrolBean0.setPatrolImage(oldBean.get(oldBean.size() -1 ).getPatrolImage());
-            }
-            patrolBeanList.add(patrolBean0);
-
-
-            String fn = MyConstants.DATAPATH.replace(File.separator, "");
-            String paths = FileUtils2.getCacheFilePath(MyConstants.DATAPATH
-                    + File.separator+ "tempPic" + File.separator + fn + "_temp.xml");
-            createDOMXml(patrolBeanList, context, paths, false);
-        }
-
-    }
 
     public static void createDOMXml(List<PatrolBean> userPatrol, Context context) {
         String fn = MyConstants.DATAPATH.replace(File.separator, "");
@@ -303,52 +242,67 @@ public class Tools {
             document.setXmlStandalone(true); //设置xml里面不显示standlone
             //创建文档下的一个根节点
             Element people = document.createElement("People");
-            PatrolBean p = userPatrol.get(0);
-            people.setAttribute("id", getCtx(p.getId()));
-            people.setAttribute("PatrolTime", getCtx(p.getPatrolTime()));
-            people.setAttribute("LineId", getCtx(p.getLineId()));
-            people.setAttribute("TodayIsAbnormal", getCtx(p.getTodayIsAbnormal()));
-
-            //向bookstore添加子节点
-            for (int i = 0; i < userPatrol.size(); i++) {
-                PatrolBean pb = userPatrol.get(i);
-                Element point = document.createElement("PatrolPoint");
-                point.setAttribute("id", getCtx(pb.getPointId()));
-                point.setAttribute("ArriveTime", getCtx(pb.getArriveTime()));
-                point.setAttribute("IsAbnormal", getCtx(pb.getIsAbnormal()));
-                point.setAttribute("QRcode", getCtx(pb.getqRcode()));
-                point.setAttribute("PatrolImage", getCtx(pb.getPatrolImage()));
-
-                List<PatrolBean.ProjectResult> pObjs = pb.getProjectResults();
-                if (null != pObjs) {
-                    for (int j = 0; j < pObjs.size(); j++) {
-                        //添加子节点
-                        PatrolBean.ProjectResult obj = pObjs.get(j);
-                        Element pro = document.createElement("PatrolProject");
-                        pro.setAttribute("objId", getCtx(obj.getObjId()));
-                        pro.setAttribute("Result", getCtx(obj.getResult()));
-                        point.appendChild(pro);
-                    }
+            if(null != userPatrol && userPatrol.size() > 0) {
+                PatrolBean p = userPatrol.get(0);
+                people.setAttribute("id", getCtx(p.getId()));
+                people.setAttribute("PatrolTime", getCtx(p.getPatrolTime()));
+                people.setAttribute("LineId", getCtx(p.getLineId()));
+                people.setAttribute("TodayIsAbnormal", getCtx(p.getTodayIsAbnormal()));
+                if (!toast) {//区分临时，和导出xml
+                    people.setAttribute("name", getCtx(p.getName()));
                 }
-                //将book添加book
-                people.appendChild(point);
-            }
-            //添加根节点（已经包含了book）
-            document.appendChild(people);
 
-            //将dom树保存成xml文件
+                //向bookstore添加子节点
+                for (int i = 0; i < userPatrol.size(); i++) {
+                    PatrolBean pb = userPatrol.get(i);
+                    Element point = document.createElement("PatrolPoint");
+                    point.setAttribute("id", getCtx(pb.getPointId()));
+                    point.setAttribute("ArriveTime", getCtx(pb.getArriveTime()));
+                    point.setAttribute("IsAbnormal", getCtx(pb.getIsAbnormal()));
+                    point.setAttribute("QRcode", getCtx(pb.getqRcode()));
+                    point.setAttribute("PatrolImage", getCtx(pb.getPatrolImage()));
+                    if (!toast) {//区分临时，和导出xml
+                        point.setAttribute("isShow", getCtx(pb.getIsShow()));
+                        point.setAttribute("photoUrl", getCtx(pb.getPhotoUrl()));
+                        point.setAttribute("photoUrlSy", getCtx(pb.getPhotoUrlSy()));
+                        point.setAttribute("LinePlaceName", getCtx(pb.getLinePlaceName()));
 
-            //创建TransformerFactory 对象
-            TransformerFactory factory = TransformerFactory.newInstance();
-            Transformer tf = factory.newTransformer();
-            //设置换行
-            tf.setOutputProperty(OutputKeys.INDENT, "yes");
-            //将document转换成xml文件
+                    }
+                    List<PatrolBean.ProjectResult> pObjs = pb.getProjectResults();
+                    if (null != pObjs) {
+                        for (int j = 0; j < pObjs.size(); j++) {
+                            //添加子节点
+                            PatrolBean.ProjectResult obj = pObjs.get(j);
+                            Element pro = document.createElement("PatrolProject");
+                            pro.setAttribute("objId", getCtx(obj.getObjId()));
+                            pro.setAttribute("Result", getCtx(obj.getResult()));
+                            if (!toast) {//区分临时，和导出xml
+                                pro.setAttribute("objDesc", getCtx(obj.getObjDesc()));
+                                pro.setAttribute("objName", getCtx(obj.getObjName()));
+                            }
+                            point.appendChild(pro);
+                        }
+                    }
+                    //将book添加book
+                    people.appendChild(point);
+                }
+                //添加根节点（已经包含了book）
+                document.appendChild(people);
 
-            DOMSource domSource = new DOMSource(document);
-            tf.transform(domSource, new StreamResult(new File(paths)));
-            if (toast) {
-                ToastUtils.toastL(context, "导出到目录\n" + paths);
+                //将dom树保存成xml文件
+
+                //创建TransformerFactory 对象
+                TransformerFactory factory = TransformerFactory.newInstance();
+                Transformer tf = factory.newTransformer();
+                //设置换行
+                tf.setOutputProperty(OutputKeys.INDENT, "yes");
+                //将document转换成xml文件
+
+                DOMSource domSource = new DOMSource(document);
+                tf.transform(domSource, new StreamResult(new File(paths)));
+                if (toast) {
+                    ToastUtils.toastL(context, "导出到目录\n" + paths);
+                }
             }
 
             //输出第二份
@@ -365,6 +319,152 @@ public class Tools {
             e.printStackTrace();
         }
 
+    }
+
+
+    public static void createPatrolBeanXml(Context context, People people, List<PatrolBean> oldBean) {
+        String fn = MyConstants.DATAPATH.replace(File.separator, "");
+        MyConstants.tempXml = FileUtils2.getCacheFilePath(MyConstants.DATAPATH
+                + File.separator+ "tempPic" + File.separator + fn + "_temp.xml");
+        File xmlFile = new File(MyConstants.tempXml);
+        if (xmlFile.exists()){
+
+            return;// 已有不覆盖数据
+        }
+
+        List<People.PatrolProject> projectList;
+        List<People.PatrolPoint> pointList;
+        People.Line line;
+        List<PatrolBean> patrolBeanList = new ArrayList<>();
+        if (null != people) {
+            projectList = people.getPatrolProjects();
+            pointList = people.getPatrolPoints();
+            line = people.getLine();
+
+            for (int i = pointList.size() -1 ; i >= 0 ; i--) {
+                PatrolBean patrolBean = new PatrolBean();
+                People.PatrolPoint point = pointList.get(i);
+
+                patrolBean.setId(people.getId());
+                patrolBean.setPatrolTime(DateUtils.getCurrentDate());
+                patrolBean.setLineId(line.getlId());
+                patrolBean.setTodayIsAbnormal("1");
+                patrolBean.setIsShow("0");
+                patrolBean.setPointId(point.getPid());
+                patrolBean.setIsAbnormal("1");
+                patrolBean.setqRcode(point.getqRcode());
+                patrolBean.setLinePlaceName(point.getLinePlaceName());
+                patrolBean.setName(people.getName());
+
+                if (null != oldBean) {
+                    patrolBean.setPhotoUrl(oldBean.get(i).getPhotoUrl());
+                    patrolBean.setPhotoUrlSy(oldBean.get(i).getPhotoUrlSy());
+                    patrolBean.setPatrolImage(oldBean.get(i).getPatrolImage());
+                }
+                List<PatrolBean.ProjectResult> projectResults = new ArrayList<>();
+                for (int j = 0; j < projectList.size(); j++) {
+                    People.PatrolProject project = projectList.get(j);
+
+                    PatrolBean.ProjectResult result = new PatrolBean.ProjectResult();
+                    result.setObjId(project.getObjId());
+                    result.setResult("1");
+                    result.setObjDesc(project.getObjDesc());
+                    result.setObjName(project.getObjName());
+                    projectResults.add(result);
+                }
+                patrolBean.setProjectResults(projectResults);
+                patrolBeanList.add(patrolBean);
+            }
+            ////
+            PatrolBean patrolBean0 = new PatrolBean();
+            patrolBean0.setPatrolTime("");
+            patrolBean0.setTodayIsAbnormal("1");
+            patrolBean0.setIsShow("1");
+            patrolBean0.setLinePlaceName("登录");
+            if (null != oldBean && oldBean.size() -1 == 0) {
+                PatrolBean patrolBeanOld = oldBean.get(oldBean.size() -1 );
+                patrolBean0.setPatrolImage(patrolBeanOld.getPatrolImage());
+                patrolBean0.setPatrolTime(patrolBeanOld.getPatrolTime());
+            }
+            patrolBeanList.add(patrolBean0);
+
+
+
+            createDOMXml(patrolBeanList, context, MyConstants.tempXml, false);
+        }
+
+    }
+
+    public static List<PatrolBean> ReadPatrolBeanXml() {
+        List<PatrolBean> peopleList = new ArrayList<>();
+        try {
+            File xmlFile = new File(MyConstants.tempXml);
+            if (xmlFile.exists()) {
+                DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+                DocumentBuilder builder = factory.newDocumentBuilder();
+                Document document = builder.parse(xmlFile);
+                Element element = document.getDocumentElement();
+
+                String id = element.getAttribute("id");
+                String name = element.getAttribute("name");
+                String today = element.getAttribute("TodayIsAbnormal");
+                String lid = element.getAttribute("LineId");
+                String pt = element.getAttribute("PatrolTime");
+                
+                NodeList nodes = element.getElementsByTagName("PatrolPoint");
+                PatrolBean p = null;
+                for (int i = 0; i < nodes.getLength(); i++) {
+                    Element nE = (Element) nodes.item(i);
+                    p = new PatrolBean();
+                    p.setId(id);
+                    p.setName(name);
+                    p.setTodayIsAbnormal(today);
+                    p.setLineId(lid);
+                    p.setPatrolTime(pt);
+
+                    p.setIsShow(nE.getAttribute("isShow"));
+                    p.setLinePlaceName(nE.getAttribute("LinePlaceName"));
+                    p.setPatrolImage(nE.getAttribute("PatrolImage"));
+                    p.setqRcode(nE.getAttribute("QRcode"));
+                    p.setArriveTime(nE.getAttribute("ArriveTime"));
+                    p.setIsAbnormal(nE.getAttribute("IsAbnormal"));
+                    p.setPhotoUrl(nE.getAttribute("photoUrl"));
+                    p.setPhotoUrlSy(nE.getAttribute("photoUrlSy"));
+                    p.setPointId(nE.getAttribute("id"));
+
+                    NodeList childPeopleNodes = nE.getChildNodes();
+
+                    List<PatrolBean.ProjectResult> projectResults = new ArrayList<>();
+                    for (int j = 0; j < childPeopleNodes.getLength(); j++) {
+                        //DOM解析时候注意子节点前面的空格也会被解析
+                        if (childPeopleNodes.item(j) instanceof Element) {
+                            Element childPeopleElement = (Element) childPeopleNodes.item(j);
+                            if (childPeopleElement.getNodeType() == Node.ELEMENT_NODE) {
+                                if (childPeopleElement.getNodeName().equals("PatrolProject")) {
+                                    PatrolBean.ProjectResult obj = new PatrolBean.ProjectResult();
+                                    obj.setObjId(childPeopleElement.getAttribute("objId"));
+                                    obj.setObjName(childPeopleElement.getAttribute("objName"));
+                                    obj.setObjDesc(childPeopleElement.getAttribute("objDesc"));
+                                    obj.setResult(childPeopleElement.getAttribute("Result"));
+                                    projectResults.add(obj);
+                                   
+                                }
+                                
+                            }
+                        }
+                    }
+                    p.setProjectResults(projectResults);
+                    peopleList.add(p);
+                }
+
+            }
+
+        } catch (Exception e) {
+            // TODO 自动生成的 catch 块
+            e.printStackTrace();
+        }finally {
+            return  peopleList;
+        }
     }
 
     public static String getCtx(String str) {

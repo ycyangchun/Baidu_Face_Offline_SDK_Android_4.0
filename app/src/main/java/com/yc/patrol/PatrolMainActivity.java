@@ -10,6 +10,7 @@ import android.support.v4.content.FileProvider;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
 
@@ -41,11 +42,7 @@ public class PatrolMainActivity extends BaseActivity implements PatrolAdapter.It
     private PatrolAdapter adapter;
     public List<PatrolBean> list;
     private CustomDialog2 customDialog;
-    private TextView name;
-    private static People people;
-    private static List<People.PatrolProject> projectList;
-    private static List<People.PatrolPoint> pointList;
-    private static People.Line line;
+    private TextView nameTv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,42 +53,47 @@ public class PatrolMainActivity extends BaseActivity implements PatrolAdapter.It
         initData();
     }
 
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        outState.putParcelableArrayList("list", (ArrayList<? extends Parcelable>) list);
-        super.onSaveInstanceState(outState);
-    }
-
-    @Override
-    protected void onRestoreInstanceState(Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
-        if (null != savedInstanceState) {
-            list = savedInstanceState.getParcelableArrayList("list");
-        }
-    }
 
     private void initData() {
-        people = App.getUser();
-        if (null != people) {
-            projectList = people.getPatrolProjects();
-            pointList = people.getPatrolPoints();
-            line = people.getLine();
-            name.setText(people.getName());
-
-            list = new ArrayList<>();
-            list.add(new PatrolBean("登录"));
-
-            adapter = new PatrolAdapter(list, this);
-            recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
-            recyclerView.setAdapter(adapter);
-            adapter.setListener(this);
-        }
-
+        list = new ArrayList<>();
+        adapter = new PatrolAdapter(list, this);
+        recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
+        recyclerView.setAdapter(adapter);
+        adapter.setListener(this);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        List<PatrolBean> localList = Tools.ReadPatrolBeanXml();
+        if(null !=localList && localList.size() > 0 ){
+
+            PatrolBean lastPb = localList.get(localList.size() -1);
+            if(null != nameTv){
+                nameTv.setText(lastPb.getName());
+            }
+            String aTime = lastPb.getArriveTime();
+            if(TextUtils.isEmpty(aTime)){
+                //登录时间
+                lastPb.setArriveTime(DateUtils.gethmsTime());
+                localList.set(localList.size() -1,lastPb);
+            }
+            list.clear();
+            list.addAll(localList);
+            adapter.notifyDataSetChanged();
+            recyclerView.scrollToPosition(0);
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if(null != adapter)
+        Tools.createDOMXml(adapter.getPatrolBeanList(), mContext, MyConstants.tempXml, false);
+    }
 
     private void initView() {
-        name = this.findViewById(R.id.title);
+        nameTv = this.findViewById(R.id.title);
         recyclerView = this.findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -115,7 +117,7 @@ public class PatrolMainActivity extends BaseActivity implements PatrolAdapter.It
     @Override
     public void OnDialogClickCallBack(boolean isPositive, Object obj) {
         if (isPositive) {
-            Tools.createDOMXml(list, mContext);
+            Tools.createDOMXml(adapter.getPatrolBeanList(), mContext);
         }
     }
 
@@ -194,18 +196,35 @@ public class PatrolMainActivity extends BaseActivity implements PatrolAdapter.It
                 patrolBean.setUriSy(imageUriSy);
                 patrolBean.setPhotoUrlSy(fileUriSy.getAbsolutePath());
                 patrolBean.setPatrolImage(patrolImage);
-                adapter.upData(position, patrolBean);
-                recyclerView.scrollToPosition(0);
+                recyclerView.scrollToPosition(position);
+                recyclerView.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        adapter.upData(position, patrolBean);
+                    }
+                });
             }
         }
         if (requestCode == SCAN_REQUEST) {
             String qrcode = data == null || resultCode != RESULT_OK ? null : data.getStringExtra("scan");
             boolean isHave = false;
-            for (People.PatrolPoint point : pointList) {
-                if (qrcode.equals(point.getqRcode())) {
+            for (int i = 0; i < list.size(); i++) {
+                final PatrolBean pb = list.get(i);
+                if (qrcode.equals(pb.getqRcode())) {
                     isHave = true;
-                    adapter.addData(0, new PatrolBean(people, point, projectList));
-                    recyclerView.scrollToPosition(0);
+                    pb.setIsShow("1");
+                    pb.setArriveTime(DateUtils.gethmsTime());
+                    recyclerView.scrollToPosition(i);
+                    final int finalI = i;
+                    //更新UI要在 主线程 执行
+                    recyclerView.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            adapter.upData(finalI, pb);
+                        }
+                    });
+
+
                     break;
                 }
             }

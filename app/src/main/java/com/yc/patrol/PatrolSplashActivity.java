@@ -36,8 +36,9 @@ public class PatrolSplashActivity extends BaseActivity {
         setContentView(R.layout.activity_splash_patrol);
 
         mContext = this;
-        initView();
         batchImport();
+        initView();
+
     }
 
     /**

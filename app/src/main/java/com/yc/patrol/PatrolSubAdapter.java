@@ -53,7 +53,13 @@ public class PatrolSubAdapter extends RecyclerView.Adapter<PatrolSubAdapter.VH> 
         String str = result.getObjName() + " "+ result.getObjDesc();
         viewHolder.tv_item.setText(str);
         viewHolder.switch_item.setTag(i+"_"+str);
-
+        String localResult = result.getResult();
+        final boolean[] toUpdate = {true};
+        if("0".equals(localResult)){
+            viewHolder.switch_item.setChecked(false);
+        }else {
+            viewHolder.switch_item.setChecked(true);
+        }
         viewHolder.switch_item.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -66,7 +72,7 @@ public class PatrolSubAdapter extends RecyclerView.Adapter<PatrolSubAdapter.VH> 
                 if(null != parentAdapter){
                     parentAdapter.updateStatus(parentPosition,i,result);
                 }
-                System.out.println(buttonView.getTag().toString()+ " "+ isChecked);
+                System.out.println(parentPosition + " " + buttonView.getTag().toString()+ " "+ isChecked);
 
             }
         });

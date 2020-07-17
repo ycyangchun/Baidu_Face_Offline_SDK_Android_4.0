@@ -1,8 +1,10 @@
 package com.yc.patrol;
 
 import android.content.Context;
-import android.graphics.drawable.BitmapDrawable;
+import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.AsyncTask;
+import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -11,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.baidu.idl.facesdkdemo.R;
@@ -47,43 +50,54 @@ public class PatrolAdapter extends RecyclerView.Adapter<PatrolAdapter.VH> {
         notifyDataSetChanged();
     }
 
-    //更新巡更状态
+    public List<PatrolBean> getPatrolBeanList() {
+        return patrolBeanList;
+    }
+
+    /**
+     * switch 更新巡更状态
+     * @param position
+     * @param subPosition
+     * @param objResult
+     */
     public void updateStatus(int position,int subPosition,String objResult){
         if(null != patrolBeanList && patrolBeanList.size() > 0 ) {
             if(position < patrolBeanList.size()) {
                 PatrolBean pbUpdate = patrolBeanList.get(position);
                 List<PatrolBean.ProjectResult> results = pbUpdate.getProjectResults();
-                PatrolBean.ProjectResult projectResult = results.get(subPosition);
+                if(null != results && results.size() > 0 ) {
+                    PatrolBean.ProjectResult projectResult = results.get(subPosition);
 
-                if(!objResult.equals(projectResult.getResult())){
-                    //result
-                    projectResult.setResult(objResult);
-                    results.set(subPosition,projectResult);
-                    // List<PatrolBean.ProjectResult>
-                    pbUpdate.setProjectResults(results);
+                    if (!objResult.equals(projectResult.getResult())) {
+                        //result
+                        projectResult.setResult(objResult);
+                        results.set(subPosition, projectResult);
+                        // List<PatrolBean.ProjectResult>
+                        pbUpdate.setProjectResults(results);
 
-                    int k = 1;
-                    for(int i = 0 ; i < results.size(); i++){
-                        k *= Integer.parseInt(getCtx(results.get(i).getResult()));
+                        int k = 1;
+                        for (int i = 0; i < results.size(); i++) {
+                            k *= Integer.parseInt(getCtx(results.get(i).getResult()));
+                        }
+                        //IsAbnormal
+                        pbUpdate.setIsAbnormal(k + "");
+                        patrolBeanList.set(position, pbUpdate);
+
+                        int m = 1;
+                        for (int i = 0; i < patrolBeanList.size(); i++) {
+                            m *= Integer.parseInt(getCtx(patrolBeanList.get(i).getIsAbnormal()));
+                        }
+                        //TodayIsAbnormal
+                        pbUpdate.setTodayIsAbnormal(m + "");
+                        patrolBeanList.set(position, pbUpdate);
                     }
-                    //IsAbnormal
-                    pbUpdate.setIsAbnormal(k+"");
-                    patrolBeanList.set(position,pbUpdate);
-
-                    int m = 1;
-                    for(int i = 0 ; i < patrolBeanList.size(); i++){
-                        m *= Integer.parseInt(getCtx(patrolBeanList.get(i).getIsAbnormal()));
-                    }
-                    //TodayIsAbnormal
-                    pbUpdate.setTodayIsAbnormal(m+"");
-                    patrolBeanList.set(position,pbUpdate);
                 }
-
 
             }
         }
 
     }
+
 
     public static String getCtx(String str) {
         String s = "1";
@@ -102,10 +116,38 @@ public class PatrolAdapter extends RecyclerView.Adapter<PatrolAdapter.VH> {
         return new VH(v);
     }
 
+
     @Override
     public void onBindViewHolder(@NonNull PatrolAdapter.VH viewHolder, final int i) {
-        final PatrolBean patrolBean = patrolBeanList.get(i);
+        PatrolBean patrolBean = patrolBeanList.get(i);
+        String show = patrolBean.getIsShow();
 
+        if("1".equals(show)){
+            viewHolder.list_item_ll.setVisibility(View.VISIBLE);
+        }else {
+            viewHolder.list_item_ll.setVisibility(View.GONE);
+        }
+
+        subAdapter(viewHolder, i, patrolBean);
+
+        viewHolder.item_time.setText(patrolBean.getArriveTime());
+        viewHolder.item_title.setText(patrolBean.getLinePlaceName());
+        setBg(viewHolder, patrolBean);
+
+        viewHolder.item_status_iv.setBackgroundResource(R.drawable.ic_switch);
+
+        final PatrolBean finalPb = patrolBean;
+        viewHolder.item_photo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(null != listener){
+                    listener.itemClick(i,finalPb);
+                }
+            }
+        });
+    }
+
+    private void subAdapter(@NonNull VH viewHolder, int i, PatrolBean patrolBean) {
         if(null != patrolBean.getProjectResults()) {
             viewHolder.list.clear();
             viewHolder.list.addAll(patrolBean.getProjectResults());
@@ -124,39 +166,45 @@ public class PatrolAdapter extends RecyclerView.Adapter<PatrolAdapter.VH> {
             }
 
         }
-        viewHolder.item_time.setText(patrolBean.getArriveTime());
-        viewHolder.item_title.setText(patrolBean.getLinePlaceName());
+    }
+
+    private void setBg(@NonNull final VH viewHolder, final PatrolBean patrolBean) {
         String url = patrolBean.getPhotoUrl();
-        String urlSy = patrolBean.getPhotoUrlSy();
-        Uri uri = patrolBean.getUri();
+        final String urlSy = patrolBean.getPhotoUrlSy();
+        final Uri uri = patrolBean.getUri();
         Uri uriSy = patrolBean.getUriSy();
         if(TextUtils.isEmpty(url)){ // 扫码后创建的空数据
 
         }else {
-            if (null != uri) {
+            if (null != uri) {// 拍照生成水印照片
                 viewHolder.item_photo.setImageBitmap(PhotoUtils.makePhoto(mContext, uri, urlSy,
                         patrolBean.getLinePlaceName()));
                 Tools.deleteFile(url);
                 patrolBean.setUri(null);
 
             } else {
-                viewHolder.item_photo.setImageBitmap(PhotoUtils.getBitmapFromUri(uriSy, mContext));
-            }
-        }
-        viewHolder.item_status_iv.setBackgroundResource(R.drawable.ic_switch);
-//        if(i == 0){
-//            viewHolder.item_status_iv.setBackgroundResource(R.drawable.ic_switch);
-//        }else if(i == 2){
-//            viewHolder.item_status_iv.setBackgroundResource(R.drawable.ic_close_line);
-//        }
-        viewHolder.item_photo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(null != listener){
-                    listener.itemClick(i,patrolBean);
+                if(null != urlSy){
+//                    AsyncTask task  = new AsyncTask() {
+//                        @Override
+//                        protected Bitmap doInBackground(Object[] objects) {
+//                            return PhotoUtils.getBitmapFromUri((String) objects[0], mContext);
+//                        }
+//
+//                        @Override
+//                        protected void onPostExecute(Object o) {
+//                            super.onPostExecute(o);
+//                            viewHolder.item_photo.setImageBitmap((Bitmap)o);
+//                        }
+//                    };
+//                    if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.HONEYCOMB_MR1) {
+//                        task.execute(urlSy);
+//                    } else {
+//                        task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,urlSy);
+//                    }
+                    viewHolder.item_photo.setImageBitmap(PhotoUtils.getBitmapFromUri(urlSy, mContext));
                 }
             }
-        });
+        }
     }
 
 
@@ -176,6 +224,7 @@ public class PatrolAdapter extends RecyclerView.Adapter<PatrolAdapter.VH> {
         ImageView item_status_iv;
         RecyclerView recycler_sub;
         PatrolSubAdapter patrolSubAdapter;
+        LinearLayout list_item_ll;
         List<PatrolBean.ProjectResult> list = new ArrayList<>();
         public VH(@NonNull View itemView) {
             super(itemView);
@@ -184,6 +233,7 @@ public class PatrolAdapter extends RecyclerView.Adapter<PatrolAdapter.VH> {
             item_photo = itemView.findViewById(R.id.item_photo);
             item_status_iv = itemView.findViewById(R.id.item_status_iv);
             recycler_sub = itemView.findViewById(R.id.recycler_sub);
+            list_item_ll = itemView.findViewById(R.id.list_item_ll);
 
         }
     }

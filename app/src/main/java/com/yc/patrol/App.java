@@ -44,6 +44,10 @@ public class App extends Application {
 
     }
 
+    public static Context getmContext() {
+        return mContext;
+    }
+
     public static void setUserByFullName(String fullName) {
 
         if (patrolPlan != null){
@@ -51,16 +55,13 @@ public class App extends Application {
                 People p = patrolPlan.get(i);
                 if(fullName.equals(p.getFullName())){
                     user = p;
-                    Tools.createBeanXml(mContext,p,null);
+                    Tools.createPatrolBeanXml(mContext,p,null);
                     break;
                 }
             }
         }
     }
 
-//    public static void setUser(String userName) {
-//        user.setName(userName);
-//    }
 
     public static People getUser() {
         return user;
@@ -68,8 +69,8 @@ public class App extends Application {
 
 
     public static void setPatrolPlan(List<People> patrolPlan) {
-        if(App.patrolPlan != null ) App.patrolPlan.clear();
-        App.patrolPlan = patrolPlan;
+        if(patrolPlan != null ) App.patrolPlan.clear();
+        App.patrolPlan.addAll(patrolPlan);
     }
 
     @Override
@@ -82,7 +83,6 @@ public class App extends Application {
      * 启动应用程序，如果之前初始过，自动初始化鉴权和模型（可以添加到Application 中）
      */
     private void initLicense() {
-        initcfg();
         if (FaceSDKManager.initStatus != FaceSDKManager.SDK_MODEL_LOAD_SUCCESS) {
             FaceSDKManager.getInstance().init(mContext, new SdkInitListener() {
                 @Override
@@ -160,7 +160,7 @@ public class App extends Application {
         }
     }
 
-    private void initcfg() {
+    public void initcfg() {
         // todo shangrong 增加配置信息初始化操作
         isConfigExit = ConfigUtils.isConfigExit();
         isInitConfig = ConfigUtils.initConfig();
