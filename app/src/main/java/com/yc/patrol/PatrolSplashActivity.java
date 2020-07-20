@@ -1,6 +1,7 @@
 package com.yc.patrol;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
@@ -17,6 +18,8 @@ import com.baidu.idl.face.main.utils.FileUtils;
 import com.baidu.idl.face.main.utils.LogUtils;
 import com.baidu.idl.face.main.utils.ToastUtils;
 import com.baidu.idl.facesdkdemo.R;
+import com.yc.patrol.utils.CustomDialog2;
+import com.yc.patrol.utils.CustomDialogInput;
 import com.yc.patrol.utils.Tools;
 
 import java.io.File;
@@ -64,8 +67,7 @@ public class PatrolSplashActivity extends BaseActivity {
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(mContext, PatrolFaceRegisterActivity.class);
-                startActivityForResult(intent, PAGE_TYPE);
+                showInputDialog();
             }
         });
 
@@ -101,4 +103,29 @@ public class PatrolSplashActivity extends BaseActivity {
         }
         Tools.ReadXml(Environment.getExternalStorageDirectory().toString()+ File.separator + xml);
     }
+
+    private void showInputDialog() {
+        CustomDialogInput customDialog;
+        customDialog = new CustomDialogInput(this);
+        customDialog
+                .setButton("登录", "取消")
+                .setCancelable(true);
+        customDialog.setOnDialogClickListener(new CustomDialogInput.OnDialogClickListener() {
+            @Override
+            public void OnDialogClickCallBack(boolean isPositive, Object obj) {
+                if("success".equals((String)obj)){
+                    Intent intent = new Intent(mContext, PatrolFaceRegisterActivity.class);
+                    startActivityForResult(intent, PAGE_TYPE);
+                }
+            }
+
+            @Override
+            public void onDismiss(DialogInterface dialog, Object obj) {
+
+            }
+        });
+        customDialog.show();
+    }
+
+
 }
