@@ -11,6 +11,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.TextView;
 
@@ -60,6 +61,26 @@ public class PatrolMainActivity extends BaseActivity implements PatrolAdapter.It
         recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
         recyclerView.setAdapter(adapter);
         adapter.setListener(this);
+        findViewById(R.id.back_bnt).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                toBack();
+            }
+        });
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            toBack();
+            return true;
+        }else {
+            return super.onKeyDown(keyCode, event);
+        }
+    }
+
+    private void toBack() {
+        showDialog("确定退出?","finish");
     }
 
     @Override
@@ -119,14 +140,21 @@ public class PatrolMainActivity extends BaseActivity implements PatrolAdapter.It
             @Override
             public void onClick(View view) {
                 customDialog.show();
+                showDialog("确认巡更完成,导出数据？","save");
             }
         });
     }
 
     @Override
     public void OnDialogClickCallBack(boolean isPositive, Object obj) {
+        String data = (String)obj;
         if (isPositive) {
-            Tools.createDOMXml(adapter.getPatrolBeanList(), mContext);
+            if("save".equals(data)) {
+                Tools.createDOMXml(adapter.getPatrolBeanList(), mContext);
+                mContext.finish();
+            }else if("finish".equals(data)){
+                mContext.finish();
+            }
         }
     }
 
@@ -138,15 +166,17 @@ public class PatrolMainActivity extends BaseActivity implements PatrolAdapter.It
     private void initCustomDialog() {
         if (customDialog == null) {
             customDialog = new CustomDialog2(this);
-            customDialog.setMessage("确认巡更完成,导出数据？")
-                    .setData("0")
-                    .setButton("确认", "取消")
-                    .setCancelable(true);
-
             customDialog.setOnDialogClickListener(this);
         }
     }
 
+    public void showDialog(String title,String data){
+        customDialog.setMessage(title)
+                .setData(data)
+                .setButton("确认", "取消")
+                .setCancelable(true);
+        customDialog.show();
+    }
     /**
      * 选择图片
      */

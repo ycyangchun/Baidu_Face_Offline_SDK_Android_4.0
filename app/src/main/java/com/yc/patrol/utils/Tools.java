@@ -301,7 +301,7 @@ public class Tools {
                 DOMSource domSource = new DOMSource(document);
                 tf.transform(domSource, new StreamResult(new File(paths)));
                 if (toast) {
-                    ToastUtils.toastL(context, "导出到目录\n" + paths);
+                    ToastUtils.toastL(context, "记录保持到目录\n" + paths);
                 }
             }
 
