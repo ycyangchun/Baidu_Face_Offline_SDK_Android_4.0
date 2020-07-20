@@ -250,6 +250,8 @@ public class Tools {
                 people.setAttribute("TodayIsAbnormal", getCtx(p.getTodayIsAbnormal()));
                 if (!toast) {//区分临时，和导出xml
                     people.setAttribute("name", getCtx(p.getName()));
+                    people.setAttribute("fullName", getCtx(p.getFullName()));
+
                 }
 
                 //向bookstore添加子节点
@@ -355,6 +357,7 @@ public class Tools {
                 patrolBean.setqRcode(point.getqRcode());
                 patrolBean.setLinePlaceName(point.getLinePlaceName());
                 patrolBean.setName(people.getName());
+                patrolBean.setFullName(people.getFullName());
 
                 if (null != oldBean) {
                     patrolBean.setPhotoUrl(oldBean.get(i).getPhotoUrl());
@@ -410,7 +413,8 @@ public class Tools {
                 String today = element.getAttribute("TodayIsAbnormal");
                 String lid = element.getAttribute("LineId");
                 String pt = element.getAttribute("PatrolTime");
-                
+                String fn = element.getAttribute("fullName");
+
                 NodeList nodes = element.getElementsByTagName("PatrolPoint");
                 PatrolBean p = null;
                 for (int i = 0; i < nodes.getLength(); i++) {
@@ -421,6 +425,7 @@ public class Tools {
                     p.setTodayIsAbnormal(today);
                     p.setLineId(lid);
                     p.setPatrolTime(pt);
+                    p.setFullName(fn);
 
                     p.setIsShow(nE.getAttribute("isShow"));
                     p.setLinePlaceName(nE.getAttribute("LinePlaceName"));

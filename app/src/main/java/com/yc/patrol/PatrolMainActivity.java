@@ -5,9 +5,8 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Parcelable;
+import android.os.Environment;
 import android.support.v4.content.FileProvider;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -17,17 +16,19 @@ import android.widget.TextView;
 
 import com.baidu.idl.face.main.activity.BaseActivity;
 import com.baidu.idl.face.main.utils.ToastUtils;
+import com.baidu.idl.facesdkdemo.R;
 import com.yc.patrol.scanner.CaptureActivity;
 import com.yc.patrol.utils.CustomDialog2;
 import com.yc.patrol.utils.DateUtils;
 import com.yc.patrol.utils.FileUtils2;
 import com.yc.patrol.utils.PhotoUtils;
-import com.baidu.idl.facesdkdemo.R;
 import com.yc.patrol.utils.Tools;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class PatrolMainActivity extends BaseActivity implements PatrolAdapter.ItemClickListener,
         CustomDialog2.OnDialogClickListener {
@@ -44,7 +45,7 @@ public class PatrolMainActivity extends BaseActivity implements PatrolAdapter.It
     public List<PatrolBean> list;
     private CustomDialog2 customDialog;
     private TextView nameTv;
-
+    private CircleImageView head_view;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -93,6 +94,10 @@ public class PatrolMainActivity extends BaseActivity implements PatrolAdapter.It
                 PatrolBean lastPb = localList.get(localList.size() - 1);
                 if (null != nameTv) {
                     nameTv.setText(lastPb.getName());
+                    String head = Environment.getExternalStorageDirectory() + File.separator +
+                            "Success-Import" + File.separator +
+                            "default-"+lastPb.getFullName()+".jpg";
+                    head_view.setImageBitmap(PhotoUtils.getBitmapFromUri(head,mContext));
                 }
                 String aTime = lastPb.getArriveTime();
                 if (TextUtils.isEmpty(aTime)) {
@@ -125,6 +130,8 @@ public class PatrolMainActivity extends BaseActivity implements PatrolAdapter.It
     private void initView() {
         nameTv = this.findViewById(R.id.title);
         recyclerView = this.findViewById(R.id.recycler_view);
+        head_view = this.findViewById(R.id.avatar);
+
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         initCustomDialog();

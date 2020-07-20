@@ -51,7 +51,7 @@ public class PatrolFaceRegisterActivity extends BaseActivity implements View.OnC
     private static final int TEXT_LENGTH = 20;
     private static final int USERINFO_LENGTH = 100;
     String[] names = null,fullNames = null;
-
+    String userInfoSpinner;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,7 +76,7 @@ public class PatrolFaceRegisterActivity extends BaseActivity implements View.OnC
         backBtn.setOnClickListener(this);
 
         createList();
-
+        userInfoSpinner = names[0];
         ArrayAdapter<String> adapter = new ArrayAdapter<
                 >(this, android.R.layout.simple_spinner_item, names);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -84,6 +84,7 @@ public class PatrolFaceRegisterActivity extends BaseActivity implements View.OnC
         usernameEt.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                userInfoSpinner = names[position];
                 userInfoEt.setText(fullNames[position]);
             }
 
@@ -164,8 +165,8 @@ public class PatrolFaceRegisterActivity extends BaseActivity implements View.OnC
                 }
             }
 
-            final String userInfo = userInfoEt.getText().toString().trim();
-
+//            final String userInfo = userInfoEt.getText().toString().trim();
+            final String userInfo = userInfoSpinner;
             if (userInfo.length() > USERINFO_LENGTH) {
                 Toast.makeText(PatrolFaceRegisterActivity.this, "用户信息输入长度超过限制！", Toast.LENGTH_SHORT).show();
                 return;

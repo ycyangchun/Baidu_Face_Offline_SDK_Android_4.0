@@ -29,6 +29,8 @@ public class PatrolBean implements Parcelable {
     private String photoUrlSy;
     private String isShow;
     private String name;
+    private String fullName;
+
 
     public PatrolBean(){
 
@@ -277,6 +279,13 @@ public class PatrolBean implements Parcelable {
         this.isShow = isShow;
     }
 
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
 
     @Override
     public int describeContents() {
@@ -302,6 +311,7 @@ public class PatrolBean implements Parcelable {
         dest.writeString(this.photoUrlSy);
         dest.writeString(this.isShow);
         dest.writeString(this.name);
+        dest.writeString(this.fullName);
     }
 
     protected PatrolBean(Parcel in) {
@@ -322,6 +332,7 @@ public class PatrolBean implements Parcelable {
         this.photoUrlSy = in.readString();
         this.isShow = in.readString();
         this.name = in.readString();
+        this.fullName = in.readString();
     }
 
     public static final Creator<PatrolBean> CREATOR = new Creator<PatrolBean>() {
