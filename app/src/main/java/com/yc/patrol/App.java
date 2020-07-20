@@ -26,7 +26,7 @@ public class App extends Application {
     private Boolean isConfigExit;
     private CrashHandler crashHandler;
     private static People user = null ;
-    private static List<People> patrolPlan = null;
+    public static List<People> patrolPlan = null;
     @Override
     public void onCreate() {
         super.onCreate();

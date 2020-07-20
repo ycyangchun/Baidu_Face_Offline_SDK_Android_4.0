@@ -59,7 +59,8 @@
                     android:id="@+id/user_admin_et"
                     android:layout_width="200dp"
                     android:layout_height="wrap_content"
-                    android:textSize="@dimen/ts_16"/>
+                    android:textSize="@dimen/ts_16"
+                    android:text="admin"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -78,7 +79,8 @@
                     android:id="@+id/psw_admin_et"
                     android:layout_width="200dp"
                     android:layout_height="wrap_content"
-                    android:textSize="@dimen/ts_16"/>
+                    android:textSize="@dimen/ts_16"
+                    android:text="admin123"/>
             </LinearLayout>
 
             <View

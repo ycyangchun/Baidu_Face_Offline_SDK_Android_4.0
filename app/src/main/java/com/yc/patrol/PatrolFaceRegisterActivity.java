@@ -4,8 +4,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.baidu.idl.face.main.activity.BaseActivity;
@@ -36,9 +40,9 @@ public class PatrolFaceRegisterActivity extends BaseActivity implements View.OnC
     public static final int SOURCE_REG = 1;
 
     public static final int PICK_REG_VIDEO = 100;
-    private EditText usernameEt;
+    private Spinner usernameEt;
     private EditText userGroupEt;
-    private EditText userInfoEt;
+    private TextView userInfoEt;
 
     private Button autoDetectBtn;
     private Button settingButton;
@@ -46,7 +50,7 @@ public class PatrolFaceRegisterActivity extends BaseActivity implements View.OnC
 
     private static final int TEXT_LENGTH = 20;
     private static final int USERINFO_LENGTH = 100;
-
+    String[] names = null,fullNames = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,18 +64,50 @@ public class PatrolFaceRegisterActivity extends BaseActivity implements View.OnC
     public void initView() {
 
 
-        usernameEt = (EditText) findViewById(R.id.username_et);
+        usernameEt = (Spinner) findViewById(R.id.username_et);
         userGroupEt = (EditText) findViewById(R.id.userGroup_et);
         autoDetectBtn = (Button) findViewById(R.id.auto_detect_btn);
         settingButton = (Button) findViewById(R.id.id_reg_setting);
         backBtn = (Button) findViewById(R.id.id_reg_back);
-        userInfoEt = (EditText) findViewById(R.id.user_info_tx);
+        userInfoEt = (TextView) findViewById(R.id.user_info_tx);
 
         autoDetectBtn.setOnClickListener(this);
         settingButton.setOnClickListener(this);
         backBtn.setOnClickListener(this);
+
+        createList();
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<
+                >(this, android.R.layout.simple_spinner_item, names);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        usernameEt.setAdapter(adapter);
+        usernameEt.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                userInfoEt.setText(fullNames[position]);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
     }
 
+    private String[] createList() {
+
+        if(App.patrolPlan != null){
+            names = new String[App.patrolPlan.size()];
+            fullNames = new String[App.patrolPlan.size()];
+            for(int i = 0 ; i < App.patrolPlan.size() ;i++){
+                People people = App.patrolPlan.get(i);
+                names[i] = people.getName();
+                fullNames[i] = people.getFullName();
+            }
+        }
+
+        return names;
+    }
 
     // 正则只支持数字与字符
     private static final Pattern pattern = Pattern.compile("^[A-Za-z0-9]+$");
@@ -81,7 +117,7 @@ public class PatrolFaceRegisterActivity extends BaseActivity implements View.OnC
 
         if (view == autoDetectBtn) {
 
-            final String username = usernameEt.getText().toString().trim();
+            final String username = userInfoEt.getText().toString().trim();
             if (TextUtils.isEmpty(username)) {
                 Toast.makeText(PatrolFaceRegisterActivity.this, "用户名不能为空", Toast.LENGTH_SHORT).show();
                 return;
@@ -96,6 +132,7 @@ public class PatrolFaceRegisterActivity extends BaseActivity implements View.OnC
                 Toast.makeText(PatrolFaceRegisterActivity.this, "用户名输入长度超过限制！", Toast.LENGTH_SHORT).show();
                 return;
             }
+
             String groupId = null;
             String groupStr = userGroupEt.getText().toString();
             if (TextUtils.isEmpty(groupStr)) {
