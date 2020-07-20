@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.baidu.idl.face.main.activity.BaseActivity;
+import com.baidu.idl.face.main.db.DBManager;
 import com.baidu.idl.face.main.utils.ToastUtils;
 import com.baidu.idl.facesdkdemo.R;
 import com.yc.patrol.scanner.CaptureActivity;
@@ -279,5 +280,11 @@ public class PatrolMainActivity extends BaseActivity implements PatrolAdapter.It
                 ToastUtils.toastL(mContext, "没有此任务！");
             }
         }
+    }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        // 关闭数据库
+        DBManager.getInstance().release();
     }
 }

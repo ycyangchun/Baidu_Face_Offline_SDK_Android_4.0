@@ -91,18 +91,7 @@ public class PatrolSplashActivity extends BaseActivity {
         });
     }
 
-    public void batchImport() {
-        // 获取导入目录 /sdcard/Face-Import
-        String xml = "PatrolPlan.xml";
-        // 判断Face.zip是否存在
-        File zipFile = FileUtils.isFileExist(Environment.getExternalStorageDirectory().toString(), xml);
-        if (zipFile == null) {
-            LogUtils.i(TAG, "导入数据的文件夹没有PatrolPlan.xml");
-            ToastUtils.toastL(mContext,"没有PatrolPlan.xml");
-            return;
-        }
-        Tools.ReadXml(Environment.getExternalStorageDirectory().toString()+ File.separator + xml);
-    }
+
 
     private void showInputDialog() {
         CustomDialogInput customDialog;

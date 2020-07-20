@@ -39,7 +39,9 @@ public class App extends Application {
         if (FaceSDKManager.getInstance().initStatus == FaceSDKManager.SDK_UNACTIVATION) {
             initLicense();
         } else {
-            initLicense(2);
+            if (FaceSDKManager.initStatus != FaceSDKManager.SDK_MODEL_LOAD_SUCCESS) {
+                initLicense(2);
+            }
         }
 
     }

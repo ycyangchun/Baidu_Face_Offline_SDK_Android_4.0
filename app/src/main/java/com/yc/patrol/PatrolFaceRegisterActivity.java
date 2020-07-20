@@ -58,11 +58,10 @@ public class PatrolFaceRegisterActivity extends BaseActivity implements View.OnC
         setContentView(R.layout.activity_face_register_patrol);
 
         initView();
-
+        initData();
     }
 
     public void initView() {
-
 
         usernameEt = (Spinner) findViewById(R.id.username_et);
         userGroupEt = (EditText) findViewById(R.id.userGroup_et);
@@ -75,39 +74,41 @@ public class PatrolFaceRegisterActivity extends BaseActivity implements View.OnC
         settingButton.setOnClickListener(this);
         backBtn.setOnClickListener(this);
 
-        createList();
-        userInfoSpinner = names[0];
-        ArrayAdapter<String> adapter = new ArrayAdapter<
-                >(this, android.R.layout.simple_spinner_item, names);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        usernameEt.setAdapter(adapter);
-        usernameEt.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                userInfoSpinner = names[position];
-                userInfoEt.setText(fullNames[position]);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
     }
 
-    private String[] createList() {
-
-        if(App.patrolPlan != null){
+    private void initData() {
+        if(App.patrolPlan.size() == 0){
+            batchImport();
+        }
+        if(App.patrolPlan.size() > 0){
             names = new String[App.patrolPlan.size()];
             fullNames = new String[App.patrolPlan.size()];
+
             for(int i = 0 ; i < App.patrolPlan.size() ;i++){
                 People people = App.patrolPlan.get(i);
                 names[i] = people.getName();
                 fullNames[i] = people.getFullName();
             }
+            userInfoSpinner = names[0];
+
+            ArrayAdapter<String> adapter = new ArrayAdapter<
+                    >(this, android.R.layout.simple_spinner_item, names);
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            usernameEt.setAdapter(adapter);
+            usernameEt.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    userInfoSpinner = names[position];
+                    userInfoEt.setText(fullNames[position]);
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
         }
 
-        return names;
     }
 
     // 正则只支持数字与字符

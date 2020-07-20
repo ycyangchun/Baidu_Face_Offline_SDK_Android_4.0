@@ -5,10 +5,17 @@ import android.app.Activity;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.KeyEvent;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.baidu.idl.face.main.utils.FileUtils;
+import com.baidu.idl.face.main.utils.LogUtils;
+import com.baidu.idl.face.main.utils.ToastUtils;
+import com.yc.patrol.utils.Tools;
+
+import java.io.File;
 import java.util.ArrayList;
 
 public class BaseActivity extends Activity {
@@ -75,5 +82,18 @@ public class BaseActivity extends Activity {
 //            return super.dispatchKeyEvent(event);
 //        }
         return super.dispatchKeyEvent(event);
+    }
+
+    public void batchImport() {
+        // 获取导入目录 /sdcard/Face-Import
+        String xml = "PatrolPlan.xml";
+        // 判断Face.zip是否存在
+        File zipFile = FileUtils.isFileExist(Environment.getExternalStorageDirectory().toString(), xml);
+        if (zipFile == null) {
+            LogUtils.i("TAG", "导入数据的文件夹没有PatrolPlan.xml");
+            ToastUtils.toastL(this,"没有PatrolPlan.xml");
+            return;
+        }
+        Tools.ReadXml(Environment.getExternalStorageDirectory().toString()+ File.separator + xml);
     }
 }
