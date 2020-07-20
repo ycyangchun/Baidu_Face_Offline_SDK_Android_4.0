@@ -348,10 +348,10 @@ public class Tools {
                 patrolBean.setId(people.getId());
                 patrolBean.setPatrolTime(DateUtils.getCurrentDate());
                 patrolBean.setLineId(line.getlId());
-                patrolBean.setTodayIsAbnormal("1");
+                patrolBean.setTodayIsAbnormal("0");
                 patrolBean.setIsShow("0");
                 patrolBean.setPointId(point.getPid());
-                patrolBean.setIsAbnormal("1");
+                patrolBean.setIsAbnormal("0");
                 patrolBean.setqRcode(point.getqRcode());
                 patrolBean.setLinePlaceName(point.getLinePlaceName());
                 patrolBean.setName(people.getName());
@@ -367,7 +367,7 @@ public class Tools {
 
                     PatrolBean.ProjectResult result = new PatrolBean.ProjectResult();
                     result.setObjId(project.getObjId());
-                    result.setResult("1");
+                    result.setResult("0");
                     result.setObjDesc(project.getObjDesc());
                     result.setObjName(project.getObjName());
                     projectResults.add(result);
@@ -378,9 +378,9 @@ public class Tools {
             ////
             PatrolBean patrolBean0 = new PatrolBean();
             patrolBean0.setPatrolTime("");
-            patrolBean0.setTodayIsAbnormal("1");
+            patrolBean0.setTodayIsAbnormal("0");
             patrolBean0.setIsShow("1");
-            patrolBean0.setLinePlaceName("登录");
+            patrolBean0.setLinePlaceName("签到");
             if (null != oldBean && oldBean.size() -1 == 0) {
                 PatrolBean patrolBeanOld = oldBean.get(oldBean.size() -1 );
                 patrolBean0.setPatrolImage(patrolBeanOld.getPatrolImage());

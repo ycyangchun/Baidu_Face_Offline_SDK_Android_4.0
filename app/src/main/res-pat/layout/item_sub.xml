@@ -2,31 +2,35 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/white"
-    android:layout_marginTop="@dimen/padding_5"
-    android:gravity="center_vertical"
-    android:orientation="horizontal">
+    >
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="40dp"
+        android:layout_marginTop="@dimen/padding_5"
+        android:padding="5dp"
+        android:gravity="center_vertical"
+        android:background="@color/white"
+        >
     <TextView
         android:layout_alignParentLeft="true"
         android:id="@+id/tv_item"
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:padding="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:gravity="center_vertical"
-        android:text="" />
+        android:text="1111" />
 
     <Switch
         android:layout_alignParentRight="true"
         android:id="@+id/switch_item"
         android:layout_width="wrap_content"
-        android:layout_height="40dp"
+        android:layout_height="match_parent"
         android:gravity="center_vertical"
-        android:padding="5dp"
         android:textOff="否"
         android:textOn="是"
         android:showText="true"
-        android:checked="true"/>
+        android:checked="false"/>
 
-
+    </RelativeLayout>
 </RelativeLayout>

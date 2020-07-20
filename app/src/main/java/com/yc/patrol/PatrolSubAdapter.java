@@ -47,6 +47,7 @@ public class PatrolSubAdapter extends RecyclerView.Adapter<PatrolSubAdapter.VH> 
         return new VH(v);
     }
 
+
     @Override
     public void onBindViewHolder(@NonNull PatrolSubAdapter.VH viewHolder, final int i) {
         PatrolBean.ProjectResult result = projectResultList.get(i);
@@ -54,11 +55,11 @@ public class PatrolSubAdapter extends RecyclerView.Adapter<PatrolSubAdapter.VH> 
         viewHolder.tv_item.setText(str);
         viewHolder.switch_item.setTag(i+"_"+str);
         String localResult = result.getResult();
-        final boolean[] toUpdate = {true};
-        if("0".equals(localResult)){
-            viewHolder.switch_item.setChecked(false);
-        }else {
+
+        if("1".equals(localResult)){
             viewHolder.switch_item.setChecked(true);
+        }else {
+            viewHolder.switch_item.setChecked(false);
         }
         viewHolder.switch_item.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -96,7 +97,4 @@ public class PatrolSubAdapter extends RecyclerView.Adapter<PatrolSubAdapter.VH> 
         }
     }
 
-    interface ItemSubClickListener{
-        void updateStatus(List<PatrolBean> patrolBeanList , int position,int subPosition,String objResult);
-    }
 }

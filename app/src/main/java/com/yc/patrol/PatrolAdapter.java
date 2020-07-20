@@ -47,7 +47,7 @@ public class PatrolAdapter extends RecyclerView.Adapter<PatrolAdapter.VH> {
 
     public void upData(int position,PatrolBean pb) {
         patrolBeanList.set(position, pb);
-        notifyDataSetChanged();
+        notifyItemChanged(position);
     }
 
     public List<PatrolBean> getPatrolBeanList() {
@@ -162,7 +162,6 @@ public class PatrolAdapter extends RecyclerView.Adapter<PatrolAdapter.VH> {
                 viewHolder.recycler_sub.setAdapter(viewHolder.patrolSubAdapter);
             } else {
                 viewHolder.patrolSubAdapter.setPosition(i);
-                viewHolder.patrolSubAdapter.notifyDataSetChanged();
             }
 
         }
@@ -184,24 +183,9 @@ public class PatrolAdapter extends RecyclerView.Adapter<PatrolAdapter.VH> {
 
             } else {
                 if(null != urlSy){
-//                    AsyncTask task  = new AsyncTask() {
-//                        @Override
-//                        protected Bitmap doInBackground(Object[] objects) {
-//                            return PhotoUtils.getBitmapFromUri((String) objects[0], mContext);
-//                        }
-//
-//                        @Override
-//                        protected void onPostExecute(Object o) {
-//                            super.onPostExecute(o);
-//                            viewHolder.item_photo.setImageBitmap((Bitmap)o);
-//                        }
-//                    };
-//                    if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.HONEYCOMB_MR1) {
-//                        task.execute(urlSy);
-//                    } else {
-//                        task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,urlSy);
-//                    }
                     viewHolder.item_photo.setImageBitmap(PhotoUtils.getBitmapFromUri(urlSy, mContext));
+                }else {
+                    viewHolder.item_photo.setBackground(mContext.getResources().getDrawable(R.drawable.image_practice_repast_1));
                 }
             }
         }
